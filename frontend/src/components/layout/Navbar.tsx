@@ -37,9 +37,9 @@ export default function Navbar() {
       <div className="mx-4 mt-4">
         <nav className="glass-card-gold px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group" aria-label="Hazina Home">
             <div className="w-9 h-9 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center group-hover:border-gold/60 transition-all duration-300">
-              <Database className="w-5 h-5 text-gold" />
+              <Database className="w-5 h-5 text-gold" aria-hidden="true" />
             </div>
             <span className="font-display font-semibold text-xl text-foreground group-hover:text-gold transition-colors duration-300">
               Hazina
@@ -60,7 +60,7 @@ export default function Navbar() {
                     : "text-foreground-muted hover:text-foreground hover:bg-surface-2",
                 )}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-4 h-4" aria-hidden="true" />
                 {label}
               </Link>
             ))}
@@ -77,11 +77,13 @@ export default function Navbar() {
           <button
             className="md:hidden text-foreground-muted hover:text-foreground p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? (
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5" aria-hidden="true" />
             ) : (
-              <Menu className="w-5 h-5" />
+              <Menu className="w-5 h-5" aria-hidden="true" />
             )}
           </button>
         </nav>

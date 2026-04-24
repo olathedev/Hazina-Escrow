@@ -19,10 +19,17 @@ function ScrollToTop() {
 export default function App() {
   return (
     <BrowserRouter>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-gold focus:text-void focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-2 focus:ring-gold-light"
+      >
+        Skip to content
+      </a>
       <ScrollToTop />
       <Navbar />
       <OnboardingTour />
-      <Routes>
+      <main id="main-content" tabIndex={-1}>
+        <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/sell" element={<SellPage />} />
@@ -30,6 +37,7 @@ export default function App() {
         <Route path="/agent" element={<AgentPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </main>
     </BrowserRouter>
   );
 }
