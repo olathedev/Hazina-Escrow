@@ -8,11 +8,14 @@ import express from 'express';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import path from 'path';
 import { datasetsRouter } from './datasets/datasets.router';
 import { paymentsRouter } from './payments/payments.router';
 import { agentRouter } from './agent/agent.router';
 import { checkHealth } from './common/health';
 import { rateLimitMiddleware } from './common/rateLimit';
+import { BackupScheduler } from './common/backup.scheduler';
+import { backupRouter, setBackupScheduler } from './common/backup.router';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -22,6 +25,32 @@ app.use(express.json({ limit: '10mb' }));
 
 // Apply rate limiting to all API routes
 app.use('/api', rateLimitMiddleware);
+
+// Initialize backup scheduler
+const backupEnabled = process.env.BACKUP_ENABLED !== 'false';
+if (backupEnabled) {
+  const backupScheduler = new BackupScheduler({
+    enabled: true,
+    backupDir: process.env.BACKUP_DIR || path.join(__dirname, '../../backups'),
+    maxBackups: parseInt(process.env.BACKUP_MAX_BACKUPS || '30', 10),
+    cronSchedule: process.env.BACKUP_CRON_SCHEDULE || '0 0 * * *', // Daily at midnight by default
+  });
+  
+  backupScheduler.start();
+  setBackupScheduler(backupScheduler);
+  
+  // Graceful shutdown
+  process.on('SIGTERM', () => {
+    console.log('[Backup] Stopping backup scheduler...');
+    backupScheduler.stop();
+  });
+  
+  process.on('SIGINT', () => {
+    console.log('[Backup] Stopping backup scheduler...');
+    backupScheduler.stop();
+    process.exit(0);
+  });
+}
 
 const swaggerOptions = {
   definition: {
@@ -65,6 +94,7 @@ app.get('/health', async (_req, res) => {
 app.use('/api/datasets', datasetsRouter);
 app.use('/api', paymentsRouter);
 app.use('/api/agent', agentRouter);
+app.use('/api', backupRouter);
 
 app.listen(PORT, () => {
   console.log(`\n  ██╗  ██╗ █████╗ ███████╗██╗███╗   ██╗ █████╗`);

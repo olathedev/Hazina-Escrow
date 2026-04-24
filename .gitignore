@@ -5,5 +5,7 @@ dist/
 .DS_Store
 frontend/dist/
 backend/dist/
+backend/backups/
+backups/
 issue.md
 pr.md
