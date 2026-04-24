@@ -1,0 +1,30 @@
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+ignore:
+  - "node_modules"
+  - "dist"
+  - "**/*.test.ts"
+  - "**/*.spec.ts"
+  - "**/*.test.tsx"
+  - "**/*.spec.tsx"
+
+comment:
+  layout: "reach,diff,flags,files"
+  behavior: default
+  require_changes: false
+  require_base: false
+  show_carryforward_flags: false
+
+flags:
+  backend:
+    paths:
+      - backend/src
+  frontend:
+    paths:
+      - frontend/src
+  contracts:
+    paths:
+      - contracts
