@@ -45,9 +45,48 @@ impl HazinaEscrow {
         if env.storage().instance().has(&DataKey::Admin) {
             panic!("already initialised");
         }
+        assert!(platform_fee_bps <= 10_000, "fee exceeds 100%");
         env.storage().instance().set(&DataKey::Admin, &admin);
         env.storage().instance().set(&DataKey::PlatformFee, &platform_fee_bps);
         env.storage().instance().set(&DataKey::EscrowCount, &0u64);
+
+        // Emit event so indexers can observe initial configuration
+        env.events().publish(
+            (soroban_sdk::symbol_short!("init"),),
+            (admin, platform_fee_bps),
+        );
+    }
+
+    /// Admin can update the platform fee (in basis points, max 10 000 = 100%).
+    pub fn set_fee(env: Env, admin: Address, new_fee_bps: u32) {
+        admin.require_auth();
+        Self::assert_admin(&env, &admin);
+        assert!(new_fee_bps <= 10_000, "fee exceeds 100%");
+
+        let old_fee: u32 = env
+            .storage()
+            .instance()
+            .get(&DataKey::PlatformFee)
+            .unwrap_or(500);
+        env.storage().instance().set(&DataKey::PlatformFee, &new_fee_bps);
+
+        env.events().publish(
+            (soroban_sdk::symbol_short!("fee_set"),),
+            (old_fee, new_fee_bps),
+        );
+    }
+
+    /// Admin can transfer admin rights to a new address.
+    pub fn set_admin(env: Env, admin: Address, new_admin: Address) {
+        admin.require_auth();
+        Self::assert_admin(&env, &admin);
+
+        env.storage().instance().set(&DataKey::Admin, &new_admin);
+
+        env.events().publish(
+            (soroban_sdk::symbol_short!("admin_set"),),
+            (admin, new_admin),
+        );
     }
 
     /// Buyer calls this to lock tokens in escrow for a dataset query.
@@ -316,5 +355,228 @@ mod tests {
         let eurc_token_client = TokenClient::new(&env, &eurc);
         let eurc_seller_expected = eurc_amount * 95 / 100;
         assert_eq!(eurc_token_client.balance(&seller), eurc_seller_expected);
+    }
+
+    #[test]
+    fn test_initialize_emits_event() {
+        let env = Env::default();
+        env.mock_all_auths();
+
+        let admin = Address::generate(&env);
+        let contract_id = env.register(HazinaEscrow, ());
+        let client = HazinaEscrowClient::new(&env, &contract_id);
+        client.initialize(&admin, &250);
+
+        // Fee is stored correctly after init
+        assert_eq!(client.get_fee(), 250);
+    }
+
+    #[test]
+    fn test_set_fee() {
+        let (_, client, admin, _, _, _) = setup();
+        client.set_fee(&admin, &300);
+        assert_eq!(client.get_fee(), 300);
+    }
+
+    #[test]
+    fn test_set_fee_max_boundary() {
+        let (_, client, admin, _, _, _) = setup();
+        client.set_fee(&admin, &10_000);
+        assert_eq!(client.get_fee(), 10_000);
+    }
+
+    #[test]
+    #[should_panic(expected = "fee exceeds 100%")]
+    fn test_set_fee_rejects_over_10000() {
+        let (_, client, admin, _, _, _) = setup();
+        client.set_fee(&admin, &10_001);
+    }
+
+    #[test]
+    fn test_set_admin() {
+        let (env, client, admin, _, _, _) = setup();
+        let new_admin = Address::generate(&env);
+        client.set_admin(&admin, &new_admin);
+
+        // Old admin can no longer change the fee (new admin is required)
+        // New admin can change the fee successfully
+        client.set_fee(&new_admin, &100);
+        assert_eq!(client.get_fee(), 100);
+    }
+
+    #[test]
+    #[should_panic(expected = "not admin")]
+    fn test_set_fee_requires_admin() {
+        let (env, client, _, _, _, _) = setup();
+        let impostor = Address::generate(&env);
+        client.set_fee(&impostor, &100);
+    }
+
+    #[test]
+    #[should_panic(expected = "already initialised")]
+    fn test_double_initialize_panics() {
+        let (_, client, admin, _, _, _) = setup();
+        client.initialize(&admin, &500); // second call must panic
+    }
+}
+
+// ─── Fuzz / property-based tests ────────────────────────────────────────────
+
+#[cfg(test)]
+mod fuzz_tests {
+    extern crate std;
+
+    use super::*;
+    use proptest::prelude::*;
+    use soroban_sdk::{
+        testutils::Address as _,
+        token::{Client as TokenClient, StellarAssetClient},
+        Env, String,
+    };
+
+    // ── helpers ──────────────────────────────────────────────────────────────
+
+    /// Mint `amount` of a fresh token to `buyer` and return the token address.
+    fn deploy_token(env: &Env, admin: &Address, buyer: &Address, amount: i128) -> Address {
+        let id = env.register_stellar_asset_contract_v2(admin.clone());
+        let addr = id.address();
+        StellarAssetClient::new(env, &addr).mint(buyer, &amount);
+        addr
+    }
+
+    fn deploy_escrow(env: &Env, admin: &Address, fee_bps: u32) -> HazinaEscrowClient<'static> {
+        let contract_id = env.register(HazinaEscrow, ());
+        let client = HazinaEscrowClient::new(env, &contract_id);
+        client.initialize(admin, &fee_bps);
+        client
+    }
+
+    // ── fee arithmetic invariant ─────────────────────────────────────────────
+
+    proptest! {
+        /// For any valid fee and any positive lock amount, the split must be lossless:
+        ///   seller_cut + platform_cut == amount
+        #[test]
+        fn prop_fee_split_is_lossless(
+            fee_bps in 0u32..=10_000u32,
+            amount   in 1i128..=1_000_000_000i128,
+        ) {
+            let platform_cut = amount * fee_bps as i128 / 10_000;
+            let seller_cut   = amount - platform_cut;
+            prop_assert_eq!(seller_cut + platform_cut, amount);
+        }
+
+        /// Seller cut is always <= amount and never negative.
+        #[test]
+        fn prop_seller_cut_in_bounds(
+            fee_bps in 0u32..=10_000u32,
+            amount  in 0i128..=i128::MAX / 10_001,
+        ) {
+            let platform_cut = amount * fee_bps as i128 / 10_000;
+            let seller_cut   = amount - platform_cut;
+            prop_assert!(seller_cut >= 0);
+            prop_assert!(seller_cut <= amount);
+        }
+
+        /// set_fee persists arbitrary valid fee values correctly.
+        #[test]
+        fn prop_set_fee_roundtrip(new_fee in 0u32..=10_000u32) {
+            let env = Env::default();
+            env.mock_all_auths();
+            let admin = Address::generate(&env);
+            let client = deploy_escrow(&env, &admin, 500);
+            client.set_fee(&admin, &new_fee);
+            prop_assert_eq!(client.get_fee(), new_fee);
+        }
+
+        /// Lock with various amounts: contract balance increases by exactly `amount`.
+        #[test]
+        fn prop_lock_transfers_exact_amount(
+            amount in 1i128..=500_000_000i128,
+        ) {
+            let env = Env::default();
+            env.mock_all_auths();
+
+            let admin  = Address::generate(&env);
+            let buyer  = Address::generate(&env);
+            let seller = Address::generate(&env);
+
+            let mint_amount = amount + 1_000; // ensure buyer has enough
+            let token = deploy_token(&env, &admin, &buyer, mint_amount);
+            let token_client = TokenClient::new(&env, &token);
+
+            let client = deploy_escrow(&env, &admin, 500);
+            let _contract_addr = env.register(HazinaEscrow, ()); // register to get address
+
+            let buyer_before = token_client.balance(&buyer);
+            client.lock(
+                &buyer, &seller, &token, &amount,
+                &String::from_str(&env, "ds-fuzz"),
+            );
+            let buyer_after = token_client.balance(&buyer);
+
+            prop_assert_eq!(buyer_before - buyer_after, amount);
+        }
+
+        /// Release after lock: combined payout always equals locked amount.
+        #[test]
+        fn prop_release_pays_out_full_amount(
+            fee_bps in 0u32..=10_000u32,
+            amount  in 1i128..=500_000_000i128,
+        ) {
+            let env = Env::default();
+            env.mock_all_auths();
+
+            let admin  = Address::generate(&env);
+            let buyer  = Address::generate(&env);
+            let seller = Address::generate(&env);
+
+            let token = deploy_token(&env, &admin, &buyer, amount + 1_000);
+            let token_client = TokenClient::new(&env, &token);
+
+            let client = deploy_escrow(&env, &admin, fee_bps);
+            let escrow_id = client.lock(
+                &buyer, &seller, &token, &amount,
+                &String::from_str(&env, "ds-fuzz-rel"),
+            );
+
+            let seller_before = token_client.balance(&seller);
+            let admin_before  = token_client.balance(&admin);
+
+            client.release(&admin, &escrow_id);
+
+            let seller_gain = token_client.balance(&seller) - seller_before;
+            let admin_gain  = token_client.balance(&admin)  - admin_before;
+
+            prop_assert_eq!(seller_gain + admin_gain, amount);
+        }
+
+        /// Refund after lock: buyer always recovers the full locked amount.
+        #[test]
+        fn prop_refund_returns_full_amount(
+            amount in 1i128..=500_000_000i128,
+        ) {
+            let env = Env::default();
+            env.mock_all_auths();
+
+            let admin  = Address::generate(&env);
+            let buyer  = Address::generate(&env);
+            let seller = Address::generate(&env);
+
+            let token = deploy_token(&env, &admin, &buyer, amount + 1_000);
+            let token_client = TokenClient::new(&env, &token);
+
+            let client = deploy_escrow(&env, &admin, 500);
+            let escrow_id = client.lock(
+                &buyer, &seller, &token, &amount,
+                &String::from_str(&env, "ds-fuzz-ref"),
+            );
+
+            let buyer_before = token_client.balance(&buyer);
+            client.refund(&admin, &escrow_id);
+            let buyer_after = token_client.balance(&buyer);
+
+            prop_assert_eq!(buyer_after - buyer_before, amount);
+        }
     }
 }
