@@ -12,12 +12,16 @@ import { datasetsRouter } from './datasets/datasets.router';
 import { paymentsRouter } from './payments/payments.router';
 import { agentRouter } from './agent/agent.router';
 import { checkHealth } from './common/health';
+import { rateLimitMiddleware } from './common/rateLimit';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
 app.use(express.json({ limit: '10mb' }));
+
+// Apply rate limiting to all API routes
+app.use('/api', rateLimitMiddleware);
 
 const swaggerOptions = {
   definition: {
