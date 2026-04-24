@@ -2,4 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: Ask a question / architecture discussion
     url: https://github.com/Anuoluwapo25/Hazina-Escrow/discussions
-    about: Not sure where to start? Open a discussion first.
+    about: Use Discussions for setup help, architecture questions, and early design conversations.
+  - name: Contributor guide
+    url: https://github.com/Anuoluwapo25/Hazina-Escrow/blob/main/CONTRIBUTING.md
+    about: Review setup instructions, testing expectations, and project conventions before opening an issue or PR.
