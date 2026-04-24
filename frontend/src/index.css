@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
@@ -14,12 +16,25 @@
   body {
     @apply bg-void text-foreground font-body antialiased;
     background-image:
-      radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.03) 0%, transparent 40%);
+      radial-gradient(
+        ellipse at 20% 50%,
+        rgba(201, 168, 76, 0.04) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 20%,
+        rgba(201, 168, 76, 0.03) 0%,
+        transparent 40%
+      );
     min-height: 100vh;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display;
   }
 
@@ -61,12 +76,17 @@
   /* Glass morphism card */
   .glass-card {
     @apply bg-surface/50 backdrop-blur-sm border border-border/60 rounded-2xl;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(201,168,76,0.08);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(201, 168, 76, 0.08);
   }
 
   .glass-card-gold {
     @apply bg-surface/60 backdrop-blur-md border border-border-gold/20 rounded-2xl;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.4), 0 0 20px rgba(201,168,76,0.08), inset 0 1px 0 rgba(201,168,76,0.12);
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(201, 168, 76, 0.08),
+      inset 0 1px 0 rgba(201, 168, 76, 0.12);
   }
 
   /* Gold button */
@@ -74,13 +94,17 @@
     @apply relative overflow-hidden bg-gold text-void font-body font-semibold
            px-6 py-3 rounded-xl transition-all duration-300
            hover:shadow-gold-md active:scale-95;
-    background: linear-gradient(135deg, #C9A84C 0%, #E8C96A 50%, #C9A84C 100%);
+    background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 50%, #c9a84c 100%);
   }
 
   .btn-gold::after {
-    content: '';
+    content: "";
     @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 50%
+    );
   }
 
   .btn-gold:hover::after {
@@ -107,7 +131,7 @@
 
   /* Gradient text */
   .text-gold-gradient {
-    background: linear-gradient(135deg, #C9A84C 0%, #E8C96A 60%, #C9A84C 100%);
+    background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 60%, #c9a84c 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -115,7 +139,12 @@
 
   /* Shine animation for gold elements */
   .shimmer-gold {
-    background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.3) 50%, transparent 100%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(201, 168, 76, 0.3) 50%,
+      transparent 100%
+    );
     background-size: 200% 100%;
     animation: shimmer 2.5s linear infinite;
   }
@@ -125,4 +154,70 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-5px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-15px) translateX(3px);
+  }
+}
+
+@keyframes pulseGold {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(26, 26, 26, 0.6) 0%,
+    rgba(201, 168, 76, 0.15) 50%,
+    rgba(26, 26, 26, 0.6) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulseGold 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
 }

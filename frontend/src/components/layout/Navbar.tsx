@@ -1,13 +1,31 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Database, BarChart3, Upload, ShoppingCart, Menu, X, Bot } from 'lucide-react';
-import { useState } from 'react';
-import clsx from 'clsx';
+import { Link, useLocation } from "react-router-dom";
+import {
+  Database,
+  BarChart3,
+  Upload,
+  ShoppingCart,
+  Menu,
+  X,
+  Bot,
+} from "lucide-react";
+import { useState } from "react";
+import clsx from "clsx";
 
 const NAV_LINKS = [
-  { to: '/marketplace', label: 'Marketplace', icon: ShoppingCart },
-  { to: '/agent', label: 'AI Agent', icon: Bot },
-  { to: '/sell', label: 'Sell Data', icon: Upload },
-  { to: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+  {
+    to: "/marketplace",
+    label: "Marketplace",
+    icon: ShoppingCart,
+    dataTour: "marketplace-link",
+  },
+  { to: "/agent", label: "AI Agent", icon: Bot, dataTour: "agent-link" },
+  { to: "/sell", label: "Sell Data", icon: Upload, dataTour: "sell-link" },
+  {
+    to: "/dashboard",
+    label: "Dashboard",
+    icon: BarChart3,
+    dataTour: "dashboard-link",
+  },
 ];
 
 export default function Navbar() {
@@ -30,15 +48,16 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map(({ to, label, icon: Icon }) => (
+            {NAV_LINKS.map(({ to, label, icon: Icon, dataTour }) => (
               <Link
                 key={to}
                 to={to}
+                data-tour={dataTour}
                 className={clsx(
-                  'flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium font-body transition-all duration-200',
+                  "flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium font-body transition-all duration-200",
                   pathname === to
-                    ? 'bg-gold/15 text-gold border border-gold/25'
-                    : 'text-foreground-muted hover:text-foreground hover:bg-surface-2'
+                    ? "bg-gold/15 text-gold border border-gold/25"
+                    : "text-foreground-muted hover:text-foreground hover:bg-surface-2",
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -59,7 +78,11 @@ export default function Navbar() {
             className="md:hidden text-foreground-muted hover:text-foreground p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </button>
         </nav>
 
@@ -72,17 +95,21 @@ export default function Navbar() {
                 to={to}
                 onClick={() => setMobileOpen(false)}
                 className={clsx(
-                  'flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium font-body transition-all duration-200',
+                  "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium font-body transition-all duration-200",
                   pathname === to
-                    ? 'bg-gold/15 text-gold border border-gold/25'
-                    : 'text-foreground-muted hover:text-foreground hover:bg-surface-2'
+                    ? "bg-gold/15 text-gold border border-gold/25"
+                    : "text-foreground-muted hover:text-foreground hover:bg-surface-2",
                 )}
               >
                 <Icon className="w-4 h-4" />
                 {label}
               </Link>
             ))}
-            <Link to="/marketplace" className="btn-gold text-sm text-center mt-2" onClick={() => setMobileOpen(false)}>
+            <Link
+              to="/marketplace"
+              className="btn-gold text-sm text-center mt-2"
+              onClick={() => setMobileOpen(false)}
+            >
               Browse Data
             </Link>
           </div>

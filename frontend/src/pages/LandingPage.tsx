@@ -1,13 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
-  ArrowRight, Database, Shield, Zap, TrendingUp, Lock,
-  ChevronRight, Star, Globe, Activity
-} from 'lucide-react';
-import { api, DatasetMeta } from '../lib/api';
-import { useCountUp } from '../hooks/useCountUp';
-import DatasetCard from '../components/ui/DatasetCard';
-import clsx from 'clsx';
+import {
+  ArrowRight,
+  Database,
+  Shield,
+  Zap,
+  TrendingUp,
+  Lock,
+  ChevronRight,
+  Star,
+  Globe,
+  Activity,
+} from "lucide-react";
+import { api, DatasetMeta } from "../lib/api";
+import { useCountUp } from "../hooks/useCountUp";
+import DatasetCard from "../components/ui/DatasetCard";
+import clsx from "clsx";
 
 function Particle({ style }: { style: React.CSSProperties }) {
   return (
@@ -16,8 +25,8 @@ function Particle({ style }: { style: React.CSSProperties }) {
       style={{
         width: 4,
         height: 4,
-        background: 'rgba(201,168,76,0.6)',
-        boxShadow: '0 0 8px rgba(201,168,76,0.8)',
+        background: "rgba(201,168,76,0.6)",
+        boxShadow: "0 0 8px rgba(201,168,76,0.8)",
         animation: `float ${6 + Math.random() * 6}s ease-in-out infinite`,
         animationDelay: `${Math.random() * 5}s`,
         ...style,
@@ -27,14 +36,28 @@ function Particle({ style }: { style: React.CSSProperties }) {
 }
 
 /* ── Animated stat card ── */
-function StatCard({ value, label, prefix = '', suffix = '', decimals = 0 }: {
-  value: number; label: string; prefix?: string; suffix?: string; decimals?: number;
+function StatCard({
+  value,
+  label,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+}: {
+  value: number;
+  label: string;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
 }) {
   const animated = useCountUp(value, 2200, decimals);
   return (
     <div className="glass-card-gold px-8 py-6 text-center flex-1 min-w-[160px]">
       <div className="stat-number text-3xl md:text-4xl text-gold-gradient mb-1">
-        {prefix}{decimals > 0 ? animated.toFixed(decimals) : Math.round(animated).toLocaleString()}{suffix}
+        {prefix}
+        {decimals > 0
+          ? animated.toFixed(decimals)
+          : Math.round(animated).toLocaleString()}
+        {suffix}
       </div>
       <p className="text-sm text-foreground-muted font-body">{label}</p>
     </div>
@@ -42,8 +65,16 @@ function StatCard({ value, label, prefix = '', suffix = '', decimals = 0 }: {
 }
 
 /* ── How it works step ── */
-function Step({ number, title, desc, icon: Icon }: {
-  number: string; title: string; desc: string; icon: React.ElementType;
+function Step({
+  number,
+  title,
+  desc,
+  icon: Icon,
+}: {
+  number: string;
+  title: string;
+  desc: string;
+  icon: React.ElementType;
 }) {
   return (
     <div className="flex flex-col items-center text-center group">
@@ -55,20 +86,34 @@ function Step({ number, title, desc, icon: Icon }: {
           {number}
         </div>
       </div>
-      <h3 className="font-display font-semibold text-lg text-foreground mb-2">{title}</h3>
-      <p className="text-sm text-foreground-muted font-body leading-relaxed max-w-[220px]">{desc}</p>
+      <h3 className="font-display font-semibold text-lg text-foreground mb-2">
+        {title}
+      </h3>
+      <p className="text-sm text-foreground-muted font-body leading-relaxed max-w-[220px]">
+        {desc}
+      </p>
     </div>
   );
 }
 
 export default function LandingPage() {
-  const [stats, setStats] = useState({ totalDatasets: 0, totalQueries: 0, totalUsdcEarned: 0 });
+  const [stats, setStats] = useState({
+    totalDatasets: 0,
+    totalQueries: 0,
+    totalUsdcEarned: 0,
+  });
   const [featured, setFeatured] = useState<DatasetMeta[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    api.getStats().then(setStats).catch(() => {});
-    api.getDatasets().then((ds) => setFeatured(ds.slice(0, 3))).catch(() => {});
+    api
+      .getStats()
+      .then(setStats)
+      .catch(() => {});
+    api
+      .getDatasets()
+      .then((ds) => setFeatured(ds.slice(0, 3)))
+      .catch(() => {});
     const t = setTimeout(() => setLoaded(true), 100);
     return () => clearTimeout(t);
   }, []);
@@ -95,20 +140,23 @@ export default function LandingPage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 70% 50% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%)',
+            background:
+              "radial-gradient(ellipse 70% 50% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%)",
           }}
         />
 
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {particles.map((p) => <Particle key={p.key} style={p.style} />)}
+          {particles.map((p) => (
+            <Particle key={p.key} style={p.style} />
+          ))}
         </div>
 
         {/* Hero content */}
         <div
           className={clsx(
-            'relative z-10 text-center px-4 max-w-5xl mx-auto transition-all duration-700',
-            loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            "relative z-10 text-center px-4 max-w-5xl mx-auto transition-all duration-700",
+            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
           {/* Eyebrow */}
@@ -130,18 +178,28 @@ export default function LandingPage() {
 
           {/* Sub */}
           <p className="text-lg md:text-xl text-foreground-muted font-body max-w-2xl mx-auto mb-12 leading-relaxed">
-            Hazina is the luxury marketplace for on-chain intelligence. Upload your datasets,
-            set your price, and let our AI escrow agent collect{' '}
-            <span className="text-gold font-medium">Stellar micropayments</span> while you sleep.
+            Hazina is the luxury marketplace for on-chain intelligence. Upload
+            your datasets, set your price, and let our AI escrow agent collect{" "}
+            <span className="text-gold font-medium">Stellar micropayments</span>{" "}
+            while you sleep.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link to="/sell" className="btn-gold text-base px-8 py-4 flex items-center gap-2 shadow-gold-md">
+          <div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            data-tour="hero-cta"
+          >
+            <Link
+              to="/sell"
+              className="btn-gold text-base px-8 py-4 flex items-center gap-2 shadow-gold-md"
+            >
               List Your Data
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link to="/marketplace" className="btn-ghost text-base px-8 py-4 flex items-center gap-2">
+            <Link
+              to="/marketplace"
+              className="btn-ghost text-base px-8 py-4 flex items-center gap-2"
+            >
               Browse Marketplace
               <ChevronRight className="w-4 h-4" />
             </Link>
@@ -151,7 +209,12 @@ export default function LandingPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <StatCard value={stats.totalDatasets} label="Datasets Listed" />
             <StatCard value={stats.totalQueries} label="Queries Sold" />
-            <StatCard value={stats.totalUsdcEarned} label="USDC Earned" prefix="$" decimals={2} />
+            <StatCard
+              value={stats.totalUsdcEarned}
+              label="USDC Earned"
+              prefix="$"
+              decimals={2}
+            />
           </div>
         </div>
 
@@ -167,12 +230,15 @@ export default function LandingPage() {
         <div className="absolute inset-0 pattern-bg" />
         <div className="relative max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">The Flow</p>
+            <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">
+              The Flow
+            </p>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
               How Hazina Works
             </h2>
             <p className="text-foreground-muted font-body max-w-xl mx-auto">
-              From upload to earnings in three steps. The escrow agent handles everything automatically.
+              From upload to earnings in three steps. The escrow agent handles
+              everything automatically.
             </p>
           </div>
 
@@ -207,29 +273,52 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">Why Hazina</p>
+              <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">
+                Why Hazina
+              </p>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Built for the New Economy of{' '}
+                Built for the New Economy of{" "}
                 <em className="text-gold not-italic">Data Sovereignty</em>
               </h2>
               <p className="text-foreground-muted font-body text-lg leading-relaxed mb-8">
-                Hazina — <em>treasure</em> in Swahili — represents the untapped value in your on-chain intelligence.
-                Stop giving it away free. Monetize it securely.
+                Hazina — <em>treasure</em> in Swahili — represents the untapped
+                value in your on-chain intelligence. Stop giving it away free.
+                Monetize it securely.
               </p>
               <div className="flex flex-col gap-4">
                 {[
-                  { icon: Zap, label: 'x402 Micropayments', desc: 'Sub-second Stellar payment verification' },
-                  { icon: Shield, label: 'AI-Powered Escrow', desc: 'Claude verifies every transaction before data release' },
-                  { icon: Globe, label: 'Global Marketplace', desc: 'Reach data buyers across the world instantly' },
-                  { icon: Activity, label: 'Real-time Earnings', desc: 'Watch USDC arrive in your wallet in real time' },
+                  {
+                    icon: Zap,
+                    label: "x402 Micropayments",
+                    desc: "Sub-second Stellar payment verification",
+                  },
+                  {
+                    icon: Shield,
+                    label: "AI-Powered Escrow",
+                    desc: "Claude verifies every transaction before data release",
+                  },
+                  {
+                    icon: Globe,
+                    label: "Global Marketplace",
+                    desc: "Reach data buyers across the world instantly",
+                  },
+                  {
+                    icon: Activity,
+                    label: "Real-time Earnings",
+                    desc: "Watch USDC arrive in your wallet in real time",
+                  },
                 ].map(({ icon: Icon, label, desc }) => (
                   <div key={label} className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Icon className="w-5 h-5 text-gold" />
                     </div>
                     <div>
-                      <p className="font-body font-semibold text-foreground text-sm mb-0.5">{label}</p>
-                      <p className="font-body text-sm text-foreground-muted">{desc}</p>
+                      <p className="font-body font-semibold text-foreground text-sm mb-0.5">
+                        {label}
+                      </p>
+                      <p className="font-body text-sm text-foreground-muted">
+                        {desc}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -242,18 +331,20 @@ export default function LandingPage() {
                 {/* Outer ring */}
                 <div
                   className="absolute inset-0 rounded-full border border-gold/15 animate-spin-slow"
-                  style={{ animationDuration: '20s' }}
+                  style={{ animationDuration: "20s" }}
                 />
                 {/* Middle ring */}
                 <div
                   className="absolute inset-8 rounded-full border border-gold/20"
-                  style={{ animation: 'spin 15s linear infinite reverse' }}
+                  style={{ animation: "spin 15s linear infinite reverse" }}
                 />
                 {/* Inner glow */}
                 <div className="absolute inset-16 rounded-full bg-gold/5 border border-gold/30 flex items-center justify-center">
                   <div className="text-center">
                     <Lock className="w-10 h-10 text-gold mx-auto mb-2" />
-                    <p className="text-xs text-gold font-body font-medium">VAULT SECURED</p>
+                    <p className="text-xs text-gold font-body font-medium">
+                      VAULT SECURED
+                    </p>
                   </div>
                 </div>
                 {/* Orbiting dots */}
@@ -264,7 +355,7 @@ export default function LandingPage() {
                     style={{
                       top: `calc(50% + ${Math.sin((deg * Math.PI) / 180) * 130}px - 6px)`,
                       left: `calc(50% + ${Math.cos((deg * Math.PI) / 180) * 130}px - 6px)`,
-                      boxShadow: '0 0 8px rgba(201,168,76,0.8)',
+                      boxShadow: "0 0 8px rgba(201,168,76,0.8)",
                       animation: `pulseGold ${2 + i * 0.3}s ease-in-out infinite`,
                     }}
                   />
@@ -282,12 +373,17 @@ export default function LandingPage() {
           <div className="relative max-w-6xl mx-auto px-4">
             <div className="flex items-end justify-between mb-12">
               <div>
-                <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">Live Now</p>
+                <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">
+                  Live Now
+                </p>
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
                   Featured Datasets
                 </h2>
               </div>
-              <Link to="/marketplace" className="hidden md:flex btn-ghost items-center gap-2 text-sm">
+              <Link
+                to="/marketplace"
+                className="hidden md:flex btn-ghost items-center gap-2 text-sm"
+              >
                 View All
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -300,7 +396,10 @@ export default function LandingPage() {
             </div>
 
             <div className="text-center mt-10">
-              <Link to="/marketplace" className="btn-gold text-base px-8 py-4 inline-flex items-center gap-2">
+              <Link
+                to="/marketplace"
+                className="btn-gold text-base px-8 py-4 inline-flex items-center gap-2"
+              >
                 <Database className="w-5 h-5" />
                 Browse All Datasets
               </Link>
@@ -315,22 +414,31 @@ export default function LandingPage() {
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%)',
+            background:
+              "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%)",
           }}
         />
         <div className="relative max-w-3xl mx-auto px-4 text-center">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Ready to Monetize Your <span className="text-gold-gradient">On-Chain Intelligence?</span>
+            Ready to Monetize Your{" "}
+            <span className="text-gold-gradient">On-Chain Intelligence?</span>
           </h2>
           <p className="text-foreground-muted font-body text-lg mb-10">
-            Join the sellers already earning USDC passively. Your data is your treasure — it's time to unlock it.
+            Join the sellers already earning USDC passively. Your data is your
+            treasure — it's time to unlock it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/sell" className="btn-gold text-base px-10 py-4 flex items-center justify-center gap-2 shadow-gold-lg">
+            <Link
+              to="/sell"
+              className="btn-gold text-base px-10 py-4 flex items-center justify-center gap-2 shadow-gold-lg"
+            >
               Start Selling Now
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link to="/marketplace" className="btn-ghost text-base px-8 py-4 flex items-center justify-center gap-2">
+            <Link
+              to="/marketplace"
+              className="btn-ghost text-base px-8 py-4 flex items-center justify-center gap-2"
+            >
               Explore Marketplace
             </Link>
           </div>
@@ -344,15 +452,33 @@ export default function LandingPage() {
             <div className="w-8 h-8 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center">
               <Database className="w-4 h-4 text-gold" />
             </div>
-            <span className="font-display font-semibold text-foreground">Hazina</span>
+            <span className="font-display font-semibold text-foreground">
+              Hazina
+            </span>
           </div>
           <p className="text-xs text-muted-2 font-body">
-            Built on Stellar Testnet · Powered by Anthropic Claude · x402 Protocol
+            Built on Stellar Testnet · Powered by Anthropic Claude · x402
+            Protocol
           </p>
           <div className="flex gap-6">
-            <Link to="/marketplace" className="text-xs text-foreground-muted hover:text-gold transition-colors font-body">Marketplace</Link>
-            <Link to="/sell" className="text-xs text-foreground-muted hover:text-gold transition-colors font-body">Sell Data</Link>
-            <Link to="/dashboard" className="text-xs text-foreground-muted hover:text-gold transition-colors font-body">Dashboard</Link>
+            <Link
+              to="/marketplace"
+              className="text-xs text-foreground-muted hover:text-gold transition-colors font-body"
+            >
+              Marketplace
+            </Link>
+            <Link
+              to="/sell"
+              className="text-xs text-foreground-muted hover:text-gold transition-colors font-body"
+            >
+              Sell Data
+            </Link>
+            <Link
+              to="/dashboard"
+              className="text-xs text-foreground-muted hover:text-gold transition-colors font-body"
+            >
+              Dashboard
+            </Link>
           </div>
         </div>
       </footer>
@@ -363,10 +489,19 @@ export default function LandingPage() {
 // Upload icon (missing from lucide imports above)
 function Upload({ className }: { className?: string }) {
   return (
-    <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-      <polyline points="17 8 12 3 7 8"/>
-      <line x1="12" y1="3" x2="12" y2="15"/>
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" y1="3" x2="12" y2="15" />
     </svg>
   );
 }
