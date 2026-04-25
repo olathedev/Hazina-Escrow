@@ -1,6 +1,6 @@
 #![no_std]
 use soroban_sdk::{
-    contract, contractimpl, contracttype, token, Address, Env, String, Vec,
+    contract, contracterror, contractimpl, contracttype, Address, Env, String, Vec, token,
 };
 
 // ─── Storage keys ───────────────────────────────────────────────────────────
@@ -15,6 +15,19 @@ pub enum DataKey {
 #[contracttype]
 pub enum EscrowKey {
     Record(u64),    // escrow_id → EscrowRecord
+}
+
+#[contracterror]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+pub enum Error {
+    AlreadyInitialised = 1,
+    NotAdmin = 2,
+    EscrowNotFound = 3,
+    AlreadyReleased = 4,
+    AlreadyRefunded = 5,
+    NotBuyer = 6,
+    NotExpired = 7,
+    InvalidInput = 8,
 }
 
 // ─── Data types ─────────────────────────────────────────────────────────────
@@ -48,13 +61,14 @@ pub struct HazinaEscrow;
 impl HazinaEscrow {
 
     /// One-time initialisation. Call after deployment.
-    pub fn initialize(env: Env, admin: Address, platform_fee_bps: u32) {
+    pub fn initialize(env: Env, admin: Address, platform_fee_bps: u32) -> Result<(), Error> {
         if env.storage().instance().has(&DataKey::Admin) {
-            panic!("already initialised");
+            return Err(Error::AlreadyInitialised);
         }
         env.storage().instance().set(&DataKey::Admin, &admin);
         env.storage().instance().set(&DataKey::PlatformFee, &platform_fee_bps);
         env.storage().instance().set(&DataKey::EscrowCount, &0u64);
+        Ok(())
     }
 
     /// Buyer calls this to lock tokens in escrow for a dataset query.
@@ -74,7 +88,7 @@ impl HazinaEscrow {
         token:      Address,
         amount:     i128,
         dataset_id: String,
-    ) -> u64 {
+    ) -> Result<u64, Error> {
         buyer.require_auth();
 
         // Transfer USDC from buyer → this contract
@@ -102,7 +116,7 @@ impl HazinaEscrow {
             (id, buyer, seller, amount),
         );
 
-        id
+        Ok(id)
     }
 
     /// Buyer calls this to lock one payment split across multiple sellers.
@@ -113,21 +127,22 @@ impl HazinaEscrow {
         token: Address,
         shares: Vec<SellerShare>,
         dataset_ids: Vec<String>,
-    ) -> u64 {
+    ) -> Result<u64, Error> {
         buyer.require_auth();
 
-        assert!(shares.len() > 0, "shares cannot be empty");
-        assert!(
-            shares.len() == dataset_ids.len(),
-            "shares and dataset_ids length mismatch"
-        );
+        if shares.is_empty() || shares.len() != dataset_ids.len() {
+            return Err(Error::InvalidInput);
+        }
 
         let first_id: u64 = env.storage().instance().get(&DataKey::EscrowCount).unwrap_or(0);
         let mut total_amount: i128 = 0;
 
         let mut i: u32 = 0;
         while i < shares.len() {
-            let share = shares.get(i).expect("share not found");
+            let share = match shares.get(i) {
+                Some(share) => share,
+                None => return Err(Error::InvalidInput),
+            };
             total_amount += share.amount;
             i += 1;
         }
@@ -138,8 +153,14 @@ impl HazinaEscrow {
         let mut next_id = first_id;
         let mut j: u32 = 0;
         while j < shares.len() {
-            let share = shares.get(j).expect("share not found");
-            let dataset_id = dataset_ids.get(j).expect("dataset_id not found");
+            let share = match shares.get(j) {
+                Some(share) => share,
+                None => return Err(Error::InvalidInput),
+            };
+            let dataset_id = match dataset_ids.get(j) {
+                Some(dataset_id) => dataset_id,
+                None => return Err(Error::InvalidInput),
+            };
             let record = EscrowRecord {
                 escrow_id: next_id,
                 dataset_id,
@@ -164,43 +185,51 @@ impl HazinaEscrow {
             (first_id, buyer, total_amount, shares.len()),
         );
 
-        first_id
+        Ok(first_id)
     }
 
     /// Admin (Hazina backend) calls this after verifying the data was delivered.
     /// Sends 95% to seller and 5% to admin (platform fee).
-    pub fn release(env: Env, admin: Address, escrow_id: u64) {
+    pub fn release(env: Env, admin: Address, escrow_id: u64) -> Result<(), Error> {
         admin.require_auth();
-        Self::assert_admin(&env, &admin);
-        Self::release_one(&env, &admin, escrow_id);
+        Self::assert_admin(&env, &admin)?;
+        Self::release_one(&env, &admin, escrow_id)
     }
 
     /// Admin (Hazina backend) atomically releases many escrows in one call.
-    pub fn release_multi(env: Env, admin: Address, escrow_ids: Vec<u64>) {
+    pub fn release_multi(env: Env, admin: Address, escrow_ids: Vec<u64>) -> Result<(), Error> {
         admin.require_auth();
-        Self::assert_admin(&env, &admin);
+        Self::assert_admin(&env, &admin)?;
 
         let mut i: u32 = 0;
         while i < escrow_ids.len() {
-            let escrow_id = escrow_ids.get(i).expect("escrow_id not found");
-            Self::release_one(&env, &admin, escrow_id);
+            let escrow_id = match escrow_ids.get(i) {
+                Some(escrow_id) => escrow_id,
+                None => return Err(Error::EscrowNotFound),
+            };
+            Self::release_one(&env, &admin, escrow_id)?;
             i += 1;
         }
+        Ok(())
     }
 
     /// Admin can refund buyer if something goes wrong.
-    pub fn refund(env: Env, admin: Address, escrow_id: u64) {
+    pub fn refund(env: Env, admin: Address, escrow_id: u64) -> Result<(), Error> {
         admin.require_auth();
-        Self::assert_admin(&env, &admin);
+        Self::assert_admin(&env, &admin)?;
 
         let mut record: EscrowRecord = env
             .storage()
             .persistent()
             .get(&EscrowKey::Record(escrow_id))
-            .expect("escrow not found");
+            .ok_or(Error::EscrowNotFound)?;
 
-        assert!(!record.released, "already released");
-        assert!(!record.refunded, "already refunded");
+        if record.released {
+            return Err(Error::AlreadyReleased);
+        }
+        if record.refunded {
+            return Err(Error::AlreadyRefunded);
+        }
 
         let token_client = token::Client::new(&env, &record.token);
         token_client.transfer(&env.current_contract_address(), &record.buyer, &record.amount);
@@ -212,14 +241,15 @@ impl HazinaEscrow {
             (soroban_sdk::symbol_short!("refunded"),),
             (escrow_id, record.buyer, record.amount),
         );
+        Ok(())
     }
 
     /// Read an escrow record.
-    pub fn get_escrow(env: Env, escrow_id: u64) -> EscrowRecord {
+    pub fn get_escrow(env: Env, escrow_id: u64) -> Result<EscrowRecord, Error> {
         env.storage()
             .persistent()
             .get(&EscrowKey::Record(escrow_id))
-            .expect("escrow not found")
+            .ok_or(Error::EscrowNotFound)
     }
 
     /// Read current platform fee in basis points.
@@ -229,24 +259,31 @@ impl HazinaEscrow {
 
     // ── Internal ─────────────────────────────────────────────────────────────
 
-    fn assert_admin(env: &Env, caller: &Address) {
+    fn assert_admin(env: &Env, caller: &Address) -> Result<(), Error> {
         let admin: Address = env
             .storage()
             .instance()
             .get(&DataKey::Admin)
-            .expect("not initialised");
-        assert!(admin == *caller, "not admin");
+            .ok_or(Error::AlreadyInitialised)?;
+        if admin != *caller {
+            return Err(Error::NotAdmin);
+        }
+        Ok(())
     }
 
-    fn release_one(env: &Env, admin: &Address, escrow_id: u64) {
+    fn release_one(env: &Env, admin: &Address, escrow_id: u64) -> Result<(), Error> {
         let mut record: EscrowRecord = env
             .storage()
             .persistent()
             .get(&EscrowKey::Record(escrow_id))
-            .expect("escrow not found");
+            .ok_or(Error::EscrowNotFound)?;
 
-        assert!(!record.released, "already released");
-        assert!(!record.refunded, "already refunded");
+        if record.released {
+            return Err(Error::AlreadyReleased);
+        }
+        if record.refunded {
+            return Err(Error::AlreadyRefunded);
+        }
 
         let fee_bps: u32 = env
             .storage()
@@ -270,6 +307,7 @@ impl HazinaEscrow {
             (soroban_sdk::symbol_short!("released"),),
             (escrow_id, record.seller, seller_cut, platform_cut),
         );
+        Ok(())
     }
 }
 
@@ -326,6 +364,7 @@ mod tests {
         let admin_expected  = amount - seller_expected;
         assert_eq!(token_client.balance(&seller), seller_expected);
         assert_eq!(token_client.balance(&admin),  admin_expected);
+        let _events = env.events().all();
     }
 
     #[test]
@@ -411,7 +450,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "shares cannot be empty")]
+    #[should_panic(expected = "Error(Contract, #8)")]
     fn test_lock_multi_empty_shares() {
         let (env, client, _admin, buyer, _seller, usdc) = setup();
         let shares: Vec<SellerShare> = Vec::new(&env);
@@ -421,7 +460,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "shares and dataset_ids length mismatch")]
+    #[should_panic(expected = "Error(Contract, #8)")]
     fn test_lock_multi_mismatched_lengths() {
         let (env, client, _admin, buyer, _seller, usdc) = setup();
         let mut shares = Vec::new(&env);
@@ -432,5 +471,54 @@ mod tests {
 
         let dataset_ids: Vec<String> = Vec::new(&env);
         let _ = client.lock_multi(&buyer, &usdc, &shares, &dataset_ids);
+    }
+
+    #[test]
+    #[should_panic(expected = "Error(Contract, #1)")]
+    fn test_error_already_initialised() {
+        let (_env, client, admin, _buyer, _seller, _usdc) = setup();
+        client.initialize(&admin, &500);
+    }
+
+    #[test]
+    #[should_panic(expected = "Error(Contract, #2)")]
+    fn test_error_not_admin() {
+        let (env, client, _admin, buyer, seller, usdc) = setup();
+        let amount: i128 = 1_000_000;
+        let id = client.lock(&buyer, &seller, &usdc, &amount, &String::from_str(&env, "ds-101"));
+        client.release(&buyer, &id);
+    }
+
+    #[test]
+    #[should_panic(expected = "Error(Contract, #3)")]
+    fn test_error_escrow_not_found() {
+        let (_env, client, admin, _buyer, _seller, _usdc) = setup();
+        client.get_escrow(&999);
+        client.refund(&admin, &999);
+    }
+
+    #[test]
+    #[should_panic(expected = "Error(Contract, #4)")]
+    fn test_error_already_released() {
+        let (env, client, admin, buyer, seller, usdc) = setup();
+        let amount: i128 = 1_000_000;
+        let id = client.lock(&buyer, &seller, &usdc, &amount, &String::from_str(&env, "ds-102"));
+        client.release(&admin, &id);
+        client.release(&admin, &id);
+    }
+
+    #[test]
+    #[should_panic(expected = "Error(Contract, #5)")]
+    fn test_error_already_refunded() {
+        let (env, client, admin, buyer, seller, usdc) = setup();
+        let amount: i128 = 1_000_000;
+        let id = client.lock(&buyer, &seller, &usdc, &amount, &String::from_str(&env, "ds-103"));
+        client.refund(&admin, &id);
+        client.refund(&admin, &id);
+    }
+
+    #[test]
+    fn test_error_not_buyer_code_value() {
+        assert_eq!(Error::NotBuyer as u32, 6);
     }
 }
