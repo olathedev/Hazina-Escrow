@@ -156,6 +156,8 @@ export default function MarketplacePage() {
                 <button
                   key={value}
                   onClick={() => setTypeFilter(value)}
+                  aria-label={t("marketplace.filterBy", { type: label })}
+                  aria-pressed={typeFilter === value}
                   className={clsx(
                     "px-3 py-1.5 rounded-lg text-xs font-body font-medium transition-all duration-200",
                     typeFilter === value
@@ -234,12 +236,13 @@ export default function MarketplacePage() {
                   type="button"
                   onClick={() => setPage((prev) => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
+                  aria-label={t("marketplace.pagination.previous")}
                   className={clsx(
                     "btn-ghost px-4 py-2 text-sm flex items-center gap-2",
                     currentPage === 1 && "opacity-50 cursor-not-allowed",
                   )}
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <ChevronLeft className="w-4 h-4" aria-hidden="true" />
                   {t("marketplace.pagination.previous")}
                 </button>
 
@@ -249,6 +252,8 @@ export default function MarketplacePage() {
                       key={pageNumber}
                       type="button"
                       onClick={() => setPage(pageNumber)}
+                      aria-label={t("marketplace.pagination.goToPage", { page: pageNumber })}
+                      aria-current={currentPage === pageNumber ? 'page' : undefined}
                       className={clsx(
                         "w-10 h-10 rounded-xl text-sm font-body font-medium transition-all duration-200",
                         currentPage === pageNumber
@@ -265,13 +270,14 @@ export default function MarketplacePage() {
                   type="button"
                   onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
                   disabled={currentPage === totalPages}
+                  aria-label={t("marketplace.pagination.next")}
                   className={clsx(
                     "btn-ghost px-4 py-2 text-sm flex items-center gap-2",
                     currentPage === totalPages && "opacity-50 cursor-not-allowed",
                   )}
                 >
                   {t("marketplace.pagination.next")}
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-4 h-4" aria-hidden="true" />
                 </button>
               </div>
             )}

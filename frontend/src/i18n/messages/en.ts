@@ -36,6 +36,8 @@ export const en = {
       listNewDataset: "List New Dataset",
       listFirstDataset: "List your first dataset",
       resetSearch: "Reset search",
+      copyAddress: "Copy address",
+      copyMemo: "Copy memo",
     },
     labels: {
       price: "Price",
@@ -194,11 +196,13 @@ export const en = {
     subtitle:
       "Premium on-chain intelligence, priced per query. Pay only for what you need.",
     searchPlaceholder: "Search datasets...",
+    filterBy: "Filter by {type}",
     pagination: {
       previous: "Previous",
       next: "Next",
       page: "Page {current} of {total}",
       showing: "Showing {start}-{end} of {total}",
+      goToPage: "Go to page {page}",
     },
     sorts: {
       popular: "Most Popular",

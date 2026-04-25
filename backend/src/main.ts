@@ -175,6 +175,23 @@ app.get("/health", async (_req, res) => {
   });
 });
 
+// Global error handling middleware
+app.use((err: Error, _req: Request, res: Response, _next: () => void) => {
+  const message = err.message || 'Internal server error';
+  console.error('[Global Error Handler]', err);
+  res.status(500).json({ error: message });
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason: unknown) => {
+  console.error('[Unhandled Rejection]', reason);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err: Error) => {
+  console.error('[Uncaught Exception]', err);
+});
+
 // Routes
 app.use('/api/datasets', datasetsRouter);
 app.use('/api', paymentsRouter);
