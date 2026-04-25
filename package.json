@@ -11,26 +11,10 @@
     "build": "npm run build --prefix backend && npm run build --prefix frontend",
     "prepare": "husky",
     "format": "prettier --write \"backend/src/**/*.ts\" \"frontend/src/**/*.{ts,tsx}\"",
-    "format:check": "prettier --check \"backend/src/**/*.ts\" \"frontend/src/**/*.{ts,tsx}\""
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3"
-  },
-  "lint-staged": {
-    "backend/src/**/*.ts": [
-      "prettier --write",
-      "npm run lint --prefix backend -- --max-warnings=0"
-    ],
-    "frontend/src/**/*.{ts,tsx}": [
-      "prettier --write",
-      "npm run lint --prefix frontend -- --max-warnings=0"
-    ]
+    "format:check": "prettier --check \"backend/src/**/*.ts\" \"frontend/src/**/*.{ts,tsx}\"",
     "lint": "eslint \"backend/src/**/*.{ts,tsx}\" \"frontend/src/**/*.{ts,tsx}\"",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --check .",
+    "format:all": "prettier --check .",
     "format:write": "prettier --write .",
     "contracts:check": "./scripts/contracts/checks.sh",
     "contracts:formal": "./scripts/contracts/formal-checks.sh"
@@ -43,7 +27,19 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.1.0",
     "globals": "^15.13.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.4.2",
     "typescript-eslint": "^8.18.0"
+  },
+  "lint-staged": {
+    "backend/src/**/*.ts": [
+      "prettier --write",
+      "npm run lint --prefix backend -- --max-warnings=0"
+    ],
+    "frontend/src/**/*.{ts,tsx}": [
+      "prettier --write",
+      "npm run lint --prefix frontend -- --max-warnings=0"
+    ]
   }
 }

@@ -28,48 +28,26 @@ export default function MarketplacePage() {
   const [selectedDataset, setSelectedDataset] = useState<DatasetMeta | null>(
     null,
   );
-  const pageSize = 9;
+  const pageSize = 12;
 
-  const { data: datasets = [], isLoading: loading, refetch } = useQuery<DatasetMeta[]>({
-    queryKey: ["datasets"],
-    queryFn: api.getDatasets,
+  const { data, isLoading: loading, refetch } = useQuery({
+    queryKey: ["datasets", page, search, typeFilter, sort],
+    queryFn: () => api.getDatasets({ page, limit: pageSize, search, type: typeFilter, sort }),
   });
 
-  const filtered = useMemo(() => {
-    return datasets
-      .filter((d) => {
-        const q = search.toLowerCase();
-        const matchSearch =
-          !q ||
-          d.name.toLowerCase().includes(q) ||
-          d.description.toLowerCase().includes(q);
-        const matchType = !typeFilter || d.type === typeFilter;
-        return matchSearch && matchType;
-      })
-      .sort((a, b) => {
-        if (sort === "popular") return b.queriesServed - a.queriesServed;
-        if (sort === "price-asc") return a.pricePerQuery - b.pricePerQuery;
-        if (sort === "price-desc") return b.pricePerQuery - a.pricePerQuery;
-        if (sort === "newest")
-          return (
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-        return 0;
-      });
-  }, [datasets, search, typeFilter, sort]);
+  const datasets = data?.data || [];
+  const total = data?.total || 0;
+  const totalPages = data?.totalPages || 1;
 
   useEffect(() => {
     setPage(1);
   }, [search, sort, typeFilter]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const currentPage = Math.min(page, totalPages);
-  const paginated = useMemo(() => {
-    const start = (currentPage - 1) * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [currentPage, filtered]);
-  const pageStart = filtered.length === 0 ? 0 : (currentPage - 1) * pageSize + 1;
-  const pageEnd = filtered.length === 0 ? 0 : Math.min(currentPage * pageSize, filtered.length);
+  
+  const pageStart = total === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+  const pageEnd = total === 0 ? 0 : Math.min(currentPage * pageSize, total);
+  
   const visiblePages = useMemo(() => {
     const start = Math.max(1, currentPage - 1);
     const end = Math.min(totalPages, start + 2);
@@ -195,12 +173,12 @@ export default function MarketplacePage() {
                 {t("marketplace.pagination.showing", {
                   start: pageStart.toLocaleString(locale),
                   end: pageEnd.toLocaleString(locale),
-                  total: filtered.length.toLocaleString(locale),
+                  total: total.toLocaleString(locale),
                 })}
               </>
             )}
           </p>
-          {!loading && filtered.length > 0 && (
+          {!loading && datasets.length > 0 && (
             <p className="text-sm text-foreground-muted font-body">
               {t("marketplace.pagination.page", {
                 current: currentPage.toLocaleString(locale),
@@ -217,7 +195,7 @@ export default function MarketplacePage() {
               <DatasetCardSkeleton key={i} />
             ))}
           </div>
-        ) : filtered.length === 0 ? (
+        ) : datasets.length === 0 ? (
           <div className="text-center py-24">
             <div className="w-16 h-16 rounded-2xl bg-surface-2 border border-border flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-muted" />
@@ -232,7 +210,7 @@ export default function MarketplacePage() {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {paginated.map((ds: DatasetMeta) => (
+              {datasets.map((ds: DatasetMeta) => (
                 <DatasetCard
                   key={ds.id}
                   dataset={ds}

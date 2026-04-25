@@ -112,29 +112,113 @@ export const datasetsRouter = Router();
  * @openapi
  * /api/datasets:
  *   get:
- *     summary: List all datasets
- *     description: Retrieve all datasets excluding their raw data content
+ *     summary: List datasets with pagination and filters
+ *     description: Retrieve datasets excluding their raw data content, with support for pagination, searching, filtering by type, and sorting.
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 12
+ *           maximum: 50
+ *         description: Number of items per page
+ *       - in: query
+ *         name: search
+ *         schema:
+ *           type: string
+ *         description: Search term for name or description
+ *       - in: query
+ *         name: type
+ *         schema:
+ *           type: string
+ *         description: Filter by dataset type
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *           enum: [popular, price-asc, price-desc, newest]
+ *           default: popular
+ *         description: Sort order
  *     responses:
  *       200:
- *         description: A list of datasets
+ *         description: A paginated list of datasets
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                 datasets:
+ *                 data:
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Dataset'
+ *                 total:
+ *                   type: integer
+ *                 page:
+ *                   type: integer
+ *                 totalPages:
+ *                   type: integer
+ *       400:
+ *         description: Invalid pagination parameters
  */
 
 
-// GET /api/datasets — list all (without raw data)
-datasetsRouter.get('/', (_req: Request, res: Response) => {
-  const datasets = getAllDatasets().map(({ data: _data, ...rest }) => rest);
-  res.json({ success: true, datasets });
+// GET /api/datasets — list datasets with pagination, filtering, and sorting
+datasetsRouter.get('/', (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 12;
+  const search = (req.query.search as string || '').toLowerCase();
+  const type = req.query.type as string;
+  const sort = req.query.sort as string || 'popular';
+
+  if (isNaN(page) || page < 1 || isNaN(limit) || limit < 1) {
+    return res.status(400).json({ error: 'Invalid page or limit' });
+  }
+
+  if (limit > 50) {
+    return res.status(400).json({ error: 'Limit exceeds maximum of 50' });
+  }
+
+  let datasets = getAllDatasets().map(({ data: _data, ...rest }) => rest);
+
+  // Filter
+  if (search) {
+    datasets = datasets.filter(
+      (d) =>
+        d.name.toLowerCase().includes(search) ||
+        d.description.toLowerCase().includes(search)
+    );
+  }
+  if (type) {
+    datasets = datasets.filter((d) => d.type === type);
+  }
+
+  // Sort
+  datasets.sort((a, b) => {
+    if (sort === 'popular') return b.queriesServed - a.queriesServed;
+    if (sort === 'price-asc') return a.pricePerQuery - b.pricePerQuery;
+    if (sort === 'price-desc') return b.pricePerQuery - a.pricePerQuery;
+    if (sort === 'newest')
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    return 0;
+  });
+
+  const total = datasets.length;
+  const totalPages = Math.ceil(total / limit);
+  const start = (page - 1) * limit;
+  const data = datasets.slice(start, start + limit);
+
+  res.json({
+    data,
+    total,
+    page,
+    totalPages,
+  });
 });
 
 /**

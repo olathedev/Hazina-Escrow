@@ -90,6 +90,13 @@ export interface Stats {
   totalTransactions: number;
 }
 
+export interface PaginatedDatasets {
+  data: DatasetMeta[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+
 export interface QueryResult {
   success: boolean;
   demo?: boolean;
@@ -128,10 +135,25 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
-  getDatasets: () =>
-    request<{ success: boolean; datasets: DatasetMeta[] }>(`${BASE}/datasets`).then(
-      (r) => r.datasets
-    ),
+  getDatasets: (params?: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    type?: string;
+    sort?: string;
+  }) => {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      if (params.page) searchParams.append('page', params.page.toString());
+      if (params.limit) searchParams.append('limit', params.limit.toString());
+      if (params.search) searchParams.append('search', params.search);
+      if (params.type) searchParams.append('type', params.type);
+      if (params.sort) searchParams.append('sort', params.sort);
+    }
+    const query = searchParams.toString();
+    const url = `${BASE}/datasets${query ? `?${query}` : ''}`;
+    return request<PaginatedDatasets>(url);
+  },
 
   getStats: () =>
     request<{ success: boolean; stats: Stats }>(`${BASE}/datasets/stats`).then((r) => r.stats),
