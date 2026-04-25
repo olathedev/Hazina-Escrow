@@ -5,5 +5,13 @@ dist/
 .DS_Store
 frontend/dist/
 backend/dist/
+backend/backups/
+backups/
+
+
+# Added by cargo
+
+/target
+fix.md
 issue.md
 pr.md

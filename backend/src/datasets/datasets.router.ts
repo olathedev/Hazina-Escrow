@@ -7,6 +7,7 @@ import {
   getTransactions,
   Dataset,
 } from '../common/storage';
+import { notifySeller } from '../webhooks/webhook.service';
 
 /**
  * @openapi
@@ -241,6 +242,15 @@ datasetsRouter.post('/', (req: Request, res: Response) => {
   };
 
   addDataset(dataset);
+
+  // Notify seller via webhook
+  notifySeller(dataset.sellerWallet, 'dataset.created', {
+    datasetId: dataset.id,
+    datasetName: dataset.name,
+    type: dataset.type,
+    pricePerQuery: dataset.pricePerQuery,
+  }).catch(() => {});
+
   const { data: _d, ...meta } = dataset;
   return res.status(201).json({ success: true, dataset: meta });
 });

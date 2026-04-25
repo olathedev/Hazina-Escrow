@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
+import {
   ArrowRight,
   Database,
   Shield,
@@ -14,7 +15,7 @@ import {
 } from "lucide-react";
 import { api, DatasetMeta } from "../lib/api";
 import { useCountUp } from "../hooks/useCountUp";
-import { getTypeMeta, truncateAddress } from "../lib/utils";
+import DatasetCard from "../components/ui/DatasetCard";
 import clsx from "clsx";
 
 function Particle({ style }: { style: React.CSSProperties }) {
@@ -389,42 +390,9 @@ export default function LandingPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {featured.map((ds) => {
-                const typeMeta = getTypeMeta(ds.type);
-                return (
-                  <div
-                    key={ds.id}
-                    className="glass-card p-6 group hover:shadow-card-hover hover:border-border-gold/20 transition-all duration-300"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <span
-                        className={clsx(
-                          "type-badge text-xs",
-                          typeMeta.color,
-                          typeMeta.bg,
-                        )}
-                      >
-                        {typeMeta.label}
-                      </span>
-                      <span className="text-gold font-display font-bold">
-                        ${ds.pricePerQuery}
-                      </span>
-                    </div>
-                    <h3 className="font-display font-semibold text-foreground mb-2 leading-snug group-hover:text-gold transition-colors">
-                      {ds.name}
-                    </h3>
-                    <p className="text-sm text-foreground-muted mb-4 line-clamp-2">
-                      {ds.description}
-                    </p>
-                    <div className="flex justify-between text-xs text-muted-2 font-body">
-                      <span>{ds.queriesServed} queries</span>
-                      <span className="font-mono">
-                        {truncateAddress(ds.sellerWallet)}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+              {featured.map((ds) => (
+                <DatasetCard key={ds.id} dataset={ds} onBuy={() => {}} />
+              ))}
             </div>
 
             <div className="text-center mt-10">
