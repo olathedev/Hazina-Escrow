@@ -13,15 +13,9 @@ import {
   Info,
 } from "lucide-react";
 import { api } from "../lib/api";
-import { getTypeMeta, DATA_TYPE_META } from "../lib/utils";
+import { formatUSDC, getTypeMeta, DATA_TYPE_META } from "../lib/utils";
 import clsx from "clsx";
-
-const DATA_TYPES = Object.entries(DATA_TYPE_META).map(([value, meta]) => ({
-  value,
-  label: meta.label,
-  color: meta.color,
-  bg: meta.bg,
-}));
+import { getCatalog, useI18n } from "../i18n";
 
 const PRICE_PRESETS = [0.01, 0.02, 0.05, 0.1, 0.25, 0.5];
 
@@ -46,6 +40,8 @@ const INITIAL: FormState = {
 };
 
 export default function SellPage() {
+  const { locale, t } = useI18n();
+  const catalog = getCatalog(locale);
   const navigate = useNavigate();
   const [form, setForm] = useState<FormState>(INITIAL);
   const [tab, setTab] = useState<Tab>("form");
@@ -64,6 +60,13 @@ export default function SellPage() {
       setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const typeMeta = getTypeMeta(form.type);
+  const typeLabel = typeMeta.labelKey ? t(typeMeta.labelKey) : typeMeta.label;
+  const dataTypes = Object.entries(DATA_TYPE_META).map(([value, meta]) => ({
+    value,
+    label: meta.labelKey ? t(meta.labelKey) : meta.label,
+    color: meta.color,
+    bg: meta.bg,
+  }));
 
   const validateJson = (text: string): boolean => {
     if (!text.trim()) return true;
@@ -72,7 +75,7 @@ export default function SellPage() {
       setJsonError("");
       return true;
     } catch {
-      setJsonError("Invalid JSON — please check your data format");
+      setJsonError(t("sell.messages.invalidJson"));
       return false;
     }
   };
@@ -118,7 +121,9 @@ export default function SellPage() {
       });
       setSuccess(true);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Failed to create listing");
+      setError(
+        err instanceof Error ? err.message : t("sell.messages.createFailed"),
+      );
     } finally {
       setSubmitting(false);
     }
@@ -132,18 +137,15 @@ export default function SellPage() {
             <CheckCircle className="w-10 h-10 text-emerald-400" />
           </div>
           <h2 className="font-display text-3xl font-bold text-foreground mb-3">
-            Listing Live!
+            {t("sell.messages.listingLive")}
           </h2>
           <p className="text-foreground-muted font-body mb-2">
-            <span className="text-gold font-semibold">{form.name}</span> is now
-            on the marketplace.
+            {t("sell.messages.listingLiveBody", { name: form.name })}
           </p>
           <p className="text-sm text-foreground-muted font-body mb-8">
-            Buyers can query it for{" "}
-            <span className="text-gold font-bold">
-              ${form.pricePerQuery} USDC
-            </span>{" "}
-            each. 95% goes directly to your Stellar wallet.
+            {t("sell.messages.listingLiveRevenue", {
+              price: formatUSDC(Number(form.pricePerQuery), locale),
+            })}
           </p>
           <div className="flex gap-3 justify-center">
             <button
@@ -153,13 +155,13 @@ export default function SellPage() {
               }}
               className="btn-ghost px-6 py-3 text-sm"
             >
-              List Another
+              {t("common.actions.listAnother")}
             </button>
             <button
               onClick={() => navigate("/marketplace")}
               className="btn-gold px-6 py-3 text-sm"
             >
-              View Marketplace
+              {t("common.actions.viewMarketplace")}
             </button>
           </div>
         </div>
@@ -173,31 +175,30 @@ export default function SellPage() {
         {/* Header */}
         <div className="mb-10">
           <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-2">
-            Earn Passively
+            {t("sell.eyebrow")}
           </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-3">
-            List Your Data
+            {t("sell.title")}
           </h1>
           <p className="text-foreground-muted font-body text-lg">
-            Upload your on-chain intelligence. Set your price. Earn USDC
-            automatically via Stellar micropayments.
+            {t("sell.subtitle")}
           </p>
         </div>
 
         {/* Tab switcher */}
         <div className="flex gap-1 p-1 glass-card inline-flex mb-8 rounded-xl">
-          {(["form", "preview"] as Tab[]).map((t) => (
+          {(["form", "preview"] as Tab[]).map((tabKey) => (
             <button
-              key={t}
-              onClick={() => setTab(t)}
+              key={tabKey}
+              onClick={() => setTab(tabKey)}
               className={clsx(
                 "px-5 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 capitalize",
-                tab === t
+                tab === tabKey
                   ? "bg-gold text-void shadow-sm"
                   : "text-foreground-muted hover:text-foreground",
               )}
             >
-              {t === "form" ? "Edit Listing" : "Preview Card"}
+              {tabKey === "form" ? t("sell.tabs.form") : t("sell.tabs.preview")}
             </button>
           ))}
         </div>
@@ -211,13 +212,14 @@ export default function SellPage() {
                 <div>
                   <label className="text-sm font-body font-medium text-foreground-muted mb-2 flex items-center gap-2">
                     <Database className="w-4 h-4 text-gold" />
-                    Dataset Name <span className="text-red-400">*</span>
+                    {t("sell.form.datasetName")}{" "}
+                    <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
                     value={form.name}
                     onChange={set("name")}
-                    placeholder="e.g. Top 100 Whale Wallet Movements — April 2026"
+                    placeholder={t("sell.form.datasetNamePlaceholder")}
                     className="w-full bg-void/60 border border-border/60 rounded-xl px-4 py-3 text-sm font-body text-foreground placeholder:text-muted focus:outline-none focus:border-gold/50 transition-colors"
                   />
                 </div>
@@ -226,12 +228,13 @@ export default function SellPage() {
                 <div>
                   <label className="text-sm font-body font-medium text-foreground-muted mb-2 flex items-center gap-2">
                     <FileJson className="w-4 h-4 text-gold" />
-                    Description <span className="text-red-400">*</span>
+                    {t("sell.form.description")}{" "}
+                    <span className="text-red-400">*</span>
                   </label>
                   <textarea
                     value={form.description}
                     onChange={set("description")}
-                    placeholder="Describe what your data contains, how it was collected, and why buyers would want it..."
+                    placeholder={t("sell.form.descriptionPlaceholder")}
                     className="w-full bg-void/60 border border-border/60 rounded-xl px-4 py-3 text-sm font-body text-foreground placeholder:text-muted focus:outline-none focus:border-gold/50 transition-colors resize-none h-24"
                   />
                 </div>
@@ -241,14 +244,15 @@ export default function SellPage() {
                   <div>
                     <label className="text-sm font-body font-medium text-foreground-muted mb-2 flex items-center gap-2">
                       <Zap className="w-4 h-4 text-gold" />
-                      Data Type <span className="text-red-400">*</span>
+                      {t("sell.form.dataType")}{" "}
+                      <span className="text-red-400">*</span>
                     </label>
                     <select
                       value={form.type}
                       onChange={set("type")}
                       className="w-full bg-void/60 border border-border/60 rounded-xl px-4 py-3 text-sm font-body text-foreground focus:outline-none focus:border-gold/50 transition-colors"
                     >
-                      {DATA_TYPES.map(({ value, label }) => (
+                      {dataTypes.map(({ value, label }) => (
                         <option key={value} value={value}>
                           {label}
                         </option>
@@ -259,7 +263,7 @@ export default function SellPage() {
                   <div>
                     <label className="text-sm font-body font-medium text-foreground-muted mb-2 flex items-center gap-2">
                       <DollarSign className="w-4 h-4 text-gold" />
-                      Price / Query (USDC){" "}
+                      {t("sell.form.pricePerQuery")}{" "}
                       <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -276,7 +280,7 @@ export default function SellPage() {
                 {/* Price presets */}
                 <div>
                   <p className="text-xs text-muted-2 font-body mb-2">
-                    Quick price presets:
+                    {t("sell.form.quickPricePresets")}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {PRICE_PRESETS.map((p) => (
@@ -302,14 +306,14 @@ export default function SellPage() {
                 <div>
                   <label className="text-sm font-body font-medium text-foreground-muted mb-2 flex items-center gap-2">
                     <User className="w-4 h-4 text-gold" />
-                    Your Stellar Wallet Address{" "}
+                    {t("sell.form.sellerWallet")}{" "}
                     <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
                     value={form.sellerWallet}
                     onChange={set("sellerWallet")}
-                    placeholder="G... (56-character Stellar public key)"
+                    placeholder={t("sell.form.sellerWalletPlaceholder")}
                     className={clsx(
                       "w-full bg-void/60 border rounded-xl px-4 py-3 text-sm font-mono text-foreground placeholder:text-muted focus:outline-none transition-colors",
                       form.sellerWallet && form.sellerWallet.length < 56
@@ -319,12 +323,12 @@ export default function SellPage() {
                   />
                   {form.sellerWallet && form.sellerWallet.length < 56 && (
                     <p className="text-xs text-red-400 mt-1 font-body">
-                      Stellar addresses are 56 characters starting with G
+                      {t("sell.form.sellerWalletError")}
                     </p>
                   )}
                   <p className="text-xs text-muted-2 font-body mt-1.5 flex items-start gap-1">
                     <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
-                    95% of each query payment is sent here automatically
+                    {t("sell.form.sellerWalletHelp")}
                   </p>
                 </div>
 
@@ -332,7 +336,8 @@ export default function SellPage() {
                 <div>
                   <label className="text-sm font-body font-medium text-foreground-muted mb-2 flex items-center gap-2">
                     <Upload className="w-4 h-4 text-gold" />
-                    Dataset (JSON) <span className="text-red-400">*</span>
+                    {t("sell.form.datasetJson")}{" "}
+                    <span className="text-red-400">*</span>
                   </label>
 
                   {/* File upload */}
@@ -340,9 +345,11 @@ export default function SellPage() {
                     <Upload className="w-5 h-5 text-gold group-hover:scale-110 transition-transform" />
                     <div>
                       <p className="text-sm font-body font-medium text-foreground">
-                        Upload JSON or CSV file
+                        {t("sell.form.uploadFileTitle")}
                       </p>
-                      <p className="text-xs text-muted-2 font-body">Max 10MB</p>
+                      <p className="text-xs text-muted-2 font-body">
+                        {t("sell.form.uploadFileSubtitle")}
+                      </p>
                     </div>
                     <input
                       type="file"
@@ -355,7 +362,7 @@ export default function SellPage() {
                   <textarea
                     value={form.dataText}
                     onChange={handleDataChange}
-                    placeholder={`Paste your JSON data here...\n\nExample:\n{\n  "wallets": [\n    { "address": "0x...", "balance": 42847 }\n  ]\n}`}
+                    placeholder={t("sell.form.dataPlaceholder")}
                     className={clsx(
                       "w-full bg-void/60 border rounded-xl px-4 py-3 text-xs font-mono text-foreground placeholder:text-muted focus:outline-none transition-colors resize-none h-48",
                       jsonError
@@ -375,7 +382,7 @@ export default function SellPage() {
                     <div className="flex items-center gap-1.5 mt-1.5">
                       <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
                       <p className="text-xs text-emerald-400 font-body">
-                        Valid JSON — ready to list
+                        {t("common.states.validJson")}
                       </p>
                     </div>
                   )}
@@ -399,12 +406,12 @@ export default function SellPage() {
                   {submitting ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />
-                      Publishing Listing...
+                      {t("sell.messages.publishing")}
                     </>
                   ) : (
                     <>
                       <Upload className="w-5 h-5" />
-                      Publish to Marketplace
+                      {t("sell.form.submit")}
                     </>
                   )}
                 </button>
@@ -413,7 +420,7 @@ export default function SellPage() {
               /* Preview tab */
               <div>
                 <p className="text-sm text-foreground-muted font-body mb-4">
-                  This is how your listing will appear in the marketplace:
+                  {t("sell.preview.intro")}
                 </p>
                 <div className="glass-card-gold p-6">
                   <div className="flex justify-between items-start mb-4">
@@ -425,33 +432,37 @@ export default function SellPage() {
                       )}
                     >
                       <Zap className="w-3 h-3" />
-                      {typeMeta.label}
+                      {typeLabel}
                     </span>
                     <div className="text-right">
-                      <p className="text-xs text-muted-2 mb-0.5">per query</p>
+                      <p className="text-xs text-muted-2 mb-0.5">
+                        {t("common.units.perQuery")}
+                      </p>
                       <p className="font-display font-bold text-xl text-gold">
-                        ${form.pricePerQuery || "0.00"}
+                        ${formatUSDC(Number(form.pricePerQuery || "0"), locale)}
                       </p>
                     </div>
                   </div>
                   <h3 className="font-display font-semibold text-foreground text-lg mb-2">
-                    {form.name || "Your Dataset Name"}
+                    {form.name || t("sell.preview.datasetNameFallback")}
                   </h3>
                   <p className="text-sm text-foreground-muted font-body leading-relaxed mb-5">
                     {form.description ||
-                      "Your dataset description will appear here..."}
+                      t("sell.preview.descriptionFallback")}
                   </p>
                   <div className="flex items-center gap-4 mb-5 text-xs text-foreground-muted font-body">
-                    <span>0 queries served</span>
+                    <span>0 {t("common.units.queriesServed")}</span>
                     <span className="w-px h-3 bg-border" />
                     <span className="font-mono">
                       {form.sellerWallet
                         ? `${form.sellerWallet.slice(0, 6)}...${form.sellerWallet.slice(-6)}`
-                        : "G...wallet"}
+                        : t("sell.preview.walletFallback")}
                     </span>
                   </div>
                   <div className="w-full py-3 rounded-xl border border-border-gold/30 text-gold text-sm font-body font-semibold text-center">
-                    Buy Query — ${form.pricePerQuery || "0.00"} USDC
+                    {t("sell.preview.buyLabel", {
+                      price: formatUSDC(Number(form.pricePerQuery || "0"), locale),
+                    })}
                   </div>
                 </div>
               </div>
@@ -463,12 +474,12 @@ export default function SellPage() {
             {/* Earnings calculator */}
             <div className="glass-card p-5">
               <h3 className="font-display font-semibold text-foreground text-base mb-4">
-                Earnings Calculator
+                {t("sell.earnings.title")}
               </h3>
               {[
-                { queries: 10, label: "10 queries" },
-                { queries: 100, label: "100 queries" },
-                { queries: 1000, label: "1,000 queries" },
+                { queries: 10, label: t("sell.earnings.tenQueries") },
+                { queries: 100, label: t("sell.earnings.hundredQueries") },
+                { queries: 1000, label: t("sell.earnings.thousandQueries") },
               ].map(({ queries, label }) => {
                 const price = parseFloat(form.pricePerQuery) || 0;
                 const earned = (price * queries * 0.95).toFixed(2);
@@ -481,30 +492,23 @@ export default function SellPage() {
                       {label}
                     </span>
                     <span className="font-body font-semibold text-gold text-sm">
-                      ${earned}
+                      ${formatUSDC(Number(earned), locale)}
                     </span>
                   </div>
                 );
               })}
               <p className="text-xs text-muted-2 font-body mt-3">
-                After 5% platform fee. Paid in USDC directly to your Stellar
-                wallet.
+                {t("sell.earnings.footnote")}
               </p>
             </div>
 
             {/* Tips */}
             <div className="glass-card p-5">
               <h3 className="font-display font-semibold text-foreground text-base mb-3">
-                Tips for More Sales
+                {t("sell.tips.title")}
               </h3>
               <ul className="space-y-2">
-                {[
-                  "Use specific, descriptive names with dates",
-                  "Include the network and data source",
-                  "Price signals lower to get first queries",
-                  "Structure data as arrays for best AI analysis",
-                  "Include metadata about collection method",
-                ].map((tip, i) => (
+                {catalog.sell.tips.items.map((tip, i) => (
                   <li
                     key={i}
                     className="text-xs text-foreground-muted font-body flex gap-2"
@@ -519,13 +523,14 @@ export default function SellPage() {
             {/* How it works */}
             <div className="glass-card p-5 bg-gold/5 border-border-gold/20">
               <h3 className="font-display font-semibold text-gold text-sm mb-3">
-                How Payments Work
+                {t("sell.howItWorks.title")}
               </h3>
               <div className="space-y-2 text-xs text-foreground-muted font-body">
-                <p>1. Buyer pays in USDC on Stellar testnet</p>
-                <p>2. AI escrow verifies the transaction</p>
-                <p>3. 95% sent to your wallet instantly</p>
-                <p>4. 5% kept as platform fee</p>
+                {catalog.sell.howItWorks.items.map((item, index) => (
+                  <p key={item}>
+                    {index + 1}. {item}
+                  </p>
+                ))}
               </div>
             </div>
           </div>

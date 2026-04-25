@@ -1,0 +1,80 @@
+name: Documentation
+description: Request a fix or addition to docs, onboarding guides, examples, or comments
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for README updates, onboarding improvements, API docs, architecture notes, or missing examples.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Documentation Request
+      description: What needs to be added, clarified, corrected, or removed?
+      placeholder: |
+        The README explains the contract deployment flow, but it does not explain how to run the backend in demo mode with the minimum required environment variables.
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_gap
+    attributes:
+      label: Current Gap
+      description: What is unclear or missing today, and who is blocked by it?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed Update
+      description: What should the docs say or include?
+      placeholder: |
+        Add a "Demo Mode Setup" section to the README with the exact env vars required and a note that no funded wallet is needed.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Primary Audience
+      options:
+        - New contributor
+        - Product user
+        - Maintainer
+        - Smart contract developer
+        - API integrator
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: locations
+    attributes:
+      label: Relevant Locations
+      options:
+        - label: `README.md`
+        - label: `CONTRIBUTING.md`
+        - label: Inline code comments
+        - label: API examples
+        - label: GitHub templates / repo metadata
+        - label: Other
+
+  - type: textarea
+    id: done_criteria
+    attributes:
+      label: Done Criteria
+      description: How will we know the docs issue is resolved?
+      placeholder: |
+        - [ ] Setup instructions are complete and copy-pasteable
+        - [ ] The correct file paths and commands are documented
+        - [ ] A new contributor can follow the steps without guessing
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Screenshots, links, examples, or related issues

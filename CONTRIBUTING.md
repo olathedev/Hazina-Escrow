@@ -11,6 +11,7 @@ Hazina is a Web3 data marketplace on Stellar — data sellers list on-chain inte
 - [Branch & Commit Conventions](#branch--commit-conventions)
 - [Code Quality Standards](#code-quality-standards)
 - [Testing Requirements](#testing-requirements)
+- [Deployment CI Secrets](#deployment-ci-secrets)
 - [Submitting a Pull Request](#submitting-a-pull-request)
 - [Issue Labels Explained](#issue-labels-explained)
 - [Getting Help](#getting-help)
@@ -52,7 +53,7 @@ Required variables are documented in [.env.example](.env.example). You do **not*
 
 ```bash
 # Terminal 1 — backend (port 3001)
-cd backend && npm run dev
+cd backend && npm run start:dev
 
 # Terminal 2 — frontend (port 5173)
 cd frontend && npm run dev
@@ -250,6 +251,27 @@ const sellerAmount = dataset.pricePerQuery * (1 - PLATFORM_FEE_BPS / 10_000);
 ## Testing Requirements
 
 Every PR that touches backend logic must include or update tests. PRs with zero test coverage for new code will not be merged.
+
+---
+
+## Deployment CI Secrets
+
+The repository includes `.github/workflows/deploy-frontend.yml` to automate frontend deployment to Vercel and Netlify from `main`.
+
+Add these repository secrets before enabling production deploys:
+
+### Vercel
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+### Netlify
+
+- `NETLIFY_AUTH_TOKEN`
+- `NETLIFY_SITE_ID`
+
+If one provider's secrets are missing, that provider's deploy job is skipped while other jobs can still run.
 
 ### Backend (Vitest)
 

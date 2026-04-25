@@ -36,6 +36,7 @@ import {
   ChartSkeleton,
 } from "../components/ui/SkeletonLoader";
 import clsx from "clsx";
+import { useI18n } from "../i18n";
 
 /* ── Animated stat card ── */
 function StatCard({
@@ -47,6 +48,7 @@ function StatCard({
   decimals = 0,
   color = "text-gold",
   trend,
+  locale = "en-US",
 }: {
   icon: React.ElementType;
   label: string;
@@ -56,6 +58,7 @@ function StatCard({
   decimals?: number;
   color?: string;
   trend?: number;
+  locale?: string;
 }) {
   const animated = useCountUp(value, 1800, decimals);
   return (
@@ -84,7 +87,7 @@ function StatCard({
         <span className={color}>{prefix}</span>
         {decimals > 0
           ? animated.toFixed(decimals)
-          : Math.round(animated).toLocaleString()}
+          : Math.round(animated).toLocaleString(locale)}
         <span className="text-sm text-foreground-muted ml-1 font-body font-normal">
           {suffix}
         </span>
@@ -99,10 +102,16 @@ function ChartTooltip({
   active,
   payload,
   label,
+  locale,
+  earnedLabel,
+  queriesLabel,
 }: {
   active?: boolean;
   payload?: Array<{ value: number; name: string }>;
   label?: string;
+  locale: string;
+  earnedLabel: string;
+  queriesLabel: string;
 }) {
   if (!active || !payload?.length) return null;
   return (
@@ -110,9 +119,9 @@ function ChartTooltip({
       <p className="text-foreground-muted mb-1">{label}</p>
       {payload.map((p) => (
         <p key={p.name} className="text-gold font-semibold">
-          {p.name === "earned" ? "$" : ""}
-          {p.value.toFixed(p.name === "earned" ? 4 : 0)}{" "}
-          {p.name === "earned" ? "USDC" : "queries"}
+          {p.name === earnedLabel ? "$" : ""}
+          {p.name === earnedLabel ? formatUSDC(p.value, locale) : p.value.toLocaleString(locale)}{" "}
+          {p.name === earnedLabel ? "USDC" : queriesLabel}
         </p>
       ))}
     </div>
@@ -120,19 +129,19 @@ function ChartTooltip({
 }
 
 /* ── Generate 7-day chart data from transactions ── */
-function buildChartData(transactions: Transaction[]) {
+function buildChartData(transactions: Transaction[], locale: string) {
   const days: Record<string, { queries: number; earned: number }> = {};
   for (let i = 6; i >= 0; i--) {
     const d = new Date();
     d.setDate(d.getDate() - i);
-    const key = d.toLocaleDateString("en-US", {
+    const key = d.toLocaleDateString(locale, {
       month: "short",
       day: "numeric",
     });
     days[key] = { queries: 0, earned: 0 };
   }
   transactions.forEach((tx) => {
-    const key = new Date(tx.timestamp).toLocaleDateString("en-US", {
+    const key = new Date(tx.timestamp).toLocaleDateString(locale, {
       month: "short",
       day: "numeric",
     });
@@ -145,6 +154,7 @@ function buildChartData(transactions: Transaction[]) {
 }
 
 export default function DashboardPage() {
+  const { locale, t } = useI18n();
   const [datasets, setDatasets] = useState<DatasetMeta[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
@@ -163,7 +173,7 @@ export default function DashboardPage() {
 
   const totalEarned = datasets.reduce((s, d) => s + d.totalEarned, 0);
   const totalQueries = datasets.reduce((s, d) => s + d.queriesServed, 0);
-  const chartData = buildChartData(transactions);
+  const chartData = buildChartData(transactions, locale);
   const recentTx = [...transactions]
     .sort(
       (a, b) =>
@@ -237,13 +247,13 @@ export default function DashboardPage() {
         <div className="flex items-start justify-between mb-10">
           <div>
             <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-2">
-              Seller Hub
+              {t("dashboard.eyebrow")}
             </p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-2">
-              Dashboard
+              {t("dashboard.title")}
             </h1>
             <p className="text-foreground-muted font-body">
-              Your real-time earnings and dataset performance.
+              {t("dashboard.subtitle")}
             </p>
           </div>
           <Link
@@ -251,7 +261,7 @@ export default function DashboardPage() {
             className="hidden md:flex btn-gold items-center gap-2 text-sm px-5 py-2.5"
           >
             <Database className="w-4 h-4" />
-            List New Dataset
+            {t("common.actions.listNewDataset")}
           </Link>
         </div>
 
@@ -267,7 +277,7 @@ export default function DashboardPage() {
                   : "bg-surface-2 text-foreground-muted hover:text-foreground",
               )}
             >
-              All Sellers
+              {t("dashboard.allSellers")}
             </button>
             {uniqueWallets.map((w) => (
               <button
@@ -290,31 +300,35 @@ export default function DashboardPage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <StatCard
             icon={DollarSign}
-            label="Total USDC Earned"
+            label={t("dashboard.stats.totalEarned")}
             value={totalEarned}
             prefix="$"
             decimals={4}
             color="text-gold"
             trend={12}
+            locale={locale}
           />
           <StatCard
             icon={Zap}
-            label="Total Queries Served"
+            label={t("dashboard.stats.totalQueries")}
             value={totalQueries}
-            suffix="queries"
+            suffix={t("common.units.queries")}
             trend={8}
+            locale={locale}
           />
           <StatCard
             icon={Database}
-            label="Active Datasets"
+            label={t("dashboard.stats.activeDatasets")}
             value={filteredDatasets.length}
-            suffix="listed"
+            suffix={t("common.units.listed")}
+            locale={locale}
           />
           <StatCard
             icon={Activity}
-            label="Transactions"
+            label={t("dashboard.stats.transactions")}
             value={transactions.length}
-            suffix="total"
+            suffix={t("common.units.total")}
+            locale={locale}
           />
         </div>
 
@@ -325,10 +339,10 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="font-display font-semibold text-foreground">
-                  Earnings — Last 7 Days
+                  {t("dashboard.charts.earningsTitle")}
                 </h3>
                 <p className="text-xs text-foreground-muted font-body mt-0.5">
-                  USDC received (95% of query price)
+                  {t("dashboard.charts.earningsSubtitle")}
                 </p>
               </div>
               <TrendingUp className="w-5 h-5 text-gold" />
@@ -359,11 +373,19 @@ export default function DashboardPage() {
                   axisLine={false}
                   tickLine={false}
                 />
-                <Tooltip content={<ChartTooltip />} />
+                <Tooltip
+                  content={
+                    <ChartTooltip
+                      locale={locale}
+                      earnedLabel={t("dashboard.charts.earnedSeries")}
+                      queriesLabel={t("common.units.queries")}
+                    />
+                  }
+                />
                 <Area
                   type="monotone"
                   dataKey="earned"
-                  name="earned"
+                  name={t("dashboard.charts.earnedSeries")}
                   stroke="#C9A84C"
                   strokeWidth={2}
                   fill="url(#goldGrad)"
@@ -377,10 +399,10 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="font-display font-semibold text-foreground">
-                  Daily Queries
+                  {t("dashboard.charts.queriesTitle")}
                 </h3>
                 <p className="text-xs text-foreground-muted font-body mt-0.5">
-                  Requests served per day
+                  {t("dashboard.charts.queriesSubtitle")}
                 </p>
               </div>
               <Activity className="w-5 h-5 text-gold" />
@@ -405,8 +427,20 @@ export default function DashboardPage() {
                   axisLine={false}
                   tickLine={false}
                 />
-                <Tooltip content={<ChartTooltip />} />
-                <Bar dataKey="queries" name="queries" radius={[4, 4, 0, 0]}>
+                <Tooltip
+                  content={
+                    <ChartTooltip
+                      locale={locale}
+                      earnedLabel={t("dashboard.charts.earnedSeries")}
+                      queriesLabel={t("common.units.queries")}
+                    />
+                  }
+                />
+                <Bar
+                  dataKey="queries"
+                  name={t("dashboard.charts.queriesSeries")}
+                  radius={[4, 4, 0, 0]}
+                >
                   {chartData.map((_, i) => (
                     <Cell
                       key={i}
@@ -429,13 +463,13 @@ export default function DashboardPage() {
           <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-display font-semibold text-foreground">
-                Your Datasets
+                {t("dashboard.datasets.title")}
               </h3>
               <Link
                 to="/marketplace"
                 className="text-xs text-gold hover:text-gold-light font-body flex items-center gap-1 transition-colors"
               >
-                View all <ChevronRight className="w-3 h-3" />
+                {t("common.actions.viewAll")} <ChevronRight className="w-3 h-3" />
               </Link>
             </div>
             <div className="space-y-3">
@@ -443,13 +477,13 @@ export default function DashboardPage() {
                 <div className="text-center py-8">
                   <Database className="w-8 h-8 text-muted mx-auto mb-2" />
                   <p className="text-sm text-foreground-muted font-body">
-                    No datasets yet
+                    {t("dashboard.datasets.empty")}
                   </p>
                   <Link
                     to="/sell"
                     className="text-xs text-gold hover:text-gold-light font-body mt-1 inline-block"
                   >
-                    List your first dataset →
+                    {t("common.actions.listFirstDataset")} →
                   </Link>
                 </div>
               ) : (
@@ -473,7 +507,7 @@ export default function DashboardPage() {
                               typeMeta.bg,
                             )}
                           >
-                            {typeMeta.label}
+                            {typeMeta.labelKey ? t(typeMeta.labelKey) : typeMeta.label}
                           </span>
                           <p className="text-sm font-body font-medium text-foreground truncate group-hover:text-gold transition-colors">
                             {ds.name}
@@ -481,10 +515,10 @@ export default function DashboardPage() {
                         </div>
                         <div className="text-right flex-shrink-0">
                           <p className="text-sm font-display font-bold text-gold">
-                            ${formatUSDC(ds.totalEarned)}
+                            ${formatUSDC(ds.totalEarned, locale)}
                           </p>
                           <p className="text-xs text-muted-2 font-body">
-                            {ds.queriesServed} queries
+                            {ds.queriesServed.toLocaleString(locale)} {t("common.units.queries")}
                           </p>
                         </div>
                       </div>
@@ -511,7 +545,7 @@ export default function DashboardPage() {
           <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-display font-semibold text-foreground">
-                Recent Transactions
+                {t("dashboard.transactions.title")}
               </h3>
               <Clock className="w-4 h-4 text-muted" />
             </div>
@@ -519,7 +553,7 @@ export default function DashboardPage() {
               <div className="text-center py-8">
                 <Activity className="w-8 h-8 text-muted mx-auto mb-2" />
                 <p className="text-sm text-foreground-muted font-body">
-                  No transactions yet
+                  {t("dashboard.transactions.empty")}
                 </p>
               </div>
             ) : (
@@ -536,11 +570,11 @@ export default function DashboardPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-body font-medium text-foreground truncate">
-                          {ds?.name ?? "Unknown Dataset"}
+                          {ds?.name ?? t("dashboard.datasets.unknownDataset")}
                         </p>
                         <p className="text-xs text-muted-2 font-mono truncate">
                           {tx.txHash.startsWith("demo")
-                            ? "demo-mode"
+                            ? t("dashboard.transactions.demoMode")
                             : tx.txHash.slice(0, 20) + "..."}
                         </p>
                       </div>
@@ -549,7 +583,7 @@ export default function DashboardPage() {
                           +${(tx.amount * 0.95).toFixed(4)}
                         </p>
                         <p className="text-xs text-muted-2 font-body">
-                          {formatTimeAgo(tx.timestamp)}
+                          {formatTimeAgo(tx.timestamp, locale)}
                         </p>
                       </div>
                     </div>

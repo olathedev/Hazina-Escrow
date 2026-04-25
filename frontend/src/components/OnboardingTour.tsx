@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { X, ChevronRight, ChevronLeft } from "lucide-react";
+import { useI18n } from "../i18n";
 
 interface TourStep {
   target: string;
@@ -9,44 +10,40 @@ interface TourStep {
   placement?: "top" | "bottom" | "left" | "right";
 }
 
-const TOUR_STEPS: TourStep[] = [
-  {
-    target: '[data-tour="marketplace-link"]',
-    title: "Browse Datasets",
-    description:
-      "Explore premium on-chain data from whale wallets, trading signals, yield opportunities, and more.",
-    placement: "bottom",
-  },
-  {
-    target: '[data-tour="sell-link"]',
-    title: "List Your Data",
-    description:
-      "Upload your datasets, set your price per query, and start earning USDC passively on Stellar.",
-    placement: "bottom",
-  },
-  {
-    target: '[data-tour="dashboard-link"]',
-    title: "Track Your Earnings",
-    description:
-      "Monitor your dataset performance, view transactions, and see your real-time USDC earnings.",
-    placement: "bottom",
-  },
-  {
-    target: '[data-tour="hero-cta"]',
-    title: "Ready to Start?",
-    description:
-      "Click here to list your first dataset or browse the marketplace to buy queries. Payments are verified automatically via AI escrow on Stellar testnet.",
-    placement: "top",
-  },
-];
-
 const TOUR_KEY = "hazina-tour-completed";
 
 export default function OnboardingTour() {
+  const { t } = useI18n();
   const [isActive, setIsActive] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const location = useLocation();
+  const tourSteps: TourStep[] = [
+    {
+      target: '[data-tour="marketplace-link"]',
+      title: t("onboarding.steps.marketplace.title"),
+      description: t("onboarding.steps.marketplace.description"),
+      placement: "bottom",
+    },
+    {
+      target: '[data-tour="sell-link"]',
+      title: t("onboarding.steps.sell.title"),
+      description: t("onboarding.steps.sell.description"),
+      placement: "bottom",
+    },
+    {
+      target: '[data-tour="dashboard-link"]',
+      title: t("onboarding.steps.dashboard.title"),
+      description: t("onboarding.steps.dashboard.description"),
+      placement: "bottom",
+    },
+    {
+      target: '[data-tour="hero-cta"]',
+      title: t("onboarding.steps.cta.title"),
+      description: t("onboarding.steps.cta.description"),
+      placement: "top",
+    },
+  ];
 
   useEffect(() => {
     // Only show tour on landing page and if not completed before
@@ -60,7 +57,7 @@ export default function OnboardingTour() {
     if (!isActive) return;
 
     const updatePosition = () => {
-      const step = TOUR_STEPS[currentStep];
+      const step = tourSteps[currentStep];
       const element = document.querySelector(step.target);
       if (element) {
         const rect = element.getBoundingClientRect();
@@ -87,10 +84,10 @@ export default function OnboardingTour() {
       window.removeEventListener("resize", updatePosition);
       window.removeEventListener("scroll", updatePosition);
     };
-  }, [isActive, currentStep]);
+  }, [isActive, currentStep, tourSteps]);
 
   const handleNext = () => {
-    if (currentStep < TOUR_STEPS.length - 1) {
+    if (currentStep < tourSteps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
       handleClose();
@@ -110,9 +107,9 @@ export default function OnboardingTour() {
 
   if (!isActive) return null;
 
-  const step = TOUR_STEPS[currentStep];
+  const step = tourSteps[currentStep];
   const isFirst = currentStep === 0;
-  const isLast = currentStep === TOUR_STEPS.length - 1;
+  const isLast = currentStep === tourSteps.length - 1;
 
   return (
     <>
@@ -154,7 +151,7 @@ export default function OnboardingTour() {
 
         {/* Progress */}
         <div className="flex items-center gap-1.5 mb-4">
-          {TOUR_STEPS.map((_, i) => (
+          {tourSteps.map((_, i) => (
             <div
               key={i}
               className={`h-1 rounded-full transition-all duration-300 ${
@@ -174,7 +171,7 @@ export default function OnboardingTour() {
             onClick={handleClose}
             className="text-sm text-muted hover:text-foreground font-body transition-colors"
           >
-            Skip Tour
+            {t("onboarding.skip")}
           </button>
           <div className="flex items-center gap-2">
             {!isFirst && (
@@ -183,14 +180,14 @@ export default function OnboardingTour() {
                 className="btn-ghost px-4 py-2 text-sm flex items-center gap-1"
               >
                 <ChevronLeft className="w-4 h-4" />
-                Back
+                {t("onboarding.back")}
               </button>
             )}
             <button
               onClick={handleNext}
               className="btn-gold px-4 py-2 text-sm flex items-center gap-1"
             >
-              {isLast ? "Finish" : "Next"}
+              {isLast ? t("onboarding.finish") : t("onboarding.next")}
               {!isLast && <ChevronRight className="w-4 h-4" />}
             </button>
           </div>

@@ -70,6 +70,7 @@ export interface DatasetMeta {
   queriesServed: number;
   totalEarned: number;
   createdAt: string;
+  thumbnail?: string;
 }
 
 export interface Transaction {

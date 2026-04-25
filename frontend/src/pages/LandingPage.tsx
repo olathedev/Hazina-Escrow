@@ -11,11 +11,13 @@ import {
   Star,
   Globe,
   Activity,
+  Upload,
 } from "lucide-react";
 import { api, DatasetMeta } from "../lib/api";
 import { useCountUp } from "../hooks/useCountUp";
-import { getTypeMeta, truncateAddress } from "../lib/utils";
+import DatasetCard from "../components/ui/DatasetCard";
 import clsx from "clsx";
+import { useI18n } from "../i18n";
 
 function Particle({ style }: { style: React.CSSProperties }) {
   return (
@@ -41,12 +43,14 @@ function StatCard({
   prefix = "",
   suffix = "",
   decimals = 0,
+  locale = "en-US",
 }: {
   value: number;
   label: string;
   prefix?: string;
   suffix?: string;
   decimals?: number;
+  locale?: string;
 }) {
   const animated = useCountUp(value, 2200, decimals);
   return (
@@ -55,7 +59,7 @@ function StatCard({
         {prefix}
         {decimals > 0
           ? animated.toFixed(decimals)
-          : Math.round(animated).toLocaleString()}
+          : Math.round(animated).toLocaleString(locale)}
         {suffix}
       </div>
       <p className="text-sm text-foreground-muted font-body">{label}</p>
@@ -96,6 +100,7 @@ function Step({
 }
 
 export default function LandingPage() {
+  const { locale, t } = useI18n();
   const [stats, setStats] = useState({
     totalDatasets: 0,
     totalQueries: 0,
@@ -113,8 +118,8 @@ export default function LandingPage() {
       .getDatasets()
       .then((ds) => setFeatured(ds.slice(0, 3)))
       .catch(() => {});
-    const t = setTimeout(() => setLoaded(true), 100);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   // Generate particles positions once
@@ -162,25 +167,22 @@ export default function LandingPage() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/25 bg-gold/5 mb-8">
             <Star className="w-3.5 h-3.5 text-gold" />
             <span className="text-xs font-body font-medium text-gold tracking-widest uppercase">
-              Web3 Data Marketplace on Stellar
+              {t("landing.eyebrow")}
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6 leading-[1.05]">
-            Your Data.
+            {t("landing.headline.lineOne")}
             <br />
-            <span className="text-gold-gradient">Your Price.</span>
+            <span className="text-gold-gradient">{t("landing.headline.lineTwo")}</span>
             <br />
-            Automatic Earnings.
+            {t("landing.headline.lineThree")}
           </h1>
 
           {/* Sub */}
           <p className="text-lg md:text-xl text-foreground-muted font-body max-w-2xl mx-auto mb-12 leading-relaxed">
-            Hazina is the luxury marketplace for on-chain intelligence. Upload
-            your datasets, set your price, and let our AI escrow agent collect{" "}
-            <span className="text-gold font-medium">Stellar micropayments</span>{" "}
-            while you sleep.
+            {t("landing.subheading")}
           </p>
 
           {/* CTAs */}
@@ -192,27 +194,36 @@ export default function LandingPage() {
               to="/sell"
               className="btn-gold text-base px-8 py-4 flex items-center gap-2 shadow-gold-md"
             >
-              List Your Data
+              {t("common.actions.listData")}
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               to="/marketplace"
               className="btn-ghost text-base px-8 py-4 flex items-center gap-2"
             >
-              Browse Marketplace
+              {t("common.actions.browseMarketplace")}
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
           {/* Stats bar */}
           <div className="flex flex-wrap justify-center gap-4">
-            <StatCard value={stats.totalDatasets} label="Datasets Listed" />
-            <StatCard value={stats.totalQueries} label="Queries Sold" />
+            <StatCard
+              value={stats.totalDatasets}
+              label={t("landing.stats.datasetsListed")}
+              locale={locale}
+            />
+            <StatCard
+              value={stats.totalQueries}
+              label={t("landing.stats.queriesSold")}
+              locale={locale}
+            />
             <StatCard
               value={stats.totalUsdcEarned}
-              label="USDC Earned"
+              label={t("landing.stats.usdcEarned")}
               prefix="$"
               decimals={2}
+              locale={locale}
             />
           </div>
         </div>
@@ -230,14 +241,13 @@ export default function LandingPage() {
         <div className="relative max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">
-              The Flow
+              {t("landing.flow.eyebrow")}
             </p>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-              How Hazina Works
+              {t("landing.flow.title")}
             </h2>
             <p className="text-foreground-muted font-body max-w-xl mx-auto">
-              From upload to earnings in three steps. The escrow agent handles
-              everything automatically.
+              {t("landing.flow.body")}
             </p>
           </div>
 
@@ -248,20 +258,20 @@ export default function LandingPage() {
             <Step
               number="1"
               icon={Upload}
-              title="Upload Your Data"
-              desc="List your on-chain datasets — whale wallets, trading signals, DeFi yields — and set your price per query."
+              title={t("landing.flow.steps.upload.title")}
+              desc={t("landing.flow.steps.upload.description")}
             />
             <Step
               number="2"
               icon={Shield}
-              title="Escrow Protects Both"
-              desc="Our AI escrow agent holds data securely and verifies every Stellar x402 micropayment automatically."
+              title={t("landing.flow.steps.escrow.title")}
+              desc={t("landing.flow.steps.escrow.description")}
             />
             <Step
               number="3"
               icon={TrendingUp}
-              title="Earn While You Sleep"
-              desc="95% of each payment goes directly to your Stellar wallet. No banks, no delays, instant settlement."
+              title={t("landing.flow.steps.earn.title")}
+              desc={t("landing.flow.steps.earn.description")}
             />
           </div>
         </div>
@@ -273,38 +283,36 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">
-                Why Hazina
+                {t("landing.features.eyebrow")}
               </p>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Built for the New Economy of{" "}
-                <em className="text-gold not-italic">Data Sovereignty</em>
+                {t("landing.features.titleStart")}{" "}
+                <em className="text-gold not-italic">{t("landing.features.titleAccent")}</em>
               </h2>
               <p className="text-foreground-muted font-body text-lg leading-relaxed mb-8">
-                Hazina — <em>treasure</em> in Swahili — represents the untapped
-                value in your on-chain intelligence. Stop giving it away free.
-                Monetize it securely.
+                {t("landing.features.body")}
               </p>
               <div className="flex flex-col gap-4">
                 {[
                   {
                     icon: Zap,
-                    label: "x402 Micropayments",
-                    desc: "Sub-second Stellar payment verification",
+                    label: t("landing.features.items.micropayments.label"),
+                    desc: t("landing.features.items.micropayments.description"),
                   },
                   {
                     icon: Shield,
-                    label: "AI-Powered Escrow",
-                    desc: "Claude verifies every transaction before data release",
+                    label: t("landing.features.items.escrow.label"),
+                    desc: t("landing.features.items.escrow.description"),
                   },
                   {
                     icon: Globe,
-                    label: "Global Marketplace",
-                    desc: "Reach data buyers across the world instantly",
+                    label: t("landing.features.items.marketplace.label"),
+                    desc: t("landing.features.items.marketplace.description"),
                   },
                   {
                     icon: Activity,
-                    label: "Real-time Earnings",
-                    desc: "Watch USDC arrive in your wallet in real time",
+                    label: t("landing.features.items.earnings.label"),
+                    desc: t("landing.features.items.earnings.description"),
                   },
                 ].map(({ icon: Icon, label, desc }) => (
                   <div key={label} className="flex items-start gap-4">
@@ -342,7 +350,7 @@ export default function LandingPage() {
                   <div className="text-center">
                     <Lock className="w-10 h-10 text-gold mx-auto mb-2" />
                     <p className="text-xs text-gold font-body font-medium">
-                      VAULT SECURED
+                      {t("landing.features.vaultSecured")}
                     </p>
                   </div>
                 </div>
@@ -373,58 +381,25 @@ export default function LandingPage() {
             <div className="flex items-end justify-between mb-12">
               <div>
                 <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-3">
-                  Live Now
+                  {t("landing.featured.eyebrow")}
                 </p>
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
-                  Featured Datasets
+                  {t("landing.featured.title")}
                 </h2>
               </div>
               <Link
                 to="/marketplace"
                 className="hidden md:flex btn-ghost items-center gap-2 text-sm"
               >
-                View All
+                {t("common.actions.viewAll")}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {featured.map((ds) => {
-                const typeMeta = getTypeMeta(ds.type);
-                return (
-                  <div
-                    key={ds.id}
-                    className="glass-card p-6 group hover:shadow-card-hover hover:border-border-gold/20 transition-all duration-300"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <span
-                        className={clsx(
-                          "type-badge text-xs",
-                          typeMeta.color,
-                          typeMeta.bg,
-                        )}
-                      >
-                        {typeMeta.label}
-                      </span>
-                      <span className="text-gold font-display font-bold">
-                        ${ds.pricePerQuery}
-                      </span>
-                    </div>
-                    <h3 className="font-display font-semibold text-foreground mb-2 leading-snug group-hover:text-gold transition-colors">
-                      {ds.name}
-                    </h3>
-                    <p className="text-sm text-foreground-muted mb-4 line-clamp-2">
-                      {ds.description}
-                    </p>
-                    <div className="flex justify-between text-xs text-muted-2 font-body">
-                      <span>{ds.queriesServed} queries</span>
-                      <span className="font-mono">
-                        {truncateAddress(ds.sellerWallet)}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+              {featured.map((ds) => (
+                <DatasetCard key={ds.id} dataset={ds} onBuy={() => {}} />
+              ))}
             </div>
 
             <div className="text-center mt-10">
@@ -433,7 +408,7 @@ export default function LandingPage() {
                 className="btn-gold text-base px-8 py-4 inline-flex items-center gap-2"
               >
                 <Database className="w-5 h-5" />
-                Browse All Datasets
+                {t("landing.featured.browseAll")}
               </Link>
             </div>
           </div>
@@ -452,26 +427,25 @@ export default function LandingPage() {
         />
         <div className="relative max-w-3xl mx-auto px-4 text-center">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Ready to Monetize Your{" "}
-            <span className="text-gold-gradient">On-Chain Intelligence?</span>
+            {t("landing.cta.titleStart")}{" "}
+            <span className="text-gold-gradient">{t("landing.cta.titleAccent")}</span>
           </h2>
           <p className="text-foreground-muted font-body text-lg mb-10">
-            Join the sellers already earning USDC passively. Your data is your
-            treasure — it's time to unlock it.
+            {t("landing.cta.body")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/sell"
               className="btn-gold text-base px-10 py-4 flex items-center justify-center gap-2 shadow-gold-lg"
             >
-              Start Selling Now
+              {t("common.actions.startSellingNow")}
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               to="/marketplace"
               className="btn-ghost text-base px-8 py-4 flex items-center justify-center gap-2"
             >
-              Explore Marketplace
+              {t("common.actions.exploreMarketplace")}
             </Link>
           </div>
         </div>
@@ -485,55 +459,34 @@ export default function LandingPage() {
               <Database className="w-4 h-4 text-gold" />
             </div>
             <span className="font-display font-semibold text-foreground">
-              Hazina
+              {t("nav.brand")}
             </span>
           </div>
           <p className="text-xs text-muted-2 font-body">
-            Built on Stellar Testnet · Powered by Anthropic Claude · x402
-            Protocol
+            {t("landing.footer.tagline")}
           </p>
           <div className="flex gap-6">
             <Link
               to="/marketplace"
               className="text-xs text-foreground-muted hover:text-gold transition-colors font-body"
             >
-              Marketplace
+              {t("nav.marketplace")}
             </Link>
             <Link
               to="/sell"
               className="text-xs text-foreground-muted hover:text-gold transition-colors font-body"
             >
-              Sell Data
+              {t("nav.sell")}
             </Link>
             <Link
               to="/dashboard"
               className="text-xs text-foreground-muted hover:text-gold transition-colors font-body"
             >
-              Dashboard
+              {t("nav.dashboard")}
             </Link>
           </div>
         </div>
       </footer>
     </div>
-  );
-}
-
-// Upload icon (missing from lucide imports above)
-function Upload({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="17 8 12 3 7 8" />
-      <line x1="12" y1="3" x2="12" y2="15" />
-    </svg>
   );
 }

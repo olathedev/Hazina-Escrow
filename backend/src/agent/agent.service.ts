@@ -3,6 +3,7 @@ import { getAllDatasets, getDataset, updateDataset, addTransaction, txHashUsed }
 import { verifyStellarPayment } from '../payments/stellar.service';
 import { sendUsdcPayment, getAgentPublicKey } from './agent.wallet';
 import { synthesizeResearch, parseRiskTolerance, parseBudget, ResearchReport } from '../ai/research.service';
+import { notifySeller } from '../webhooks/webhook.service';
 
 // Fee the agent charges the human (1 USDC flat)
 const AGENT_FEE_USDC = 1;
@@ -107,10 +108,14 @@ async function _executeResearch(
     if (demo) {
       // Demo: simulate payment, read data directly
       txHash = `demo-${seller.type}-${Date.now()}`;
-      console.log(`[Agent][Demo] Simulating payment of ${dataset.pricePerQuery} USDC → ${dataset.sellerWallet} for ${dataset.name}`);
+      console.log(
+        `[Agent][Demo] Simulating payment of ${dataset.pricePerQuery} USDC → ${dataset.sellerWallet} for ${dataset.name}`,
+      );
     } else {
       // Real: send USDC from agent wallet → seller wallet
-      console.log(`[Agent] Paying ${dataset.pricePerQuery} USDC → ${dataset.sellerWallet} for ${dataset.name}`);
+      console.log(
+        `[Agent] Paying ${dataset.pricePerQuery} USDC → ${dataset.sellerWallet} for ${dataset.name}`,
+      );
       const payment = await sendUsdcPayment({
         destinationAddress: dataset.sellerWallet,
         amount: dataset.pricePerQuery.toFixed(7),
@@ -147,6 +152,17 @@ async function _executeResearch(
       buyerQuery: `[Agent Job ${jobId}] ${query}`,
       timestamp: new Date().toISOString(),
     });
+
+    // Notify seller via webhook
+    notifySeller(dataset.sellerWallet, 'dataset.queried', {
+      datasetId: dataset.id,
+      datasetName: dataset.name,
+      type: dataset.type,
+      txHash,
+      amount: dataset.pricePerQuery,
+      agentJobId: jobId,
+      demo,
+    }).catch(() => {});
 
     // Read the actual data
     const fresh = getDataset(dataset.id);

@@ -45,7 +45,7 @@ The Hazina escrow contract is written in **Rust**, compiled to **WebAssembly**, 
 | **Network** | Stellar Testnet |
 | **Explorer** | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCPG2CSL6WDUA2IFUDHFN5SCJQUTFCLFKMTARALQ5RWGB2RGG345HEEH) |
 | **Admin** | `GA72WMKUB52OD2X437YOTJZXP3J7MV5G2RYC2JHFJJHWF6MBGQHVUMLO` |
-| **Platform Fee** | 5% (500 basis points) |
+| **Platform Fee** | Default 5% (500 basis points), configurable per dataset |
 | **Source** | `contracts/hazina-escrow/src/lib.rs` |
 
 ### What the Contract Does
@@ -70,12 +70,20 @@ Buyer           Contract              Seller
 
 | Function | Who Calls It | What It Does |
 |---|---|---|
-| `initialize(admin, fee_bps)` | Deployer (once) | Sets the admin address and platform fee (500 = 5%) |
+| `initialize(admin, fee_bps)` | Deployer (once) | Sets the admin address and default platform fee (500 = 5%) |
+| `set_default_fee(admin, fee_bps)` | Hazina backend (admin) | Updates the fallback fee used when no dataset override exists |
+| `set_dataset_fee(admin, dataset_id, fee_bps)` | Hazina backend (admin) | Sets a custom platform fee for a specific dataset |
+| `clear_dataset_fee(admin, dataset_id)` | Hazina backend (admin) | Removes a dataset-specific fee override |
+| `set_whitelist_enforced(admin, enforced)` | Hazina backend (admin) | Toggles whitelist mode for participant addresses |
+| `set_address_whitelisted(admin, address, whitelisted)` | Hazina backend (admin) | Marks an address as whitelist-approved |
+| `set_address_blacklisted(admin, address, blacklisted)` | Hazina backend (admin) | Blocks or unblocks a malicious address |
 | `lock(buyer, seller, token, amount, dataset_id)` | Buyer | Transfers USDC from buyer into the contract. Returns an `escrow_id`. |
 | `release(admin, escrow_id)` | Hazina backend (admin) | Sends 95% to seller, 5% to admin. Fires a `released` event. |
 | `refund(admin, escrow_id)` | Hazina backend (admin) | Returns full amount to buyer if something goes wrong. |
 | `get_escrow(escrow_id)` | Anyone | Reads an escrow record (buyer, seller, amount, status). |
-| `get_fee()` | Anyone | Returns current platform fee in basis points. |
+| `get_fee()` | Anyone | Returns the default platform fee in basis points. |
+| `get_dataset_fee_config(dataset_id)` | Anyone | Returns the effective fee config for a dataset override. |
+| `get_address_policy(address)` | Anyone | Returns whitelist and blacklist status for an address. |
 
 ### Why Soroban?
 
@@ -112,6 +120,16 @@ stellar contract invoke \
   --admin <YOUR_WALLET> \
   --platform_fee_bps 500
 ```
+
+### Verification Scripts
+
+```bash
+npm run contracts:check
+npm run contracts:formal
+```
+
+- `contracts:check` runs `cargo fmt --check`, `cargo clippy`, the full Rust test suite, and a release wasm build.
+- `contracts:formal` runs the invariant-oriented contract tests prefixed with `formal_`.
 
 ---
 

@@ -7,6 +7,7 @@ import MarketplacePage from "./pages/MarketplacePage";
 import SellPage from "./pages/SellPage";
 import DashboardPage from "./pages/DashboardPage";
 import AgentPage from "./pages/AgentPage";
+import { useI18n } from "./i18n";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -27,10 +28,17 @@ export default function App() {
       >
         <meta name="description" content="Decentralized data escrow and research platform using Stellar micropayments." />
       </Helmet>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-gold focus:text-void focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-2 focus:ring-gold-light"
+      >
+        Skip to content
+      </a>
       <ScrollToTop />
       <Navbar />
       <OnboardingTour />
-      <Routes>
+      <main id="main-content" tabIndex={-1}>
+        <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/sell" element={<SellPage />} />
@@ -38,23 +46,25 @@ export default function App() {
         <Route path="/agent" element={<AgentPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </main>
     </BrowserRouter>
   );
 }
 
 function NotFound() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen pt-28 flex items-center justify-center text-center px-4">
       <div>
         <p className="font-display text-8xl font-bold text-gold/20 mb-4">404</p>
         <h1 className="font-display text-3xl font-bold text-foreground mb-3">
-          Page not found
+          {t("notFound.title")}
         </h1>
         <p className="text-foreground-muted font-body mb-8">
-          This page doesn't exist in the vault.
+          {t("notFound.body")}
         </p>
         <a href="/" className="btn-gold px-8 py-3 text-sm inline-block">
-          Return Home
+          {t("common.actions.goHome")}
         </a>
       </div>
     </div>

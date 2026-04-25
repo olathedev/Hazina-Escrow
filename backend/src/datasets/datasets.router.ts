@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import { z } from 'zod';
 import {
   getAllDatasets,
   getDataset,
@@ -7,6 +8,74 @@ import {
   getTransactions,
   Dataset,
 } from '../common/storage';
+import { validateBody } from '../common/validate';
+import { sanitizeUserText } from '../common/sanitize';
+import { notifySeller } from '../webhooks/webhook.service';
+
+const STELLAR_ADDRESS_REGEX = /^G[A-Z2-7]{55}$/;
+const MAX_DATA_BYTES = 500 * 1024;
+const makeSanitizedTextField = (fieldName: string, maxLength: number) =>
+  z.string().transform(sanitizeUserText).superRefine((value, ctx) => {
+    if (value.length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `${fieldName} is required`,
+      });
+      return;
+    }
+    if (value.length > maxLength) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `${fieldName} must be at most ${maxLength} characters`,
+      });
+    }
+  });
+
+const dataField = z
+  .union([z.string(), z.record(z.unknown())])
+  .transform((val, ctx): Record<string, unknown> => {
+    let parsed: unknown;
+    if (typeof val === 'string') {
+      try {
+        parsed = JSON.parse(val);
+      } catch {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'data must be valid JSON',
+        });
+        return z.NEVER;
+      }
+    } else {
+      parsed = val;
+    }
+    if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'data must be a JSON object',
+      });
+      return z.NEVER;
+    }
+    if (Buffer.byteLength(JSON.stringify(parsed), 'utf8') > MAX_DATA_BYTES) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'data exceeds 500 KB limit',
+      });
+      return z.NEVER;
+    }
+    return parsed as Record<string, unknown>;
+  });
+
+const createDatasetSchema = z.object({
+  name: makeSanitizedTextField('name', 200),
+  description: makeSanitizedTextField('description', 2000),
+  type: makeSanitizedTextField('type', 100),
+  pricePerQuery: z.coerce.number().finite().positive(),
+  sellerWallet: z
+    .string()
+    .trim()
+    .regex(STELLAR_ADDRESS_REGEX, 'must be a valid Stellar G-address'),
+  data: dataField,
+});
 
 /**
  * @openapi
@@ -215,32 +284,33 @@ datasetsRouter.get('/:id/transactions', (req: Request, res: Response) => {
  *       400:
  *         description: Missing required fields or invalid price
  */
-datasetsRouter.post('/', (req: Request, res: Response) => {
-  const { name, description, type, pricePerQuery, sellerWallet, data } = req.body;
-
-  if (!name || !description || !type || !pricePerQuery || !sellerWallet || !data) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  const price = parseFloat(pricePerQuery);
-  if (isNaN(price) || price <= 0) {
-    return res.status(400).json({ error: 'Invalid price' });
-  }
+datasetsRouter.post('/', validateBody(createDatasetSchema), (req: Request, res: Response) => {
+  const { name, description, type, pricePerQuery, sellerWallet, data } =
+    req.body as z.infer<typeof createDatasetSchema>;
 
   const dataset: Dataset = {
     id: `ds-${uuidv4()}`,
     name,
     description,
     type,
-    pricePerQuery: price,
+    pricePerQuery,
     sellerWallet,
-    data: typeof data === 'string' ? JSON.parse(data) : data,
+    data,
     queriesServed: 0,
     totalEarned: 0,
     createdAt: new Date().toISOString(),
   };
 
   addDataset(dataset);
+
+  // Notify seller via webhook
+  notifySeller(dataset.sellerWallet, 'dataset.created', {
+    datasetId: dataset.id,
+    datasetName: dataset.name,
+    type: dataset.type,
+    pricePerQuery: dataset.pricePerQuery,
+  }).catch(() => {});
+
   const { data: _d, ...meta } = dataset;
   return res.status(201).json({ success: true, dataset: meta });
 });
