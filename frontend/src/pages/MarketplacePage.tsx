@@ -21,6 +21,9 @@ import { useI18n } from "../i18n";
 
 export default function MarketplacePage() {
   const { locale, t } = useI18n();
+  /** Raw input value — updated on every keystroke. */
+  const [searchInput, setSearchInput] = useState("");
+  /** Debounced value used in the query — updated 400 ms after typing stops. */
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [sort, setSort] = useState("popular");
@@ -29,6 +32,12 @@ export default function MarketplacePage() {
     null,
   );
   const pageSize = 12;
+
+  // Debounce: only update the query key 400 ms after the user stops typing.
+  useEffect(() => {
+    const timer = setTimeout(() => setSearch(searchInput), 400);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
 
   const { data, isLoading: loading, refetch } = useQuery({
     queryKey: ["datasets", page, search, typeFilter, sort],
@@ -107,13 +116,13 @@ export default function MarketplacePage() {
               <input
                 type="text"
                 placeholder={t("marketplace.searchPlaceholder")}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
                 className="w-full bg-void/60 border border-border/60 rounded-xl pl-11 pr-4 py-3 text-sm font-body text-foreground placeholder:text-muted focus:outline-none focus:border-gold/40 transition-colors"
               />
-              {search && (
+              {searchInput && (
                 <button
-                  onClick={() => setSearch("")}
+                  onClick={() => { setSearchInput(""); setSearch(""); }}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-foreground"
                   aria-label={t("common.actions.resetSearch")}
                 >

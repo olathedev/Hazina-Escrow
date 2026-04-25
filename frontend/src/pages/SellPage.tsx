@@ -97,12 +97,15 @@ export default function SellPage() {
     reader.readAsText(file);
   };
 
+  const isValidStellarAddress = (addr: string): boolean =>
+    /^G[A-Z2-7]{55}$/.test(addr.trim());
+
   const isValid =
     form.name.trim() &&
     form.description.trim() &&
     form.type &&
     parseFloat(form.pricePerQuery) > 0 &&
-    form.sellerWallet.trim().length >= 56 &&
+    isValidStellarAddress(form.sellerWallet) &&
     form.dataText.trim() &&
     !jsonError;
 
@@ -316,12 +319,12 @@ export default function SellPage() {
                     placeholder={t("sell.form.sellerWalletPlaceholder")}
                     className={clsx(
                       "w-full bg-void/60 border rounded-xl px-4 py-3 text-sm font-mono text-foreground placeholder:text-muted focus:outline-none transition-colors",
-                      form.sellerWallet && form.sellerWallet.length < 56
+                      form.sellerWallet && !isValidStellarAddress(form.sellerWallet)
                         ? "border-red-500/50 focus:border-red-500/70"
                         : "border-border/60 focus:border-gold/50",
                     )}
                   />
-                  {form.sellerWallet && form.sellerWallet.length < 56 && (
+                  {form.sellerWallet && !isValidStellarAddress(form.sellerWallet) && (
                     <p className="text-xs text-red-400 mt-1 font-body">
                       {t("sell.form.sellerWalletError")}
                     </p>

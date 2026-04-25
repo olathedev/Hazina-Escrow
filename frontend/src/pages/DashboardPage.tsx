@@ -158,16 +158,23 @@ export default function DashboardPage() {
   const [datasets, setDatasets] = useState<DatasetMeta[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
   const [walletFilter, setWalletFilter] = useState("");
 
   useEffect(() => {
+    setLoading(true);
+    setFetchError(null);
     Promise.all([api.getDatasets()])
       .then(([ds]) => {
         setDatasets(ds);
-        // Load transactions for all datasets
         return Promise.all(ds.map((d) => api.getTransactions(d.id)));
       })
       .then((txArrays) => setTransactions(txArrays.flat()))
+      .catch((err) => {
+        setFetchError(
+          err instanceof Error ? err.message : "Failed to load dashboard data.",
+        );
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -235,6 +242,26 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (fetchError) {
+    return (
+      <div className="min-h-screen pt-28 flex items-center justify-center px-4">
+        <div className="glass-card max-w-md w-full p-8 text-center">
+          <p className="font-display text-xl font-semibold text-foreground mb-3">
+            {t("dashboard.loadError", "Could not load dashboard")}
+          </p>
+          <p className="text-sm text-foreground-muted font-body mb-6">{fetchError}</p>
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="btn-gold px-6 py-2.5 text-sm"
+          >
+            {t("common.actions.retry", "Retry")}
+          </button>
         </div>
       </div>
     );

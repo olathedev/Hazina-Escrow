@@ -2,6 +2,10 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 
 type ErrorBoundaryProps = {
   children: ReactNode;
+  /** Optional label shown in the fallback heading for scoped boundaries. */
+  label?: string;
+  /** Called after the user clicks "Try again" on a scoped boundary. */
+  onReset?: () => void;
 };
 
 type ErrorBoundaryState = {
@@ -23,7 +27,12 @@ export default class ErrorBoundary extends Component<
   }
 
   private handleReload = () => {
-    window.location.reload();
+    if (this.props.onReset) {
+      this.setState({ error: null });
+      this.props.onReset();
+    } else {
+      window.location.reload();
+    }
   };
 
   render() {
@@ -32,7 +41,9 @@ export default class ErrorBoundary extends Component<
         <div className="min-h-screen flex items-center justify-center px-4">
           <div className="glass-card max-w-lg w-full p-8 text-center">
             <h2 className="font-display text-2xl font-semibold text-foreground mb-3">
-              Something went wrong
+              {this.props.label
+                ? `Something went wrong in ${this.props.label}`
+                : "Something went wrong"}
             </h2>
             <p className="font-body text-sm text-foreground-muted mb-6 break-words">
               {this.state.error.message || "Unexpected application error"}

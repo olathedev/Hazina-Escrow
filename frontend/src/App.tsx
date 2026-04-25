@@ -41,11 +41,11 @@ export default function App() {
       <OnboardingTour />
       <main id="main-content" tabIndex={-1}>
         <Routes>
-          <Route path="/" element={<RouteBoundary><LandingPage /></RouteBoundary>} />
-          <Route path="/marketplace" element={<RouteBoundary><MarketplacePage /></RouteBoundary>} />
-          <Route path="/sell" element={<RouteBoundary><SellPage /></RouteBoundary>} />
-          <Route path="/dashboard" element={<RouteBoundary><DashboardPage /></RouteBoundary>} />
-          <Route path="/agent" element={<RouteBoundary><AgentPage /></RouteBoundary>} />
+          <Route path="/" element={<RouteBoundary label="Landing"><LandingPage /></RouteBoundary>} />
+          <Route path="/marketplace" element={<RouteBoundary label="Marketplace"><MarketplacePage /></RouteBoundary>} />
+          <Route path="/sell" element={<RouteBoundary label="Sell"><SellPage /></RouteBoundary>} />
+          <Route path="/dashboard" element={<RouteBoundary label="Dashboard"><DashboardPage /></RouteBoundary>} />
+          <Route path="/agent" element={<RouteBoundary label="Agent"><AgentPage /></RouteBoundary>} />
           <Route path="*" element={<RouteBoundary><NotFound /></RouteBoundary>} />
         </Routes>
       </main>
@@ -53,8 +53,12 @@ export default function App() {
   );
 }
 
-function RouteBoundary({ children }: { children: ReactNode }) {
-  return <ErrorBoundary>{children}</ErrorBoundary>;
+function RouteBoundary({ children, label }: { children: ReactNode; label?: string }) {
+  return (
+    <ErrorBoundary label={label} onReset={() => window.location.reload()}>
+      {children}
+    </ErrorBoundary>
+  );
 }
 
 function NotFound() {
