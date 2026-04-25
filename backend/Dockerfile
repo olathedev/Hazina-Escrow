@@ -1,25 +1,25 @@
-# Build stage
-FROM node:18-alpine AS builder
-
+FROM node:20-alpine AS deps
 WORKDIR /app
-
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
+FROM deps AS dev
+WORKDIR /app
+COPY . .
+RUN mkdir -p /app/data
+EXPOSE 3001
+CMD ["npm", "run", "start:dev"]
+
+FROM deps AS builder
+WORKDIR /app
 COPY . .
 RUN npm run build
 
-# Production stage
-FROM node:18-alpine
-
+FROM node:20-alpine AS production
 WORKDIR /app
-
 COPY package*.json ./
-RUN npm install --production
-
+RUN npm ci --omit=dev
 COPY --from=builder /app/dist ./dist
-# We don't copy the 'data' folder because it will be mounted from EFS
-
+RUN mkdir -p /app/data
 EXPOSE 3001
-
 CMD ["node", "dist/main.js"]

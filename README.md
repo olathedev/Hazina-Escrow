@@ -15,10 +15,11 @@ A Web3 data marketplace where **sellers** list valuable on-chain intelligence an
 5. [Tech Stack](#tech-stack)
 6. [Project Structure](#project-structure)
 7. [Getting Started](#getting-started)
-8. [Pages & Features](#pages--features)
-9. [API Reference](#api-reference)
-10. [Payment Flow Deep Dive](#payment-flow-deep-dive)
-11. [Environment Variables](#environment-variables)
+8. [Run with Docker](#run-with-docker)
+9. [Pages & Features](#pages--features)
+10. [API Reference](#api-reference)
+11. [Payment Flow Deep Dive](#payment-flow-deep-dive)
+12. [Environment Variables](#environment-variables)
 
 ---
 
@@ -391,6 +392,43 @@ cd frontend && npm run dev
 Every dataset has **demo mode** — in the buy modal, tick **"Demo mode"** to get a full Claude AI analysis without sending a real Stellar payment.
 
 The AI Agent also has demo mode — go to `/agent`, type any query, click **Run Agent**.
+
+---
+
+## Run with Docker
+
+### Prerequisites
+
+- Docker Desktop (or Docker Engine + Compose plugin)
+- A configured `backend/.env` file
+
+### Development (hot reload)
+
+```bash
+docker compose up --build
+```
+
+- Frontend (Vite HMR): http://localhost:5173
+- Backend API: http://localhost:3001
+- Backend uses `backend/.env` via `env_file`
+- `data/datasets.json` is bind-mounted to `/app/data/datasets.json` so data persists across container restarts
+
+### Production-style local run
+
+```bash
+docker compose -f docker-compose.prod.yml up --build
+```
+
+- Frontend is built and served by nginx on http://localhost
+- nginx proxies `/api/*` traffic to the backend container
+- Backend is compiled with `tsc` and run via `node dist/main.js`
+
+### Stop containers
+
+```bash
+docker compose down
+docker compose -f docker-compose.prod.yml down
+```
 
 ---
 
