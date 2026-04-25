@@ -1,1576 +1,2356 @@
 {
   "datasets": [
     {
-      "id": "ds-001-whale-wallets",
-      "name": "Top 100 Whale Wallet Movements",
-      "description": "Real-time on-chain movement data tracking the top 100 whale wallets across Ethereum and Solana. Includes entry/exit positions, token concentrations, and cross-chain bridge activity.",
-      "type": "whale-wallets",
-      "pricePerQuery": 0.05,
-      "sellerWallet": "GB37MSLKM5YARSLRYJOQVDE2Z2QLFM4B3UGH6AK7D47M3FJ4SRMCQVKL",
-      "data": {
-        "wallets": [
-          {
-            "address": "0x8894E0a0c962CB723c1976a4421c95949bE2D4E1",
-            "balance_eth": 42847.33,
-            "last_move": "2026-04-07T14:22:00Z",
-            "direction": "accumulating",
-            "tokens": [
-              "ETH",
-              "USDC",
-              "WBTC"
-            ],
-            "net_flow_24h": 1247.5
-          },
-          {
-            "address": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
-            "balance_eth": 38920.17,
-            "last_move": "2026-04-08T02:15:00Z",
-            "direction": "distributing",
-            "tokens": [
-              "ETH",
-              "ARB",
-              "OP"
-            ],
-            "net_flow_24h": -892.3
-          },
-          {
-            "address": "0x28C6c06298d514Db089934071355E5743bf21d60",
-            "balance_eth": 31402.88,
-            "last_move": "2026-04-07T22:45:00Z",
-            "direction": "accumulating",
-            "tokens": [
-              "ETH",
-              "stETH"
-            ],
-            "net_flow_24h": 3201
-          },
-          {
-            "address": "0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8",
-            "balance_eth": 29847.55,
-            "last_move": "2026-04-08T06:00:00Z",
-            "direction": "holding",
-            "tokens": [
-              "ETH",
-              "USDT",
-              "DAI"
-            ],
-            "net_flow_24h": 0
-          },
-          {
-            "address": "0xF977814e90dA44bFA03b6295A0616a897441aceC",
-            "balance_eth": 27340.92,
-            "last_move": "2026-04-07T18:30:00Z",
-            "direction": "distributing",
-            "tokens": [
-              "ETH",
-              "BNB"
-            ],
-            "net_flow_24h": -1500.25
-          },
-          {
-            "address": "0xab5801a7d398351b8be11c439e05c5b3259aec9b",
-            "balance_eth": 24891.04,
-            "last_move": "2026-04-08T09:12:00Z",
-            "direction": "accumulating",
-            "tokens": [
-              "ETH",
-              "LINK",
-              "UNI"
-            ],
-            "net_flow_24h": 788.9
-          },
-          {
-            "address": "0xC61b9BB3A7a0767E3179713f3A5c7a9aeDCE193C",
-            "balance_eth": 22103.71,
-            "last_move": "2026-04-07T20:00:00Z",
-            "direction": "holding",
-            "tokens": [
-              "ETH",
-              "PEPE"
-            ],
-            "net_flow_24h": 45.5
-          },
-          {
-            "address": "0x934B510D4C9103Ab6dB9aDa3AEB380A3ABF93a5E",
-            "balance_eth": 19847.28,
-            "last_move": "2026-04-08T07:45:00Z",
-            "direction": "accumulating",
-            "tokens": [
-              "ETH",
-              "CRV",
-              "CVX"
-            ],
-            "net_flow_24h": 2100
-          },
-          {
-            "address": "0x1522900b6dafac587d499a862861c0869be6e428",
-            "balance_eth": 17302.56,
-            "last_move": "2026-04-07T16:20:00Z",
-            "direction": "distributing",
-            "tokens": [
-              "ETH",
-              "SHIB"
-            ],
-            "net_flow_24h": -3400
-          },
-          {
-            "address": "0x6262998Ced04146fA42253a5C0AF90CA02dfd2A3",
-            "balance_eth": 15890.12,
-            "last_move": "2026-04-08T10:30:00Z",
-            "direction": "accumulating",
-            "tokens": [
-              "ETH",
-              "MKR",
-              "AAVE"
-            ],
-            "net_flow_24h": 920.7
-          }
-        ],
-        "metadata": {
-          "total_wallets_tracked": 100,
-          "snapshot_time": "2026-04-08T12:00:00Z",
-          "network": "Ethereum Mainnet",
-          "total_eth_held": 1847392.44,
-          "avg_hold_time_days": 127.4
-        }
-      },
-      "queriesServed": 60,
-      "totalEarned": 2.9675,
-      "createdAt": "2026-04-01T00:00:00Z"
-    },
-    {
-      "id": "ds-002-dex-arb",
-      "name": "DEX Arbitrage Signals — Last 24hrs",
-      "description": "Live arbitrage opportunities detected across Uniswap, Curve, Balancer and PancakeSwap. Includes profit margins, gas costs, and execution windows for each signal.",
-      "type": "trading-signals",
-      "pricePerQuery": 0.1,
-      "sellerWallet": "GA62DGF2H7OP7IMGIX6USQXBTNUZKKJLHETDJDTSJP357LQH33YP2W3D",
-      "data": {
-        "signals": [
-          {
-            "id": "arb-001",
-            "pair": "ETH/USDC",
-            "buy_dex": "Uniswap V3",
-            "sell_dex": "Curve",
-            "profit_pct": 0.43,
-            "profit_usd": 214.5,
-            "gas_cost_usd": 12.3,
-            "net_profit_usd": 202.2,
-            "window_seconds": 45,
-            "detected_at": "2026-04-08T11:48:22Z"
-          },
-          {
-            "id": "arb-002",
-            "pair": "WBTC/ETH",
-            "buy_dex": "Balancer",
-            "sell_dex": "Uniswap V2",
-            "profit_pct": 0.31,
-            "profit_usd": 847.2,
-            "gas_cost_usd": 18.5,
-            "net_profit_usd": 828.7,
-            "window_seconds": 30,
-            "detected_at": "2026-04-08T11:42:15Z"
-          },
-          {
-            "id": "arb-003",
-            "pair": "USDC/DAI",
-            "buy_dex": "Curve",
-            "sell_dex": "PancakeSwap",
-            "profit_pct": 0.08,
-            "profit_usd": 40.1,
-            "gas_cost_usd": 5.2,
-            "net_profit_usd": 34.9,
-            "window_seconds": 120,
-            "detected_at": "2026-04-08T11:35:00Z"
-          },
-          {
-            "id": "arb-004",
-            "pair": "ARB/ETH",
-            "buy_dex": "Uniswap V3",
-            "sell_dex": "Balancer",
-            "profit_pct": 0.67,
-            "profit_usd": 312.8,
-            "gas_cost_usd": 9.8,
-            "net_profit_usd": 303,
-            "window_seconds": 20,
-            "detected_at": "2026-04-08T11:28:44Z"
-          },
-          {
-            "id": "arb-005",
-            "pair": "LINK/USDC",
-            "buy_dex": "SushiSwap",
-            "sell_dex": "Uniswap V3",
-            "profit_pct": 0.22,
-            "profit_usd": 89.3,
-            "gas_cost_usd": 11,
-            "net_profit_usd": 78.3,
-            "window_seconds": 60,
-            "detected_at": "2026-04-08T11:15:10Z"
-          },
-          {
-            "id": "arb-006",
-            "pair": "PEPE/ETH",
-            "buy_dex": "Uniswap V2",
-            "sell_dex": "Uniswap V3",
-            "profit_pct": 1.24,
-            "profit_usd": 127.6,
-            "gas_cost_usd": 22.4,
-            "net_profit_usd": 105.2,
-            "window_seconds": 15,
-            "detected_at": "2026-04-08T10:58:33Z"
-          },
-          {
-            "id": "arb-007",
-            "pair": "CRV/ETH",
-            "buy_dex": "Curve",
-            "sell_dex": "Balancer",
-            "profit_pct": 0.51,
-            "profit_usd": 63.4,
-            "gas_cost_usd": 8.7,
-            "net_profit_usd": 54.7,
-            "window_seconds": 90,
-            "detected_at": "2026-04-08T10:44:19Z"
-          }
-        ],
-        "summary": {
-          "total_signals_24h": 147,
-          "avg_profit_pct": 0.48,
-          "total_profit_captured_usd": 28420.5,
-          "most_profitable_pair": "WBTC/ETH",
-          "busiest_dex": "Uniswap V3"
-        }
-      },
-      "queriesServed": 84,
-      "totalEarned": 8.395,
-      "createdAt": "2026-04-05T00:00:00Z"
-    },
-    {
-      "id": "ds-003-defi-yields",
-      "name": "DeFi Yield Snapshot — 20+ Protocols",
-      "description": "Comprehensive APY snapshot across 20+ DeFi protocols including Aave, Compound, Curve, Yearn and emerging protocols. Sorted by risk-adjusted returns.",
+      "id": "ds-69e424ac-2c6f-4b81-8ea1-a6641352d486",
+      "name": "Roob Alpha",
+      "description": "Innovative Car featuring writhing technology and Metal construction. Aliquam agnitio conqueror. Distinctio alo pecto tam abbas. Terminatio cupressus deorsum comis cumque.",
       "type": "yield-data",
-      "pricePerQuery": 0.02,
-      "sellerWallet": "GD4GDOPE76KPE7IWGKH2JSFONJXP3VAIW63MKNVMYTG3KG7JESCVTYQ6",
+      "pricePerQuery": 1.37,
+      "sellerWallet": "GZ4KY2DA7J3X5LPXLRVNBZJTQQCVLDZ5SQPGUAGVP6ALHV36LX7LEHZF",
       "data": {
-        "yields": [
+        "sample": [
           {
-            "protocol": "Aave V3",
-            "chain": "Ethereum",
-            "asset": "USDC",
-            "apy": 5.82,
-            "tvl_usd": 8420000000,
-            "risk": "low",
-            "type": "lending"
+            "key": "a7509a8e-010d-4273-bf60-1a62c4451000",
+            "value": 92.50658463458284,
+            "timestamp": "2026-04-25T00:20:04.019Z"
           },
           {
-            "protocol": "Compound V3",
-            "chain": "Ethereum",
-            "asset": "USDC",
-            "apy": 5.24,
-            "tvl_usd": 3180000000,
-            "risk": "low",
-            "type": "lending"
+            "key": "4529c61e-3bde-44f1-99e8-60c62bcaa268",
+            "value": 109.50964492723591,
+            "timestamp": "2026-04-25T17:17:28.182Z"
           },
           {
-            "protocol": "Curve 3pool",
-            "chain": "Ethereum",
-            "asset": "USDC/DAI/USDT",
-            "apy": 4.18,
-            "tvl_usd": 1920000000,
-            "risk": "low",
-            "type": "liquidity"
+            "key": "bd81d09a-f210-42e3-af37-e7f452adf41c",
+            "value": 720.2096287398098,
+            "timestamp": "2026-04-25T03:38:12.915Z"
           },
           {
-            "protocol": "Yearn Finance",
-            "chain": "Ethereum",
-            "asset": "USDC",
-            "apy": 7.34,
-            "tvl_usd": 892000000,
-            "risk": "medium",
-            "type": "vault"
+            "key": "31924a14-ede6-4c7f-b473-4aa2b102382b",
+            "value": 89.95654766848116,
+            "timestamp": "2026-04-25T06:43:08.905Z"
           },
           {
-            "protocol": "Convex Finance",
-            "chain": "Ethereum",
-            "asset": "CRV+CVX",
-            "apy": 12.47,
-            "tvl_usd": 2340000000,
-            "risk": "medium",
-            "type": "rewards"
-          },
-          {
-            "protocol": "Lido",
-            "chain": "Ethereum",
-            "asset": "stETH",
-            "apy": 3.98,
-            "tvl_usd": 24700000000,
-            "risk": "low",
-            "type": "staking"
-          },
-          {
-            "protocol": "Rocket Pool",
-            "chain": "Ethereum",
-            "asset": "rETH",
-            "apy": 3.72,
-            "tvl_usd": 4100000000,
-            "risk": "low",
-            "type": "staking"
-          },
-          {
-            "protocol": "AAVE V3",
-            "chain": "Arbitrum",
-            "asset": "USDC.e",
-            "apy": 6.91,
-            "tvl_usd": 1270000000,
-            "risk": "low",
-            "type": "lending"
-          },
-          {
-            "protocol": "GMX",
-            "chain": "Arbitrum",
-            "asset": "GLP",
-            "apy": 18.24,
-            "tvl_usd": 890000000,
-            "risk": "high",
-            "type": "liquidity"
-          },
-          {
-            "protocol": "Stargate",
-            "chain": "Arbitrum",
-            "asset": "USDC",
-            "apy": 8.72,
-            "tvl_usd": 420000000,
-            "risk": "medium",
-            "type": "bridge"
-          },
-          {
-            "protocol": "Radiant Capital",
-            "chain": "Arbitrum",
-            "asset": "USDC",
-            "apy": 14.32,
-            "tvl_usd": 280000000,
-            "risk": "high",
-            "type": "lending"
-          },
-          {
-            "protocol": "Pendle Finance",
-            "chain": "Ethereum",
-            "asset": "stETH-PT",
-            "apy": 9.84,
-            "tvl_usd": 540000000,
-            "risk": "medium",
-            "type": "yield-tokenization"
-          },
-          {
-            "protocol": "Morpho Blue",
-            "chain": "Ethereum",
-            "asset": "USDC",
-            "apy": 6.42,
-            "tvl_usd": 1840000000,
-            "risk": "low",
-            "type": "lending"
-          },
-          {
-            "protocol": "Euler Finance",
-            "chain": "Ethereum",
-            "asset": "WETH",
-            "apy": 4.11,
-            "tvl_usd": 320000000,
-            "risk": "medium",
-            "type": "lending"
-          },
-          {
-            "protocol": "Beefy Finance",
-            "chain": "BNB Chain",
-            "asset": "CAKE-BNB",
-            "apy": 24.8,
-            "tvl_usd": 180000000,
-            "risk": "high",
-            "type": "vault"
+            "key": "33239f50-f788-4de8-9afa-e30363335b60",
+            "value": 565.9587447301748,
+            "timestamp": "2026-04-25T06:55:21.207Z"
           }
-        ],
-        "metadata": {
-          "snapshot_time": "2026-04-08T12:00:00Z",
-          "total_protocols": 20,
-          "avg_apy_stablecoins": 6.32,
-          "avg_apy_eth": 8.91,
-          "highest_apy_protocol": "Beefy Finance"
-        }
+        ]
       },
-      "queriesServed": 231,
-      "totalEarned": 4.593,
-      "createdAt": "2026-04-03T00:00:00Z"
+      "queriesServed": 3770,
+      "totalEarned": 5164.9,
+      "createdAt": "2026-03-11T00:11:38.691Z"
     },
     {
-      "id": "ds-004-wallet-risk",
-      "name": "Wallet Risk Scores — Top 500 DeFi Wallets",
-      "description": "AI-generated risk scores for the top 500 most active DeFi wallets. Scores based on liquidation history, protocol exposure, leverage ratios, and cross-chain activity.",
-      "type": "risk-scores",
-      "pricePerQuery": 0.03,
-      "sellerWallet": "GBMVCBYWG4DZTN3SQ7VTHSLEJZG3JI5V2QHNWQN3SQ7O324WBKI3AGC4",
+      "id": "ds-22fa4864-8c04-49f7-8b5c-efb9499e161e",
+      "name": "Spinka LLC Oracle",
+      "description": "Introducing the Northern Mariana Islands-inspired Hat, blending delirious style with local craftsmanship. Acies aliquid adeptio omnis earum stillicidium abundans amicitia adflicto deprecator. Conventus ceno cuius. Sit adicio concedo deleniti dicta decens aiunt sapiente.",
+      "type": "trading-signals",
+      "pricePerQuery": 4.49,
+      "sellerWallet": "G7G6AIPU5OOV5OOI2SGDSM6UAA3E2VDNKWGAVW7F6TZIG4XZYG2APIKD",
       "data": {
-        "scores": [
+        "sample": [
           {
-            "wallet": "0x8894E0a0c962CB723c1976a4421c95949bE2D4E1",
-            "risk_score": 24,
-            "risk_label": "Very Low",
-            "liquidations": 0,
-            "leverage_ratio": 1.2,
-            "protocol_count": 8,
-            "last_liquidation": null
+            "key": "c6c944c4-6c8a-4dbf-8221-7063d385f134",
+            "value": 728.3231147787685,
+            "timestamp": "2026-04-25T02:05:30.714Z"
           },
           {
-            "wallet": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
-            "risk_score": 71,
-            "risk_label": "High",
-            "liquidations": 3,
-            "leverage_ratio": 4.8,
-            "protocol_count": 15,
-            "last_liquidation": "2026-03-12"
+            "key": "c61b6d45-2a4b-4af5-a64a-b0a53d739252",
+            "value": 529.9348775128922,
+            "timestamp": "2026-04-25T03:41:27.253Z"
           },
           {
-            "wallet": "0x28C6c06298d514Db089934071355E5743bf21d60",
-            "risk_score": 38,
-            "risk_label": "Medium",
-            "liquidations": 1,
-            "leverage_ratio": 2.1,
-            "protocol_count": 6,
-            "last_liquidation": "2025-11-20"
+            "key": "d74337c3-6da7-4529-92f6-3539de70df93",
+            "value": 667.5746158414953,
+            "timestamp": "2026-04-25T14:18:32.170Z"
           },
           {
-            "wallet": "0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8",
-            "risk_score": 15,
-            "risk_label": "Very Low",
-            "liquidations": 0,
-            "leverage_ratio": 1,
-            "protocol_count": 3,
-            "last_liquidation": null
+            "key": "a0434776-d6f4-4e29-9bad-d6b9b22e787a",
+            "value": 249.67472429147386,
+            "timestamp": "2026-04-25T03:13:06.919Z"
           },
           {
-            "wallet": "0xF977814e90dA44bFA03b6295A0616a897441aceC",
-            "risk_score": 88,
-            "risk_label": "Critical",
-            "liquidations": 7,
-            "leverage_ratio": 8.4,
-            "protocol_count": 22,
-            "last_liquidation": "2026-04-01"
-          },
-          {
-            "wallet": "0xab5801a7d398351b8be11c439e05c5b3259aec9b",
-            "risk_score": 51,
-            "risk_label": "Medium",
-            "liquidations": 2,
-            "leverage_ratio": 3.2,
-            "protocol_count": 11,
-            "last_liquidation": "2026-01-08"
-          },
-          {
-            "wallet": "0xC61b9BB3A7a0767E3179713f3A5c7a9aeDCE193C",
-            "risk_score": 33,
-            "risk_label": "Low",
-            "liquidations": 0,
-            "leverage_ratio": 1.8,
-            "protocol_count": 5,
-            "last_liquidation": null
-          },
-          {
-            "wallet": "0x934B510D4C9103Ab6dB9aDa3AEB380A3ABF93a5E",
-            "risk_score": 62,
-            "risk_label": "High",
-            "liquidations": 4,
-            "leverage_ratio": 5.1,
-            "protocol_count": 18,
-            "last_liquidation": "2026-02-28"
-          },
-          {
-            "wallet": "0x1522900b6dafac587d499a862861c0869be6e428",
-            "risk_score": 79,
-            "risk_label": "High",
-            "liquidations": 5,
-            "leverage_ratio": 6.7,
-            "protocol_count": 20,
-            "last_liquidation": "2026-03-22"
-          },
-          {
-            "wallet": "0x6262998Ced04146fA42253a5C0AF90CA02dfd2A3",
-            "risk_score": 44,
-            "risk_label": "Medium",
-            "liquidations": 1,
-            "leverage_ratio": 2.6,
-            "protocol_count": 9,
-            "last_liquidation": "2025-12-15"
+            "key": "b2f5fac2-3373-40ad-a008-17ea14d6c57f",
+            "value": 617.3932638953687,
+            "timestamp": "2026-04-25T18:20:19.156Z"
           }
-        ],
-        "metadata": {
-          "total_wallets_scored": 500,
-          "avg_risk_score": 48.7,
-          "critical_wallets": 23,
-          "high_risk_wallets": 87,
-          "model_version": "HazAI-Risk-v2.1",
-          "scored_at": "2026-04-08T06:00:00Z"
-        }
+        ]
       },
-      "queriesServed": 171,
-      "totalEarned": 5.1075,
-      "createdAt": "2026-04-02T00:00:00Z"
+      "queriesServed": 220,
+      "totalEarned": 987.8,
+      "createdAt": "2025-05-16T02:18:14.822Z"
     },
     {
-      "id": "ds-005-nft-floors",
-      "name": "NFT Floor Price Movements — Last 7 Days",
-      "description": "Comprehensive floor price tracking for top 50 NFT collections over the last 7 days. Includes volume, holder counts, wash trading flags, and momentum scores.",
-      "type": "nft-data",
-      "pricePerQuery": 0.02,
-      "sellerWallet": "GCDDN2PNSMNAGUF6IN7W4EGR66TNH3EGFOSW7UQLM7LNCAFN7DL56PUH",
+      "id": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "name": "Ortiz - Bernhard Analytics",
+      "description": "The sleek and mammoth Table comes with ivory LED lighting for smart functionality. Causa unus venia voco delectatio. Dolore stella thermae aperte audacia. Tempora vir ex cresco voluptatum.",
+      "type": "yield-data",
+      "pricePerQuery": 0.44,
+      "sellerWallet": "GBTCNTSHBSXFZQTZQ2O7ALI6IAWX5MNP2POOBKHDH2Q2IEW3OHY7EJAG",
       "data": {
-        "collections": [
+        "sample": [
           {
-            "name": "Bored Ape Yacht Club",
-            "symbol": "BAYC",
-            "floor_eth": 8.24,
-            "floor_change_7d_pct": -12.4,
-            "volume_7d_eth": 847.3,
-            "holders": 5842,
-            "wash_trade_flag": false,
-            "momentum": "bearish"
+            "key": "ff84691c-fbe2-4aa4-a66c-6fee8819ac33",
+            "value": 191.8664116889125,
+            "timestamp": "2026-04-25T18:41:33.616Z"
           },
           {
-            "name": "CryptoPunks",
-            "symbol": "PUNK",
-            "floor_eth": 18.9,
-            "floor_change_7d_pct": 4.2,
-            "volume_7d_eth": 1204.8,
-            "holders": 3512,
-            "wash_trade_flag": false,
-            "momentum": "bullish"
+            "key": "99263694-5b6a-4fce-b59f-a795c7011f10",
+            "value": 554.0948699419707,
+            "timestamp": "2026-04-25T15:10:41.735Z"
           },
           {
-            "name": "Azuki",
-            "symbol": "AZUKI",
-            "floor_eth": 4.1,
-            "floor_change_7d_pct": -8.1,
-            "volume_7d_eth": 321.5,
-            "holders": 7241,
-            "wash_trade_flag": false,
-            "momentum": "bearish"
+            "key": "2e88c366-e305-430c-8358-a0c3571ecc90",
+            "value": 28.533156973651664,
+            "timestamp": "2026-04-25T03:03:10.517Z"
           },
           {
-            "name": "DeGods",
-            "symbol": "DGOD",
-            "floor_eth": 2.85,
-            "floor_change_7d_pct": 22.3,
-            "volume_7d_eth": 198.4,
-            "holders": 4892,
-            "wash_trade_flag": false,
-            "momentum": "bullish"
+            "key": "2b753125-e491-4fc4-adab-41ff46f8285f",
+            "value": 718.5062260364977,
+            "timestamp": "2026-04-25T11:37:31.656Z"
           },
           {
-            "name": "Pudgy Penguins",
-            "symbol": "PPG",
-            "floor_eth": 6.72,
-            "floor_change_7d_pct": 8.7,
-            "volume_7d_eth": 534.2,
-            "holders": 8371,
-            "wash_trade_flag": false,
-            "momentum": "bullish"
-          },
-          {
-            "name": "Milady Maker",
-            "symbol": "MILADY",
-            "floor_eth": 1.44,
-            "floor_change_7d_pct": 31.8,
-            "volume_7d_eth": 284.1,
-            "holders": 6102,
-            "wash_trade_flag": true,
-            "momentum": "bullish"
-          },
-          {
-            "name": "Doodles",
-            "symbol": "DOODLE",
-            "floor_eth": 0.92,
-            "floor_change_7d_pct": -18.9,
-            "volume_7d_eth": 87.3,
-            "holders": 4521,
-            "wash_trade_flag": false,
-            "momentum": "bearish"
-          },
-          {
-            "name": "World of Women",
-            "symbol": "WOW",
-            "floor_eth": 0.38,
-            "floor_change_7d_pct": -5.2,
-            "volume_7d_eth": 42.1,
-            "holders": 7820,
-            "wash_trade_flag": false,
-            "momentum": "neutral"
-          },
-          {
-            "name": "CloneX",
-            "symbol": "CLONEX",
-            "floor_eth": 1.87,
-            "floor_change_7d_pct": 14.2,
-            "volume_7d_eth": 143.8,
-            "holders": 9421,
-            "wash_trade_flag": false,
-            "momentum": "bullish"
-          },
-          {
-            "name": "Okay Bears",
-            "symbol": "OKAY",
-            "floor_eth": 0.28,
-            "floor_change_7d_pct": -24.1,
-            "volume_7d_eth": 31.4,
-            "holders": 6241,
-            "wash_trade_flag": false,
-            "momentum": "bearish"
+            "key": "65cf99f4-7d06-45a7-befb-1d289922e652",
+            "value": 455.92288703297254,
+            "timestamp": "2026-04-25T15:52:22.816Z"
           }
-        ],
-        "metadata": {
-          "total_collections": 50,
-          "snapshot_end": "2026-04-08T12:00:00Z",
-          "snapshot_start": "2026-04-01T12:00:00Z",
-          "market_sentiment": "mixed",
-          "total_volume_7d_eth": 18420.8
-        }
+        ]
       },
-      "queriesServed": 98,
-      "totalEarned": 1.96,
-      "createdAt": "2026-04-04T00:00:00Z"
+      "queriesServed": 2549,
+      "totalEarned": 1121.56,
+      "createdAt": "2026-01-02T11:49:09.194Z"
     },
     {
-      "id": "ds-006-sentiment",
-      "name": "Crypto Social Sentiment Scores",
-      "description": "AI-aggregated sentiment scores from Twitter/X, Reddit, Telegram and Discord for top 30 crypto assets. Updated every 4 hours with momentum and fear/greed indicators.",
+      "id": "ds-d3403e8e-4f65-4ef5-896c-6763d20aaa9e",
+      "name": "Pacocha Inc Analytics",
+      "description": "Stylish Pizza designed to make you stand out with aggravating looks. Aliquid cilicium arbitro valeo at delectatio undique vergo conduco. Vilis mollitia spoliatio suffragium amita pecus thymbra. Vicinus audacia comburo dicta delicate.",
+      "type": "whale-wallets",
+      "pricePerQuery": 2.14,
+      "sellerWallet": "GOD4FX7XHXBVV53AVYWZUQLHBKJB4KE3S2ONWV5HLHXBOVEXNNUSJX55",
+      "data": {
+        "sample": [
+          {
+            "key": "ece393e9-9834-4514-b6af-9ad74094c3b7",
+            "value": 31.647180375451335,
+            "timestamp": "2026-04-25T19:11:57.437Z"
+          },
+          {
+            "key": "9a7b3162-accb-4c10-a650-ff5f136e09cc",
+            "value": 637.1556387654717,
+            "timestamp": "2026-04-25T14:08:54.197Z"
+          },
+          {
+            "key": "fc10f03b-4fad-45d9-866b-b4b9289d6350",
+            "value": 324.2664559721773,
+            "timestamp": "2026-04-25T16:50:18.331Z"
+          },
+          {
+            "key": "8fb11702-4730-4461-b1df-9780c1213b68",
+            "value": 143.84713838182006,
+            "timestamp": "2026-04-25T12:49:08.623Z"
+          },
+          {
+            "key": "daeb6d12-63be-4697-bc62-e45204b0a9ac",
+            "value": 553.3345239043769,
+            "timestamp": "2026-04-25T06:52:14.235Z"
+          }
+        ]
+      },
+      "queriesServed": 2840,
+      "totalEarned": 6077.6,
+      "createdAt": "2025-04-28T15:09:05.271Z"
+    },
+    {
+      "id": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "name": "Hauck - Williamson Analytics",
+      "description": "Introducing the Saint Barthélemy-inspired Car, blending windy style with local craftsmanship. Concedo verbera dolore textus clam adsum. Temporibus cenaculum unde cupiditate victoria venia summa videlicet. Calco comitatus carmen non vitiosus cado confero.",
+      "type": "whale-wallets",
+      "pricePerQuery": 4.58,
+      "sellerWallet": "GDNDOVXTCAUNQ55OCWIHFCPABOGXIYSALCIBPGIUH7D5KPQF3CEKGDGE",
+      "data": {
+        "sample": [
+          {
+            "key": "2db13c90-33a6-4656-8892-3485bbc27568",
+            "value": 161.6439408083218,
+            "timestamp": "2026-04-25T14:38:47.054Z"
+          },
+          {
+            "key": "c33cf4b1-9eb7-4974-9485-48595899034a",
+            "value": 499.30121239202754,
+            "timestamp": "2026-04-24T20:37:08.750Z"
+          },
+          {
+            "key": "f5d4fee9-b847-4e11-930c-f5221da60d46",
+            "value": 224.60106602438447,
+            "timestamp": "2026-04-25T13:43:01.905Z"
+          },
+          {
+            "key": "cd72727e-4521-4776-83c7-1f851b0c5069",
+            "value": 656.3226427350622,
+            "timestamp": "2026-04-24T23:14:33.131Z"
+          },
+          {
+            "key": "fc1538f4-f657-4f50-a66d-dc569e8afb45",
+            "value": 388.1970781253359,
+            "timestamp": "2026-04-25T10:16:42.792Z"
+          }
+        ]
+      },
+      "queriesServed": 2812,
+      "totalEarned": 12878.96,
+      "createdAt": "2025-11-11T21:32:10.215Z"
+    },
+    {
+      "id": "ds-d5544115-fa7c-403f-857c-a82513c0d07f",
+      "name": "Heathcote - Stiedemann Index",
+      "description": "Experience the green brilliance of our Soap, perfect for yellowish environments. Super libero vespillo. Ab thalassinus aestas. Comprehendo carbo cuius ullus valeo blandior ciminatio tondeo totidem cena.",
+      "type": "trading-signals",
+      "pricePerQuery": 3.27,
+      "sellerWallet": "GXZAVVFP3OCAGQR6OWQIDHDRXWDDTUOWPHNDN27MS5C2VSRAY4Z7OLXI",
+      "data": {
+        "sample": [
+          {
+            "key": "56911187-684a-4ef5-817e-6510a21eb542",
+            "value": 679.2784165874635,
+            "timestamp": "2026-04-24T21:44:31.285Z"
+          },
+          {
+            "key": "8cc0cca9-0f24-4d4b-9ca3-f80513736b61",
+            "value": 321.2325887599694,
+            "timestamp": "2026-04-25T04:35:21.547Z"
+          },
+          {
+            "key": "86ab7dec-096e-4742-b64c-73eb773ddd8e",
+            "value": 125.85334315032016,
+            "timestamp": "2026-04-25T16:29:32.935Z"
+          },
+          {
+            "key": "654b2956-8d91-44c6-8c31-63babd51af34",
+            "value": 333.58729242586617,
+            "timestamp": "2026-04-25T14:37:18.786Z"
+          },
+          {
+            "key": "ab9dd61b-2735-4954-96a9-16144f53df9c",
+            "value": 404.10518470851844,
+            "timestamp": "2026-04-25T18:36:45.704Z"
+          }
+        ]
+      },
+      "queriesServed": 3489,
+      "totalEarned": 11409.03,
+      "createdAt": "2025-07-19T19:48:55.364Z"
+    },
+    {
+      "id": "ds-41d20047-9895-400f-a721-c5f90ed37ac6",
+      "name": "Larkin Analytics",
+      "description": "The Blanca Ball is the latest in a series of scared products from Smitham and Sons. Arx verecundia audacia pecus deprecator nulla. Quod vinitor caste defetiscor. Tergo explicabo dapifer vix nam certe maiores rem.",
+      "type": "whale-wallets",
+      "pricePerQuery": 4.39,
+      "sellerWallet": "GVNQIE5LHLHTPC25ECBJ2LSJCESHROQO6KNWDZZLVBWH44EMQFYLZV2A",
+      "data": {
+        "sample": [
+          {
+            "key": "40093f52-d3c6-4d47-8872-ab46a2a3d187",
+            "value": 750.0199725425701,
+            "timestamp": "2026-04-25T14:50:49.964Z"
+          },
+          {
+            "key": "f80cec89-256e-4972-b5c1-810ce95e7d5b",
+            "value": 123.41234514088084,
+            "timestamp": "2026-04-25T04:39:21.824Z"
+          },
+          {
+            "key": "c1f69826-7dd4-4c35-b3fe-3a317fe13cd8",
+            "value": 220.59919992859344,
+            "timestamp": "2026-04-25T09:21:20.325Z"
+          },
+          {
+            "key": "76f22c97-90e3-4553-aa2c-5ec42816e2c0",
+            "value": 905.7733795908024,
+            "timestamp": "2026-04-25T02:03:35.810Z"
+          },
+          {
+            "key": "0df7f8da-e74c-4cbd-bd40-c717d8e22855",
+            "value": 687.2212342361698,
+            "timestamp": "2026-04-25T17:15:55.596Z"
+          }
+        ]
+      },
+      "queriesServed": 2102,
+      "totalEarned": 9227.78,
+      "createdAt": "2026-04-08T02:31:59.850Z"
+    },
+    {
+      "id": "ds-2c4373e0-5d3d-4068-b683-055c8045faa5",
+      "name": "Morissette - Barton Insight",
+      "description": "The sleek and illustrious Tuna comes with green LED lighting for smart functionality. Votum omnis apud defleo atrocitas acervus. Cursim tergiversatio ustulo temporibus solio solvo amo. Corrumpo tabernus sufficio aestas contra ut.",
+      "type": "trading-signals",
+      "pricePerQuery": 0.25,
+      "sellerWallet": "GIAZYRWRUT6Z2WWCGNFHUANFSR6NIWMX5ANUQ6IWP5A2EDQPZAHGBFUG",
+      "data": {
+        "sample": [
+          {
+            "key": "c70c18cc-e895-40c2-9a60-23ab1b6f1b61",
+            "value": 725.2084172247731,
+            "timestamp": "2026-04-24T23:06:01.733Z"
+          },
+          {
+            "key": "4c9def1e-cb1c-465a-8952-105eebb9c8fb",
+            "value": 291.0342698074501,
+            "timestamp": "2026-04-25T09:15:10.773Z"
+          },
+          {
+            "key": "17c9b952-a3ae-4644-9dc1-26d61e27f86d",
+            "value": 301.098052092029,
+            "timestamp": "2026-04-25T05:07:43.340Z"
+          },
+          {
+            "key": "ed7a36a2-910b-4769-a287-4c62068738e4",
+            "value": 657.7693607024547,
+            "timestamp": "2026-04-24T23:25:14.028Z"
+          },
+          {
+            "key": "e9b29d9d-cadb-436a-ba31-077d2ed28dcc",
+            "value": 930.7182225721951,
+            "timestamp": "2026-04-24T21:49:12.623Z"
+          }
+        ]
+      },
+      "queriesServed": 1197,
+      "totalEarned": 299.25,
+      "createdAt": "2026-04-14T18:51:20.891Z"
+    },
+    {
+      "id": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "name": "Rempel Analytics",
+      "description": "Innovative Gloves featuring impeccable technology and Plastic construction. Tum iure tripudio demergo mollitia absque alienus. Totus delectus vesper terror adflicto. Coaegresco venia abduco.",
       "type": "sentiment",
-      "pricePerQuery": 0.04,
-      "sellerWallet": "GC42G7GQZW6S4AFTBOPETGY3AVMMWBTKJLPRMSPHHOEOWWTPSIIULXI5",
+      "pricePerQuery": 3.21,
+      "sellerWallet": "GWVM5KSGUGJZII4SUGSSLJKDVFDBZK3UNCUGVLLWGPPQZUUGGNWNOQ7L",
       "data": {
-        "sentiments": [
+        "sample": [
           {
-            "asset": "Bitcoin",
-            "symbol": "BTC",
-            "score": 72,
-            "label": "Greed",
-            "tweets_24h": 284920,
-            "reddit_mentions": 48291,
-            "telegram_signals": "bullish",
-            "trend": "up",
-            "change_24h": 8.4
+            "key": "605c0ee3-05f3-4c1f-89d5-45a7aadfd828",
+            "value": 517.6518290474847,
+            "timestamp": "2026-04-24T22:07:24.205Z"
           },
           {
-            "asset": "Ethereum",
-            "symbol": "ETH",
-            "score": 68,
-            "label": "Greed",
-            "tweets_24h": 198420,
-            "reddit_mentions": 32841,
-            "telegram_signals": "bullish",
-            "trend": "up",
-            "change_24h": 5.2
+            "key": "479b7114-e4b3-4440-95f8-211f501ba651",
+            "value": 758.1315464828226,
+            "timestamp": "2026-04-25T05:22:49.875Z"
           },
           {
-            "asset": "Solana",
-            "symbol": "SOL",
-            "score": 81,
-            "label": "Extreme Greed",
-            "tweets_24h": 142830,
-            "reddit_mentions": 24120,
-            "telegram_signals": "very_bullish",
-            "trend": "up",
-            "change_24h": 12.7
+            "key": "140a943c-b35e-4f5e-9802-5f25b890ff3b",
+            "value": 2.4836767234175383,
+            "timestamp": "2026-04-25T10:58:54.182Z"
           },
           {
-            "asset": "Arbitrum",
-            "symbol": "ARB",
-            "score": 54,
-            "label": "Neutral",
-            "tweets_24h": 48230,
-            "reddit_mentions": 8420,
-            "telegram_signals": "neutral",
-            "trend": "sideways",
-            "change_24h": -1.2
+            "key": "fcbe924f-6bb0-49e8-8ae2-47ba628b0c72",
+            "value": 110.10575151827918,
+            "timestamp": "2026-04-25T15:48:19.710Z"
           },
           {
-            "asset": "Chainlink",
-            "symbol": "LINK",
-            "score": 63,
-            "label": "Greed",
-            "tweets_24h": 72840,
-            "reddit_mentions": 12481,
-            "telegram_signals": "bullish",
-            "trend": "up",
-            "change_24h": 4.8
-          },
-          {
-            "asset": "Avalanche",
-            "symbol": "AVAX",
-            "score": 42,
-            "label": "Fear",
-            "tweets_24h": 38420,
-            "reddit_mentions": 6240,
-            "telegram_signals": "bearish",
-            "trend": "down",
-            "change_24h": -7.3
-          },
-          {
-            "asset": "Polygon",
-            "symbol": "MATIC",
-            "score": 38,
-            "label": "Fear",
-            "tweets_24h": 52180,
-            "reddit_mentions": 9841,
-            "telegram_signals": "bearish",
-            "trend": "down",
-            "change_24h": -11.2
-          },
-          {
-            "asset": "Pepe",
-            "symbol": "PEPE",
-            "score": 87,
-            "label": "Extreme Greed",
-            "tweets_24h": 284120,
-            "reddit_mentions": 48420,
-            "telegram_signals": "very_bullish",
-            "trend": "up",
-            "change_24h": 28.4
-          },
-          {
-            "asset": "Uniswap",
-            "symbol": "UNI",
-            "score": 51,
-            "label": "Neutral",
-            "tweets_24h": 28420,
-            "reddit_mentions": 4820,
-            "telegram_signals": "neutral",
-            "trend": "sideways",
-            "change_24h": 0.8
-          },
-          {
-            "asset": "Aave",
-            "symbol": "AAVE",
-            "score": 58,
-            "label": "Neutral",
-            "tweets_24h": 18420,
-            "reddit_mentions": 3240,
-            "telegram_signals": "neutral",
-            "trend": "up",
-            "change_24h": 2.1
-          }
-        ],
-        "fear_greed_index": 71,
-        "market_label": "Greed",
-        "metadata": {
-          "assets_tracked": 30,
-          "last_updated": "2026-04-08T10:00:00Z",
-          "update_frequency": "4 hours",
-          "sources": [
-            "Twitter/X",
-            "Reddit",
-            "Telegram",
-            "Discord",
-            "StockTwits"
-          ]
-        }
-      },
-      "queriesServed": 158,
-      "totalEarned": 6.272,
-      "createdAt": "2026-04-06T00:00:00Z"
-    },
-    {
-      "id": "ds-4d0e57b9-5616-424f-b80e-0a6d8857e9ca",
-      "name": "ETH Whale Activity — April 2026",
-      "description": "Whale Wallets",
-      "type": "whale-wallets",
-      "pricePerQuery": 0.05,
-      "sellerWallet": "GDC2RYWLBQY5NDGSPVA6OLYZKNF7SOLRJRTH7AWZGZ2SXMUPNTFZJI5X",
-      "data": {
-        "wallets": [
-          {
-            "address": "0xd8dA6B",
-            "balance": 244812,
-            "lastActive": "2026-04-13"
+            "key": "a7342d1c-fce3-4dc9-8f3c-0ef285cd6e47",
+            "value": 164.9321824849782,
+            "timestamp": "2026-04-25T06:32:34.351Z"
           }
         ]
       },
-      "queriesServed": 0,
-      "totalEarned": 0,
-      "createdAt": "2026-04-13T15:36:02.209Z"
+      "queriesServed": 1382,
+      "totalEarned": 4436.22,
+      "createdAt": "2025-09-13T10:53:18.196Z"
     },
     {
-      "id": "ds-b045a296-02d7-452d-a6bb-5532aa4642b3",
-      "name": "ETH Whale Activities around April 2026",
-      "description": "Top 20 ETH wak]le wallets with transfer volumes",
-      "type": "whale-wallets",
-      "pricePerQuery": 0.05,
-      "sellerWallet": "GDC2RYWLBQY5NDGSPVA6OLYZKNF7SOLRJRTH7AWZGZ2SXMUPNTFZJI5X",
+      "id": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "name": "Keebler - Hayes Oracle",
+      "description": "The sleek and essential Shirt comes with plum LED lighting for smart functionality. Repudiandae acidus centum aduro video aperiam complectus somnus caute aurum. Aeternus uxor turbo villa vallum. Crastinus crebro sustineo.",
+      "type": "sentiment",
+      "pricePerQuery": 1.1,
+      "sellerWallet": "GXD4F7SI4FEUK7L65SKSDO76PZNAOZNYNHPFVG2SCS5FEOFCALF43D5D",
       "data": {
-        "wallets": [
+        "sample": [
           {
-            "address": "0xd8dA6B",
-            "balance": 244812,
-            "lastActive": "2026-04-13"
+            "key": "58721d82-94a3-43c8-a6d7-37a6bcde662f",
+            "value": 349.87502214004115,
+            "timestamp": "2026-04-25T11:01:38.946Z"
+          },
+          {
+            "key": "a0420bb9-f4a3-4933-9acf-9365883f4181",
+            "value": 898.04642026184,
+            "timestamp": "2026-04-25T09:55:45.164Z"
+          },
+          {
+            "key": "06b899a9-f6c7-46d6-b797-ecc74f8d7ac5",
+            "value": 900.234427171111,
+            "timestamp": "2026-04-25T14:24:35.524Z"
+          },
+          {
+            "key": "d7250b41-b4be-40b3-abe3-8cdea29d0002",
+            "value": 453.44815924953997,
+            "timestamp": "2026-04-24T23:56:34.501Z"
+          },
+          {
+            "key": "6067f2c8-0513-483a-8cef-06f5d7d6ac9b",
+            "value": 350.7605947067568,
+            "timestamp": "2026-04-25T01:53:19.468Z"
           }
         ]
       },
-      "queriesServed": 0,
-      "totalEarned": 0,
-      "createdAt": "2026-04-13T16:58:23.027Z"
+      "queriesServed": 1355,
+      "totalEarned": 1490.5,
+      "createdAt": "2025-12-05T16:40:00.680Z"
+    },
+    {
+      "id": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "name": "Bayer - Jacobs-Feeney Analytics",
+      "description": "Fahey - Zieme's most advanced Tuna technology increases miserable capabilities. Tametsi torrens compono titulus vitae cito adipiscor totidem virgo. Temporibus approbo vesper territo. Vito reiciendis ut blanditiis talio adsum vulariter.",
+      "type": "sentiment",
+      "pricePerQuery": 1.33,
+      "sellerWallet": "GSLIO4YOSG2SEEOQJK4YVM4VLDCFCUZJV22D5ZJSZH3R6QINHC5E55IF",
+      "data": {
+        "sample": [
+          {
+            "key": "5509e1a1-4b1a-4aac-b846-960463a7a0c9",
+            "value": 882.0499730129675,
+            "timestamp": "2026-04-25T13:55:51.411Z"
+          },
+          {
+            "key": "9fd2bda4-e0de-4c74-8378-977db095aeea",
+            "value": 92.19729660961018,
+            "timestamp": "2026-04-24T23:38:10.388Z"
+          },
+          {
+            "key": "9643daec-b4d7-4bf3-9bc4-fe46abc7828f",
+            "value": 133.11928625690206,
+            "timestamp": "2026-04-25T04:42:39.283Z"
+          },
+          {
+            "key": "c9e20cfa-ef8e-4d57-a51a-6dbe0df7c8df",
+            "value": 358.9998076943034,
+            "timestamp": "2026-04-25T20:08:23.118Z"
+          },
+          {
+            "key": "c1fbcc72-3118-40d8-b9ef-93ea7edcb889",
+            "value": 134.71016369559496,
+            "timestamp": "2026-04-25T17:17:54.399Z"
+          }
+        ]
+      },
+      "queriesServed": 847,
+      "totalEarned": 1126.51,
+      "createdAt": "2025-08-12T04:29:11.671Z"
+    },
+    {
+      "id": "ds-fec99f3a-7fc7-4af9-a9a6-aab8277e0860",
+      "name": "Willms Insight",
+      "description": "New Mouse model with 70 GB RAM, 590 GB storage, and fluffy features. Verumtamen cattus asperiores peccatus animus debeo arca. Supellex tamquam non dolore explicabo. Tamisium umquam tenetur.",
+      "type": "yield-data",
+      "pricePerQuery": 4.57,
+      "sellerWallet": "GLG67J4HYNNVMR73SVQS2D3AR6WKJYQYNQPF67766H3W7NUVI3AQESK3",
+      "data": {
+        "sample": [
+          {
+            "key": "5008cca0-9c11-46c7-a53c-3a6473f88691",
+            "value": 403.8378834755485,
+            "timestamp": "2026-04-25T07:33:44.098Z"
+          },
+          {
+            "key": "3a0084bd-4a13-4472-894d-023003dc9052",
+            "value": 438.05260584120555,
+            "timestamp": "2026-04-25T09:28:49.650Z"
+          },
+          {
+            "key": "e38faec5-aa69-46f9-801d-216afc22da62",
+            "value": 853.9470637327829,
+            "timestamp": "2026-04-25T14:43:48.164Z"
+          },
+          {
+            "key": "703bf692-a7ec-44b3-9f1a-609d4fa74fe8",
+            "value": 883.3821508564408,
+            "timestamp": "2026-04-25T02:20:14.564Z"
+          },
+          {
+            "key": "937717ae-45d4-4ec0-9222-cac3ed8d3c72",
+            "value": 252.36462499894517,
+            "timestamp": "2026-04-25T18:36:17.664Z"
+          }
+        ]
+      },
+      "queriesServed": 4167,
+      "totalEarned": 19043.19,
+      "createdAt": "2026-03-09T18:46:52.801Z"
+    },
+    {
+      "id": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "name": "Kerluke - Wuckert Analytics",
+      "description": "Savor the tender essence in our Towels, designed for closed culinary adventures. Blanditiis animadverto vulnus minima arto advoco aduro acer error. Mollitia studio votum. Cupiditate vulgaris recusandae theca vivo arbitro tabula denique.",
+      "type": "risk-scores",
+      "pricePerQuery": 2.66,
+      "sellerWallet": "GBHOXV2EBDUM4WMYWPH25WTSYPHRRJJKEJ6TQVP32NBTLA4JJ2DWLTHQ",
+      "data": {
+        "sample": [
+          {
+            "key": "13e999b3-b743-45d8-9348-b8990cbe5ab5",
+            "value": 650.4510519686887,
+            "timestamp": "2026-04-25T18:06:22.827Z"
+          },
+          {
+            "key": "220d3930-9180-4c47-8f77-08285f581e96",
+            "value": 457.7755453144804,
+            "timestamp": "2026-04-25T06:22:52.647Z"
+          },
+          {
+            "key": "5e275cb3-fa74-4171-82f0-684d598d4f29",
+            "value": 692.5710804231838,
+            "timestamp": "2026-04-25T10:12:18.828Z"
+          },
+          {
+            "key": "b5d73ac5-85c2-4a49-bda6-a1727d75bd69",
+            "value": 671.5735880787646,
+            "timestamp": "2026-04-25T17:00:26.319Z"
+          },
+          {
+            "key": "1b380c7f-6444-4b76-9230-f4c233d1cc38",
+            "value": 962.7966412527585,
+            "timestamp": "2026-04-25T13:42:59.413Z"
+          }
+        ]
+      },
+      "queriesServed": 1396,
+      "totalEarned": 3713.36,
+      "createdAt": "2026-01-16T07:59:27.180Z"
+    },
+    {
+      "id": "ds-70b1014e-7f9c-4177-80d5-8f3f50a9c797",
+      "name": "Wolf Index",
+      "description": "The sleek and steel Keyboard comes with orange LED lighting for smart functionality. Audacia claustrum tunc nulla depopulo. Absum appono deserunt bene vitiosus. Autem utique voluptate aiunt sol viscus atque.",
+      "type": "yield-data",
+      "pricePerQuery": 2.75,
+      "sellerWallet": "GBHMYLZW5SHUWZHKYXFDJJCMNNGBIAM7I6NMCD6QSZ5QM2M3E2ME6AW6",
+      "data": {
+        "sample": [
+          {
+            "key": "2a12c4e4-6e3b-44df-8896-235d41500160",
+            "value": 551.6905674360546,
+            "timestamp": "2026-04-25T11:50:44.107Z"
+          },
+          {
+            "key": "f91d3e80-f888-4738-a0c8-c8514c5d4be4",
+            "value": 287.662331306329,
+            "timestamp": "2026-04-25T12:22:00.711Z"
+          },
+          {
+            "key": "055b778e-2b49-4468-93e1-bf39c79ff062",
+            "value": 438.2835782379668,
+            "timestamp": "2026-04-25T00:24:58.993Z"
+          },
+          {
+            "key": "9cf2e3d8-8896-4538-a158-4956856f0aac",
+            "value": 323.3216491340643,
+            "timestamp": "2026-04-24T22:54:28.760Z"
+          },
+          {
+            "key": "860b45da-d45f-4bfe-82ac-a9efe34d0cca",
+            "value": 256.74246063584707,
+            "timestamp": "2026-04-25T18:20:20.091Z"
+          }
+        ]
+      },
+      "queriesServed": 2898,
+      "totalEarned": 7969.5,
+      "createdAt": "2026-02-28T01:59:59.671Z"
+    },
+    {
+      "id": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "name": "Schumm - Reynolds Signals",
+      "description": "Our eagle-friendly Tuna ensures likely comfort for your pets. Torqueo tardus colligo conor coruscus hic. Esse ad defleo cribro copia circumvenio. Usitas arguo tamdiu addo tepidus admoveo coma valeo.",
+      "type": "trading-signals",
+      "pricePerQuery": 2.57,
+      "sellerWallet": "GC6FJIR74UV5F6RIRJN6BX7ERZTPSJBFEMXN4REXHNXZJLZHMAY37KNR",
+      "data": {
+        "sample": [
+          {
+            "key": "0aa35f5e-42e9-40c2-95de-964014318b54",
+            "value": 777.5421896712969,
+            "timestamp": "2026-04-25T10:05:03.017Z"
+          },
+          {
+            "key": "d4e62ab8-1c75-4c5a-921b-c20a991acf41",
+            "value": 856.1287649641511,
+            "timestamp": "2026-04-25T19:14:08.173Z"
+          },
+          {
+            "key": "0fda8988-e4be-4a4c-8599-02b7ef7d16c3",
+            "value": 998.6755390086311,
+            "timestamp": "2026-04-25T14:15:11.128Z"
+          },
+          {
+            "key": "3ea7f73e-b205-495a-a38d-fde583c794ca",
+            "value": 219.71353786091242,
+            "timestamp": "2026-04-25T17:39:29.946Z"
+          },
+          {
+            "key": "5f15bb5c-5290-42e3-bab4-be5f8eebd801",
+            "value": 271.64098340650935,
+            "timestamp": "2026-04-25T11:28:48.016Z"
+          }
+        ]
+      },
+      "queriesServed": 1109,
+      "totalEarned": 2850.13,
+      "createdAt": "2026-04-11T18:12:36.320Z"
+    },
+    {
+      "id": "ds-54e53000-bf43-4f00-bc1d-20312afcf7de",
+      "name": "Little Insight",
+      "description": "Ergonomic Computer made with Silk for all-day creative support. Cado delicate vulgivagus umbra convoco eos. Avarus conitor ater collum arx adsuesco voluptates. Carmen supplanto debeo alveus aequitas depulso magni creber.",
+      "type": "trading-signals",
+      "pricePerQuery": 2.95,
+      "sellerWallet": "GXIAZFM5RHWLXCGM5Q7TYZS75FGDXLG6DH3X2NLX3VARVLGA2SYRNXJS",
+      "data": {
+        "sample": [
+          {
+            "key": "7d4d135e-a3be-4b3e-8bde-9733cdb76c36",
+            "value": 84.9787027051706,
+            "timestamp": "2026-04-25T13:11:48.681Z"
+          },
+          {
+            "key": "873052ef-a8af-4bac-8787-1e0cf3b61fc7",
+            "value": 999.2766120843559,
+            "timestamp": "2026-04-25T14:49:47.544Z"
+          },
+          {
+            "key": "ff81fc6b-0d2e-4d71-baf5-b5534597cb3c",
+            "value": 239.48966896428738,
+            "timestamp": "2026-04-25T15:22:08.121Z"
+          },
+          {
+            "key": "052911b4-1bb8-40fd-82d2-f8749bbf2992",
+            "value": 384.8940733857945,
+            "timestamp": "2026-04-25T07:21:29.549Z"
+          },
+          {
+            "key": "cba9073d-7f8e-447d-9c8b-3624694f2167",
+            "value": 245.65794779733707,
+            "timestamp": "2026-04-25T11:24:21.761Z"
+          }
+        ]
+      },
+      "queriesServed": 108,
+      "totalEarned": 318.6,
+      "createdAt": "2025-11-22T20:18:31.558Z"
+    },
+    {
+      "id": "ds-7826fa26-3a3a-437a-8e2f-14ec8456c5ac",
+      "name": "Mertz Signals",
+      "description": "The mint green Ball combines Hungary aesthetics with Silicon-based durability. Cupressus audacia compono. Amo tamquam sed. Crastinus tollo eligendi aspernatur iure bis studio torqueo.",
+      "type": "whale-wallets",
+      "pricePerQuery": 3.82,
+      "sellerWallet": "GZBBJJ46ZR3FRLDXZLSEOFGFNPSMA2IZVHUAWCAKXKDGKXEKYY2UZ37H",
+      "data": {
+        "sample": [
+          {
+            "key": "7ea1cdd3-ad0d-48a0-b9cc-312e6caf3e44",
+            "value": 732.9674745565674,
+            "timestamp": "2026-04-25T08:21:03.879Z"
+          },
+          {
+            "key": "d3a6cf2a-dafa-4b62-9780-77a06cc819c6",
+            "value": 384.1009276846506,
+            "timestamp": "2026-04-25T10:46:48.749Z"
+          },
+          {
+            "key": "9c9d05bb-13b7-45b1-8f8e-b14b56567258",
+            "value": 335.45704023620505,
+            "timestamp": "2026-04-24T22:10:55.865Z"
+          },
+          {
+            "key": "02bafafd-1ec4-457c-b09f-bc9fb016218e",
+            "value": 5.01842781286832,
+            "timestamp": "2026-04-25T12:07:54.725Z"
+          },
+          {
+            "key": "fea34252-ab36-4e90-9855-e6fbcc007c2a",
+            "value": 381.83629413641495,
+            "timestamp": "2026-04-25T00:26:33.936Z"
+          }
+        ]
+      },
+      "queriesServed": 107,
+      "totalEarned": 408.74,
+      "createdAt": "2026-03-25T12:47:47.587Z"
+    },
+    {
+      "id": "ds-17b1d97f-10f0-4d25-9cde-6a98a947a300",
+      "name": "Rippin - Franecki Oracle",
+      "description": "Our hamster-friendly Cheese ensures perfumed comfort for your pets. Numquam acerbitas audeo aequus coruscus error cetera. Adficio arguo decor somnus aggero. Celo cruentus ter.",
+      "type": "nft-data",
+      "pricePerQuery": 1.7,
+      "sellerWallet": "GUT7N3JZMUQH6AYJXKC4YAGHE2L5M2NK2GWZ7JWHTHNNA2B3425TLCLH",
+      "data": {
+        "sample": [
+          {
+            "key": "c4773a69-14ec-4011-9c0d-b2b3f1684d6e",
+            "value": 533.5723461000757,
+            "timestamp": "2026-04-25T10:26:44.701Z"
+          },
+          {
+            "key": "901293c0-92fa-4d77-8f23-93b3731f3c8a",
+            "value": 885.8283067412664,
+            "timestamp": "2026-04-25T11:44:37.162Z"
+          },
+          {
+            "key": "146ea3f4-f38f-476e-b25b-385d5a0c6c2e",
+            "value": 759.0969157444765,
+            "timestamp": "2026-04-25T06:44:29.367Z"
+          },
+          {
+            "key": "bd3fe521-8365-45aa-be00-fe2dfe84587c",
+            "value": 281.93622901031546,
+            "timestamp": "2026-04-25T04:58:44.829Z"
+          },
+          {
+            "key": "ccda4a41-971d-4f6f-814f-6165ed3a73fe",
+            "value": 870.008279751129,
+            "timestamp": "2026-04-25T08:01:23.913Z"
+          }
+        ]
+      },
+      "queriesServed": 1861,
+      "totalEarned": 3163.7,
+      "createdAt": "2026-02-28T13:47:20.162Z"
+    },
+    {
+      "id": "ds-fcdadf0d-afa1-4e18-9cc8-54abe0670016",
+      "name": "Gottlieb-Williamson - Kessler Oracle",
+      "description": "Experience the green brilliance of our Table, perfect for murky environments. Arbitro turpis possimus ustulo aliquam desparatus. A ambitus confero desidero cogo summopere valens. Hic patruus ademptio venia demum excepturi cernuus.",
+      "type": "sentiment",
+      "pricePerQuery": 2.77,
+      "sellerWallet": "GYPJST5J2VJC4J4LUF64RFLCBZLHKUYY2IOKZWK5UX7T2ACV6EPLUVV7",
+      "data": {
+        "sample": [
+          {
+            "key": "9beb35c0-228f-4592-a434-7aa71823ced3",
+            "value": 171.06772848968532,
+            "timestamp": "2026-04-25T00:08:57.013Z"
+          },
+          {
+            "key": "27c6d8fe-6ccd-4d9b-b710-1749fcb05c7f",
+            "value": 330.52857033821203,
+            "timestamp": "2026-04-25T18:55:19.825Z"
+          },
+          {
+            "key": "713ee676-2597-4420-a945-2fea9d871451",
+            "value": 907.4968116461887,
+            "timestamp": "2026-04-25T11:50:58.458Z"
+          },
+          {
+            "key": "0073e6cd-6e58-45c8-be60-af49f7fc37d9",
+            "value": 665.3142980711586,
+            "timestamp": "2026-04-25T03:36:19.406Z"
+          },
+          {
+            "key": "1bc075a6-583d-4f74-9ec2-bd1c003ebf6f",
+            "value": 78.27758067882029,
+            "timestamp": "2026-04-25T17:08:13.744Z"
+          }
+        ]
+      },
+      "queriesServed": 2981,
+      "totalEarned": 8257.37,
+      "createdAt": "2025-06-10T20:52:51.815Z"
+    },
+    {
+      "id": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "name": "Kuvalis LLC Insight",
+      "description": "Stylish Sausages designed to make you stand out with good looks. Corrumpo versus sordeo ascit ratione pel temeritas decens. Causa aggero sufficio. Vester advenio earum stella crepusculum desparatus autus delectatio maxime.",
+      "type": "yield-data",
+      "pricePerQuery": 3.52,
+      "sellerWallet": "GDWABWQLKVPRQKRKUZXQNNAWJN2BNURVNJM53HDZ2K23RMQ23JPZ25NJ",
+      "data": {
+        "sample": [
+          {
+            "key": "cd576acb-9424-49da-b207-96ec82975d21",
+            "value": 201.65322256429675,
+            "timestamp": "2026-04-25T02:00:30.392Z"
+          },
+          {
+            "key": "54b4df77-a438-4330-9795-0c841fa238f9",
+            "value": 384.8146289122203,
+            "timestamp": "2026-04-25T11:40:52.697Z"
+          },
+          {
+            "key": "10bdf3ec-0ca5-4949-9ed5-88bb7f171a8f",
+            "value": 950.1020857997191,
+            "timestamp": "2026-04-25T16:18:07.419Z"
+          },
+          {
+            "key": "b00896a0-1560-491d-b573-82c7dc678c28",
+            "value": 73.28985183982594,
+            "timestamp": "2026-04-25T12:39:57.136Z"
+          },
+          {
+            "key": "d0b8ba2f-efa9-468c-bfcf-f1e0bd648978",
+            "value": 661.9823617220984,
+            "timestamp": "2026-04-25T11:35:55.273Z"
+          }
+        ]
+      },
+      "queriesServed": 3049,
+      "totalEarned": 10732.48,
+      "createdAt": "2025-07-03T00:54:21.058Z"
+    },
+    {
+      "id": "ds-c7e99393-6bc4-4872-8919-92f9448445aa",
+      "name": "Hane-Padberg - Morar Alpha",
+      "description": "New indigo Towels with ergonomic design for adolescent comfort. Amet suffoco cernuus creber arca. Illo apostolus suggero vallum arbustum temporibus verecundia catena. Corpus substantia cattus cuppedia delego armarium totam voluptate compello.",
+      "type": "sentiment",
+      "pricePerQuery": 1.93,
+      "sellerWallet": "GVYTHGEJN62WHVEC524FCBPNWQ3FL6DLO23ONR2G56MR64LBM52LLAFR",
+      "data": {
+        "sample": [
+          {
+            "key": "41f45d31-6be5-4d23-80b5-7849b154e5ba",
+            "value": 948.0577795989282,
+            "timestamp": "2026-04-25T16:23:37.246Z"
+          },
+          {
+            "key": "b709211d-3ea1-47f4-b632-e314bdf24d53",
+            "value": 807.616780310177,
+            "timestamp": "2026-04-25T03:12:27.579Z"
+          },
+          {
+            "key": "d04049b0-7568-45b4-8d88-1be6c7001ed6",
+            "value": 43.470236293608465,
+            "timestamp": "2026-04-24T22:10:27.157Z"
+          },
+          {
+            "key": "54f68d89-816d-42d3-bc91-70fc8c04bddb",
+            "value": 65.78424693276219,
+            "timestamp": "2026-04-25T03:24:06.675Z"
+          },
+          {
+            "key": "80b499a7-64bb-4bf1-b998-4e142fd9d2c9",
+            "value": 22.48297700551816,
+            "timestamp": "2026-04-24T22:20:07.390Z"
+          }
+        ]
+      },
+      "queriesServed": 3147,
+      "totalEarned": 6073.71,
+      "createdAt": "2025-09-27T20:03:06.186Z"
+    },
+    {
+      "id": "ds-a4b4965d-4b70-4a9d-bd88-bd8b5377e77e",
+      "name": "Kertzmann and Sons Oracle",
+      "description": "The Rodolfo Bike is the latest in a series of vivid products from Rohan, Hintz and Nitzsche. Amaritudo somniculosus sui mollitia cervus. Porro denuncio vox totam solium. Sufficio arguo capio angelus vulnero tenuis aro.",
+      "type": "whale-wallets",
+      "pricePerQuery": 3.59,
+      "sellerWallet": "GYW6F7PTOTUHK7WGAXPKTNBIBOSNUWA2532PKRVA45MVYR5G7KCMKR2J",
+      "data": {
+        "sample": [
+          {
+            "key": "ca01dd6d-20f8-46e0-b1d6-f87230869d36",
+            "value": 342.6187757963853,
+            "timestamp": "2026-04-25T19:39:32.922Z"
+          },
+          {
+            "key": "1619833c-bbcc-4e31-9545-251d38c54d4a",
+            "value": 567.7522067727758,
+            "timestamp": "2026-04-25T05:47:50.559Z"
+          },
+          {
+            "key": "7ab27b24-fe9e-42b9-8906-50d4f003e5cc",
+            "value": 624.6370048499784,
+            "timestamp": "2026-04-25T14:50:03.594Z"
+          },
+          {
+            "key": "f0d791b1-fea2-4712-b954-a8979d25b194",
+            "value": 68.73611065689356,
+            "timestamp": "2026-04-25T19:18:17.763Z"
+          },
+          {
+            "key": "bfc59d7f-577c-4464-a462-447d30b442cf",
+            "value": 772.9358080218126,
+            "timestamp": "2026-04-25T05:16:07.790Z"
+          }
+        ]
+      },
+      "queriesServed": 4148,
+      "totalEarned": 14891.32,
+      "createdAt": "2026-03-20T09:25:12.133Z"
+    },
+    {
+      "id": "ds-e8f6ca95-79ab-4646-a8ff-3f05d2ae180e",
+      "name": "Heaney and Sons Oracle",
+      "description": "Our creamy-inspired Computer brings a taste of luxury to your ornery lifestyle. Cunctatio demulceo ventosus terra. Nulla corrumpo vorax aggredior vereor universe admiratio video crux. Temporibus coruscus accusamus uter officia peior omnis.",
+      "type": "risk-scores",
+      "pricePerQuery": 3.54,
+      "sellerWallet": "GOXOCQJNCMBZUT3D6REJK7KFR4CQCJ4TCXDG7ITYUSKTK3WQRNG27UQS",
+      "data": {
+        "sample": [
+          {
+            "key": "5af80eef-ff9d-4cac-8df6-12edb590342f",
+            "value": 647.8956424735752,
+            "timestamp": "2026-04-25T03:30:45.746Z"
+          },
+          {
+            "key": "1a3ae144-aae3-4ef3-8516-3ecb5f3d3501",
+            "value": 433.71093401141013,
+            "timestamp": "2026-04-25T06:00:57.032Z"
+          },
+          {
+            "key": "3ac0a26e-a7c2-419c-a96f-df909bb6bfc5",
+            "value": 538.2240008657701,
+            "timestamp": "2026-04-24T21:24:55.810Z"
+          },
+          {
+            "key": "c452c2ba-f5aa-4b33-a500-083e1f035f45",
+            "value": 929.8341960275811,
+            "timestamp": "2026-04-25T16:09:52.840Z"
+          },
+          {
+            "key": "1178b00f-5599-418d-8926-67293cbfcb18",
+            "value": 951.0279406499,
+            "timestamp": "2026-04-25T07:54:11.327Z"
+          }
+        ]
+      },
+      "queriesServed": 4287,
+      "totalEarned": 15175.98,
+      "createdAt": "2025-04-26T11:10:53.077Z"
+    },
+    {
+      "id": "ds-16002d3a-50f7-41c4-b5ec-bb6663757580",
+      "name": "Heaney Index",
+      "description": "Innovative Gloves featuring well-off technology and Concrete construction. Amplitudo aptus aduro cornu atqui adfectus. Crur textus dedecor accusamus stella tempore validus unus ancilla. Nihil aro carcer valeo somnus explicabo comitatus.",
+      "type": "sentiment",
+      "pricePerQuery": 1.61,
+      "sellerWallet": "GLMIZ6MHCKN67JAEVLUUJK2K7LOPR5JAL6WNVPPUCTYJSC3XZ6U5OZ2H",
+      "data": {
+        "sample": [
+          {
+            "key": "53ae2ca5-b940-442c-9fe9-8c7d705d2605",
+            "value": 765.5641639215419,
+            "timestamp": "2026-04-25T07:15:08.022Z"
+          },
+          {
+            "key": "546b66f4-8ab1-46cc-b388-3dcd8430fbbe",
+            "value": 278.7410539805948,
+            "timestamp": "2026-04-25T15:26:35.354Z"
+          },
+          {
+            "key": "72838c91-51b3-4dda-bd7b-f76d9713c9af",
+            "value": 480.147145086936,
+            "timestamp": "2026-04-25T17:50:30.568Z"
+          },
+          {
+            "key": "6b5ae987-ff01-4875-8bf4-257bd2291c18",
+            "value": 374.3182491484652,
+            "timestamp": "2026-04-24T23:26:13.039Z"
+          },
+          {
+            "key": "5ba16951-fa60-43e0-a5f2-00e29612c4a3",
+            "value": 653.3297027651523,
+            "timestamp": "2026-04-25T15:21:03.650Z"
+          }
+        ]
+      },
+      "queriesServed": 1156,
+      "totalEarned": 1861.16,
+      "createdAt": "2025-07-02T02:03:35.789Z"
+    },
+    {
+      "id": "ds-85fdcbc1-7e02-4efe-a63e-90c6f0f0e39b",
+      "name": "Jacobs Inc Alpha",
+      "description": "The violet Mouse combines Algeria aesthetics with Tennessine-based durability. Toties utrum esse creator creator. Capio aestus ciminatio acquiro dignissimos. Defungo possimus demergo triumphus acidus.",
+      "type": "nft-data",
+      "pricePerQuery": 0.27,
+      "sellerWallet": "G2ZZZSA4HCVMRATOKTDAY7DEA6PVECNBHG2LHCJZMGVH6UGXGDDEOVKM",
+      "data": {
+        "sample": [
+          {
+            "key": "4c87cad2-74bd-400e-bc5a-179d981e17a2",
+            "value": 746.0979017367285,
+            "timestamp": "2026-04-25T05:58:16.059Z"
+          },
+          {
+            "key": "b56fa9d5-9319-45c4-a146-4d782ec44093",
+            "value": 401.18315052499634,
+            "timestamp": "2026-04-25T14:43:56.114Z"
+          },
+          {
+            "key": "da77a03f-a585-4fd1-a1a7-71eaa4e0b6b7",
+            "value": 728.8664500682736,
+            "timestamp": "2026-04-25T18:58:39.209Z"
+          },
+          {
+            "key": "64164b2f-78a0-41d6-b526-0308424089ee",
+            "value": 806.8263667420683,
+            "timestamp": "2026-04-25T09:59:31.002Z"
+          },
+          {
+            "key": "44260ae9-cc49-42c1-87fe-e5537d7d940c",
+            "value": 311.86580224124225,
+            "timestamp": "2026-04-25T07:03:38.504Z"
+          }
+        ]
+      },
+      "queriesServed": 277,
+      "totalEarned": 74.79,
+      "createdAt": "2026-02-28T18:48:25.088Z"
     }
   ],
   "transactions": [
     {
-      "id": "tx-001",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "4a3b2c1d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d8e7f6a5b4c3d2e1f0a9",
-      "amount": 0.05,
-      "buyerQuery": "which wallet moved the most ETH in the last 24 hours?",
-      "timestamp": "2026-04-08T11:30:00Z"
-    },
-    {
-      "id": "tx-002",
-      "datasetId": "ds-002-dex-arb",
-      "txHash": "1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
-      "amount": 0.1,
-      "buyerQuery": "what is the most profitable arbitrage pair right now?",
-      "timestamp": "2026-04-08T10:15:00Z"
-    },
-    {
-      "id": "tx-003",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "9f8e7d6c5b4a3b2c1d0e9f8e7d6c5b4a3b2c1d0e9f8e7d6c5b4a3b2c1d0e9f8",
-      "amount": 0.02,
-      "buyerQuery": "best stablecoin yield with low risk?",
-      "timestamp": "2026-04-08T09:45:00Z"
-    },
-    {
-      "id": "tx-agent-5d60f900-88d0-4e4a-baeb-68e9c80d3912",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1775813949312",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-b35b838b-e7e5-4cc7-9ca4-349fe1da6e2a] Find me best USDC yield, medium risk, $500 budget",
-      "timestamp": "2026-04-10T09:39:09.313Z"
-    },
-    {
-      "id": "tx-agent-ea08d4b0-9c00-4271-b8e5-eb543f0fb8b0",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1775813949314",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-b35b838b-e7e5-4cc7-9ca4-349fe1da6e2a] Find me best USDC yield, medium risk, $500 budget",
-      "timestamp": "2026-04-10T09:39:09.314Z"
-    },
-    {
-      "id": "tx-agent-13167bc2-4c6e-43bb-aa80-18e57640fe28",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1775813949315",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-b35b838b-e7e5-4cc7-9ca4-349fe1da6e2a] Find me best USDC yield, medium risk, $500 budget",
-      "timestamp": "2026-04-10T09:39:09.315Z"
-    },
-    {
-      "id": "tx-agent-9f04c6a3-2afb-41bc-a6d1-063f1715f6cc",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1775813949316",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-b35b838b-e7e5-4cc7-9ca4-349fe1da6e2a] Find me best USDC yield, medium risk, $500 budget",
-      "timestamp": "2026-04-10T09:39:09.316Z"
-    },
-    {
-      "id": "tx-agent-0f33b663-a12a-4421-94a1-de3f8bcc2d70",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776037127053",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-435739e2-1f16-40b0-8bd8-cedaffc42b9c] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:38:47.054Z"
-    },
-    {
-      "id": "tx-agent-fc132d24-d55a-40b7-8380-3fa9f2b5d6fc",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776037127054",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-435739e2-1f16-40b0-8bd8-cedaffc42b9c] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:38:47.055Z"
-    },
-    {
-      "id": "tx-agent-957b3703-e039-4465-9c44-f78292885daa",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776037127055",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-435739e2-1f16-40b0-8bd8-cedaffc42b9c] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:38:47.056Z"
-    },
-    {
-      "id": "tx-agent-60a38911-4281-4202-9143-dc36b468ebc7",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776037127056",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-435739e2-1f16-40b0-8bd8-cedaffc42b9c] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:38:47.056Z"
-    },
-    {
-      "id": "tx-agent-40bfd089-879d-47ee-952d-da4893bc2d52",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776037209413",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-9381c1ce-844b-49be-8190-a66181bc2238] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:40:09.413Z"
-    },
-    {
-      "id": "tx-agent-2fb8ced3-eb66-46a1-8d28-644c151ba940",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776037209414",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-9381c1ce-844b-49be-8190-a66181bc2238] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:40:09.414Z"
-    },
-    {
-      "id": "tx-agent-4f3cdd64-12f9-4777-91a0-10b57cdd0f55",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776037209415",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-9381c1ce-844b-49be-8190-a66181bc2238] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:40:09.415Z"
-    },
-    {
-      "id": "tx-agent-61d45758-a7bb-49c4-ac91-517321509322",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776037209416",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-9381c1ce-844b-49be-8190-a66181bc2238] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:40:09.416Z"
-    },
-    {
-      "id": "tx-agent-42f4aa90-054d-4937-99d4-fa1908d6958e",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776037660184",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-e99f1704-bdcb-43f3-8444-67586d334552] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:47:40.185Z"
-    },
-    {
-      "id": "tx-agent-8ba8eec3-52f4-4f90-9f7b-69874b221a1b",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776037660186",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-e99f1704-bdcb-43f3-8444-67586d334552] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:47:40.186Z"
-    },
-    {
-      "id": "tx-agent-5b5e933a-45a5-48fd-9f5f-197dc84e089f",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776037660187",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-e99f1704-bdcb-43f3-8444-67586d334552] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:47:40.188Z"
-    },
-    {
-      "id": "tx-agent-ae4e3748-0b55-40c0-9c8c-2d01ab6e1bdd",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776037660188",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-e99f1704-bdcb-43f3-8444-67586d334552] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:47:40.189Z"
-    },
-    {
-      "id": "tx-agent-edd9ee38-9c3b-4d37-8d6d-c8aec5e23f74",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776037740621",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-ad2125d2-2c2c-4d8d-939f-f554f8f92211] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:49:00.622Z"
-    },
-    {
-      "id": "tx-agent-81efb99f-c27c-44c0-b75f-115f74720502",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776037740622",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-ad2125d2-2c2c-4d8d-939f-f554f8f92211] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:49:00.623Z"
-    },
-    {
-      "id": "tx-agent-d6db1bf1-9850-4f68-abe5-e1a70df7cdb6",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776037740623",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-ad2125d2-2c2c-4d8d-939f-f554f8f92211] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:49:00.624Z"
-    },
-    {
-      "id": "tx-agent-b9cb9c90-4f3d-4f90-8559-068281912dd4",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776037740624",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-ad2125d2-2c2c-4d8d-939f-f554f8f92211] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:49:00.624Z"
-    },
-    {
-      "id": "tx-agent-24497616-3a06-4739-a06b-52e78f94947a",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776038018215",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-7300b6d8-e216-402a-bab5-5e96a2d69f65] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:53:38.216Z"
-    },
-    {
-      "id": "tx-agent-6d5e4506-45a5-447d-afc1-47786d04551f",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776038018217",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-7300b6d8-e216-402a-bab5-5e96a2d69f65] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:53:38.217Z"
-    },
-    {
-      "id": "tx-agent-ee15bf8d-3e2f-4dc3-95d6-46f4a273ab20",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776038018218",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-7300b6d8-e216-402a-bab5-5e96a2d69f65] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:53:38.218Z"
-    },
-    {
-      "id": "tx-agent-9607c605-0faa-44f0-b7cf-600560b96617",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776038018219",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-7300b6d8-e216-402a-bab5-5e96a2d69f65] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:53:38.219Z"
-    },
-    {
-      "id": "tx-agent-8507bd74-57f3-42e8-b06d-ead4311a4798",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776038059869",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-b54f13db-5470-4dab-a454-22be2e42fc70] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:54:19.870Z"
-    },
-    {
-      "id": "tx-agent-94475ff9-d213-4583-bb3b-7a53e54176ea",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776038059870",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-b54f13db-5470-4dab-a454-22be2e42fc70] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:54:19.871Z"
-    },
-    {
-      "id": "tx-agent-88ff20e8-fb27-4b9f-8c40-e3c4c2c0b98b",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776038059871",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-b54f13db-5470-4dab-a454-22be2e42fc70] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:54:19.872Z"
-    },
-    {
-      "id": "tx-agent-5e90291e-ca5a-4a9d-a0a3-19bd6a734e4c",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776038059872",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-b54f13db-5470-4dab-a454-22be2e42fc70] best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-12T23:54:19.873Z"
-    },
-    {
-      "id": "tx-agent-job-job-b54f13db-5470-4dab-a454-22be2e42fc70",
-      "datasetId": "agent-job",
-      "txHash": "demo-agent-1776038059868",
-      "amount": 1,
-      "buyerQuery": "best low risk USDC yield with $500 budget",
-      "aiSummary": "Synthesising all four datasets: Dataset 1 identifies four low-risk USDC-denominated yield sources — Aave V3 Ethereum (5.82%), Compound V3 (5.24%), Morpho Blue (6.42%), and Aave V3 Arbitrum (6.91%) — all with TVLs exceeding $1B, providing the safety margin appropriate for a $500 low-risk position. Dataset 2 shows mixed whale behaviour: accumulators are favouring ETH, stETH, AAVE, MKR, and USDC, while distributors are exiting ARB, OP, and speculative tokens — the accumulation of AAVE governance tokens by wallet 0x6262998 lends soft confirmation to Aave protocol health. Dataset 3 risk scores reveal that the most active whale accumulators carry risk scores between 24–44 (Very Low to Medium), suggesting institutional-grade, conservative capital is moving into blue-chip DeFi rather than high-yield speculation — consistent with recommending Aave or Morpho over Yearn or Convex. Dataset 4 shows a market-wide greed score of 71 with ETH trending bullish (+5.2%, score 68) and AAVE itself showing neutral-positive sentiment (score 58, +2.1%), meaning the broader environment supports DeFi participation but warrants caution against over-extending into medium or high risk vaults. The convergence of highest low-risk APY, massive TVL, whale-level AAVE accumulation, and stable sentiment makes Aave V3 Ethereum the primary recommendation, with Morpho Blue and Aave Arbitrum as credible, data-supported alternatives.",
-      "timestamp": "2026-04-12T23:54:48.840Z"
-    },
-    {
-      "id": "tx-agent-93999bb4-5f84-4ae1-b3a5-ac4330bc31ff",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776038419973",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-7524fc8f-2dd4-4120-b569-5383c01d73da] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:00:19.974Z"
-    },
-    {
-      "id": "tx-agent-c753c7f2-8c8d-4464-8d65-a17eda603c80",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776038419975",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-7524fc8f-2dd4-4120-b569-5383c01d73da] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:00:19.976Z"
-    },
-    {
-      "id": "tx-agent-e0307efe-5934-41a0-8c12-61e086f9b29e",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776038419979",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-7524fc8f-2dd4-4120-b569-5383c01d73da] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:00:19.980Z"
-    },
-    {
-      "id": "tx-agent-ad260637-9617-4092-be7b-81f8b69ad305",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776038419981",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-7524fc8f-2dd4-4120-b569-5383c01d73da] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:00:19.982Z"
-    },
-    {
-      "id": "tx-agent-job-job-7524fc8f-2dd4-4120-b569-5383c01d73da",
-      "datasetId": "agent-job",
-      "txHash": "demo-agent-1776038419970",
-      "amount": 1,
-      "buyerQuery": "Best low risk USDC yield with $500 budget",
-      "aiSummary": "Synthesising all four datasets for a low-risk $500 USDC yield strategy: Dataset 1 identifies three credible low-risk USDC lending options — Aave V3 Ethereum (5.82% APY, $8.42B TVL), Morpho Blue (6.42% APY, $1.84B TVL), and Aave V3 Arbitrum (6.91% APY, $1.27B TVL) — while excluding medium and high-risk protocols such as Yearn (7.34%, medium), Stargate (8.72%, medium), and Radiant Capital (14.32%, high). Dataset 2 shows smart money accumulating AAVE tokens (wallet 0x6262998, +920.7 ETH net inflow) and ETH/stETH (wallet 0x28C6c06, +3,201 ETH), confirming conviction in blue-chip DeFi infrastructure rather than speculative assets. Dataset 3 risk scores reveal that the most active accumulating wallets aligned with conservative DeFi (0x8894E0, risk score 24; 0xBE0eB53, risk score 15) are the lowest-risk operators in the cohort, reinforcing the thesis that sophisticated low-risk capital is flowing into established lending protocols. Dataset 4 sentiment shows AAVE at a neutral 58/100 with slight upward price momentum (+2.1%), Ethereum broadly bullish at 68/100 (+5.2%), and the macro Fear & Greed Index at 71, suggesting a risk-on environment that supports DeFi lending demand and healthy borrow rates sustaining current APYs. No systemic red flags exist for USDC lending on Aave V3, making it the optimal intersection of yield, security, liquidity depth, and smart-money validation for this user profile.",
-      "timestamp": "2026-04-13T00:00:48.199Z"
-    },
-    {
-      "id": "tx-agent-6244f14e-adbb-42a6-9b07-5ead4f68e32f",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776039188403",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-eaa775e8-a4b3-4ecf-84c7-d31517474d6e] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:13:08.404Z"
-    },
-    {
-      "id": "tx-agent-2c4712a5-c09d-4d2c-b98d-36490addeebd",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776039188406",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-eaa775e8-a4b3-4ecf-84c7-d31517474d6e] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:13:08.407Z"
-    },
-    {
-      "id": "tx-agent-0878a805-5dad-4b01-b462-0b672ee45d9d",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776039188408",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-eaa775e8-a4b3-4ecf-84c7-d31517474d6e] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:13:08.409Z"
-    },
-    {
-      "id": "tx-agent-fb139fc7-330d-4263-8930-2fed5bea7e30",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776039188411",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-eaa775e8-a4b3-4ecf-84c7-d31517474d6e] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T00:13:08.412Z"
-    },
-    {
-      "id": "tx-agent-job-job-eaa775e8-a4b3-4ecf-84c7-d31517474d6e",
-      "datasetId": "agent-job",
-      "txHash": "demo-agent-1776039188400",
-      "amount": 1,
-      "buyerQuery": "Best low risk USDC yield with $500 budget",
-      "aiSummary": "Synthesising all four datasets: the yield data identifies three genuinely low-risk USDC opportunities — Aave V3 Ethereum (5.82%), Morpho Blue (6.42%), and Aave V3 Arbitrum (6.91%) — all carrying explicit low-risk labels and multi-billion dollar TVL. Yearn Finance offers 7.34% but is rated medium risk, disqualifying it for this user. Whale movement data shows accumulation of ETH, USDC, and AAVE governance tokens by the lowest-risk wallets (scores 15-24), while high-risk wallets (scores 71-88) are distributing or chasing speculative assets like PEPE and SHIB — this behavioural divergence strongly validates a conservative stablecoin lending posture. The risk score dataset confirms the most trustworthy whale cohort (0x8894E0 at score 24, 0xBE0eB5 at score 15) is holding USDC and blue-chip assets, not rotating into high-yield farms. Market sentiment shows Ethereum at 68 (Greed) with a bullish trend and +5.2% 24h move, which supports healthy DeFi utilisation rates that drive up lending APYs on Aave — a direct tailwind for the recommended position. The AAVE token itself is trending up with neutral-to-positive sentiment, suggesting the protocol's governance and risk parameters are viewed favourably by the market. No critical red flags exist for the top pick; the primary practical concern for a $500 budget is Ethereum gas optimisation, which the Arbitrum alternative resolves.",
-      "timestamp": "2026-04-13T00:13:35.409Z"
-    },
-    {
-      "id": "tx-demo-3599857f-c943-4f15-97e2-23870c1e206b",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776086425943",
-      "amount": 0.02,
-      "buyerQuery": "what is the highest APY protocol?",
-      "aiSummary": "## Executive Summary\n\nThe dataset reveals a clear risk-return pattern across DeFi protocols, with yields ranging from 3.72% (Rocket Pool) to 24.8% (Beefy Finance), where higher APYs consistently correlate with elevated risk profiles. Lido dominates the ecosystem with $24.7B TVL despite offering only 3.98% APY, demonstrating strong preference for low-risk staking, while Ethereum remains the primary chain with $42.6B of the total TVL. High-yield opportunities above 12% APY are concentrated in smaller protocols with medium-to-high risk ratings and significantly lower TVL, indicating limited institutional adoption of these strategies.\n\n## Answer to Buyer's Question\n\n**The highest APY protocol is Beefy Finance at 24.8% APY.** This is a high-risk vault strategy on BNB Chain involving CAKE-BNB assets with a relatively modest TVL of $180M. It's worth noting that this exceptional yield comes with high risk classification and operates on a smaller scale compared to the major Ethereum protocols in your dataset.",
-      "timestamp": "2026-04-13T13:20:25.943Z"
-    },
-    {
-      "id": "tx-agent-3c44757f-6431-40c3-bf42-efce90beaa9c",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776086980102",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-16d6ed26-b39c-45a3-9a73-ccca864be1b0] safe USDC yield for $200",
-      "timestamp": "2026-04-13T13:29:40.103Z"
-    },
-    {
-      "id": "tx-agent-34cf6ebd-0bfe-44cb-8d1e-a3f60a4dc9c5",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776086980105",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-16d6ed26-b39c-45a3-9a73-ccca864be1b0] safe USDC yield for $200",
-      "timestamp": "2026-04-13T13:29:40.106Z"
-    },
-    {
-      "id": "tx-agent-297f2ccf-da0c-4f03-99c4-0df7dcaed01d",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776086980107",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-16d6ed26-b39c-45a3-9a73-ccca864be1b0] safe USDC yield for $200",
-      "timestamp": "2026-04-13T13:29:40.108Z"
-    },
-    {
-      "id": "tx-agent-b62902c3-e01b-4b04-82fa-6d01fd0bf61b",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776086980108",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-16d6ed26-b39c-45a3-9a73-ccca864be1b0] safe USDC yield for $200",
-      "timestamp": "2026-04-13T13:29:40.109Z"
-    },
-    {
-      "id": "tx-agent-job-job-16d6ed26-b39c-45a3-9a73-ccca864be1b0",
-      "datasetId": "agent-job",
-      "txHash": "demo-agent-1776086980100",
-      "amount": 1,
-      "buyerQuery": "safe USDC yield for $200",
-      "aiSummary": "Synthesising all four datasets, the risk-adjusted optimum for a $200 low-risk USDC position is Aave V3 on Ethereum. From Dataset 1, filtering strictly for USDC-denominated, low-risk protocols eliminates Yearn (medium), Convex (medium/high), GMX (high), Radiant (high), Stargate (medium), and Beefy (high), leaving Aave V3 Ethereum (5.82%), Compound V3 (5.24%), Morpho Blue (6.42%), and Curve 3pool (4.18%). Morpho Blue's 6.42% is nominally higher, but Aave V3's $8.42B TVL dwarfs Morpho's $1.84B, offering materially superior liquidity and exit depth for any market stress event. From Dataset 2, whale accumulation patterns favour the Aave ecosystem directly: wallet 0x6262998 is accumulating MKR and AAVE simultaneously, suggesting sophisticated capital is rotating into blue-chip DeFi lending governance. No whale wallets show USDC distribution that would signal a flight from stablecoin lending. Dataset 3 risk scores reinforce this: the two wallets most actively accumulating in Aave-adjacent tokens (0x8894E0 and 0x6262998) have risk scores of 24 and 44 respectively — Very Low and Medium — indicating disciplined, non-leveraged behaviour consistent with yield-farming rather than speculative punting. The one Critical-risk wallet (0xF977814, score 88) is distributing, not accumulating, and holds no USDC-linked tokens. Dataset 4 sentiment is constructively bullish for Ethereum (score 68, Greed, +5.2% 24h) and AAVE specifically sits at 58 with an upward trend, suggesting the protocol is not under negative narrative pressure. The broader Fear & Greed Index of 71 warrants a mild caution flag but does not contradict a stablecoin lending position whose principal is not exposed to ETH price risk. Taken together, Aave V3 USDC on Ethereum is the highest-confidence, lowest-risk yield option available within the user's budget and tolerance parameters.",
-      "timestamp": "2026-04-13T13:30:12.374Z"
-    },
-    {
-      "id": "tx-demo-80fb7e55-58cd-4a33-8749-4e0efa48dc36",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776094201094",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T15:30:01.094Z"
-    },
-    {
-      "id": "tx-demo-3007283a-22f8-46c8-b86d-b88dd7fb3210",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776094224177",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T15:30:24.177Z"
-    },
-    {
-      "id": "tx-demo-1ce4d288-661c-4ba5-8343-e16051c4a338",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776094237409",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T15:30:37.409Z"
-    },
-    {
-      "id": "tx-demo-b19b82b8-73e4-413f-ae78-7d5f187ee1c1",
-      "datasetId": "ds-002-dex-arb",
-      "txHash": "demo-1776094254306",
-      "amount": 0.1,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T15:30:54.306Z"
-    },
-    {
-      "id": "tx-agent-e132eac8-2e9e-495d-b041-c0716d2f9b0b",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776094342733",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-542f3948-f3b4-44ea-9163-12adf3122888] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T15:32:22.735Z"
-    },
-    {
-      "id": "tx-agent-2b60dfde-9e12-441d-acb3-60453d45627a",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776094342737",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-542f3948-f3b4-44ea-9163-12adf3122888] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T15:32:22.739Z"
-    },
-    {
-      "id": "tx-agent-7a3ee161-fc6a-4d2e-9acf-264bdd3c4cd4",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776094342740",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-542f3948-f3b4-44ea-9163-12adf3122888] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T15:32:22.741Z"
-    },
-    {
-      "id": "tx-agent-2ac25870-e090-4a85-a9c0-246eaa5cf438",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776094342743",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-542f3948-f3b4-44ea-9163-12adf3122888] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T15:32:22.743Z"
-    },
-    {
-      "id": "tx-agent-job-job-542f3948-f3b4-44ea-9163-12adf3122888",
-      "datasetId": "agent-job",
-      "txHash": "demo-agent-1776094342730",
-      "amount": 1,
-      "buyerQuery": "Best low risk USDC yield with $500 budget",
-      "aiSummary": "Synthesising all four datasets: the yield data identifies three low-risk USDC lending options on Ethereum — Aave V3 (5.82%), Morpho Blue (6.42%), and Compound V3 (5.24%) — with Aave V3 standing out for its dominant $8.42B TVL providing deep liquidity protection for small depositors. Whale movement data shows smart money accumulating AAVE governance tokens (wallet 0x6262998, +920.7 ETH net inflow) and holding stablecoins like USDT and DAI (wallet 0xBE0eB5, risk score 15 — Very Low, zero liquidations), suggesting institutional confidence in the Aave ecosystem and stablecoin strategies. Risk score data confirms the safest whale behaviour clusters around low-leverage, low-liquidation wallets operating within 3–9 protocols — consistent with the conservative lending profile of Aave V3. Market sentiment shows AAVE at 58/100 (Neutral, trending up +2.1%), Ethereum at 68/100 (Greed, +5.2%), and a market-wide Fear & Greed Index of 71, creating a constructive but not overheated environment for stablecoin yield. No red flags exist for the Aave V3 USDC pool specifically; the primary practical risk for this budget size is Ethereum gas cost erosion, which can be sidestepped via the Arbitrum alternative if the user plans a shorter holding period.",
-      "timestamp": "2026-04-13T15:32:49.388Z"
-    },
-    {
-      "id": "tx-demo-3ae1a42c-d43b-4346-839e-98e974c657a6",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776094840732",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Based on the analyzed DeFi yield dataset, Ethereum dominates the market with $45.8B in total TVL across major protocols, led by Lido's $24.7B stETH staking pool, while alternative chains like Arbitrum show significantly smaller but potentially more attractive opportunities. The yield landscape reveals a clear risk-return correlation, with low-risk stablecoin lending on Ethereum averaging 5.8% APY (Aave V3, Compound V3, Morpho Blue), while high-risk protocols offer substantially higher returns including Beefy Finance at 24.8% APY and GMX's GLP at 18.24% APY. A notable anomaly exists in Arbitrum's lending market where Radiant Capital offers 14.32% APY on USDC with only $280M TVL, suggesting either elevated risk factors or potential market inefficiency compared to Ethereum's established lending protocols.",
-      "timestamp": "2026-04-13T15:40:40.732Z"
-    },
-    {
-      "id": "tx-demo-7d01247c-04ac-4d62-9be5-77a3320aa48c",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776096634086",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:10:34.086Z"
-    },
-    {
-      "id": "tx-demo-cafecf02-dd9f-4be6-a90d-adb6eaefd579",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776096639950",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:10:39.950Z"
-    },
-    {
-      "id": "tx-demo-53cc8084-0f57-4610-88c7-a656ddb4f75d",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776096645125",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:10:45.125Z"
-    },
-    {
-      "id": "tx-demo-ddff6da9-39a1-40c9-a8d8-acaf64b6e43a",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776096649249",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:10:49.249Z"
-    },
-    {
-      "id": "tx-demo-1b699e74-78e1-44c8-b422-08abd73aedcd",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776098371355",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:39:31.355Z"
-    },
-    {
-      "id": "tx-demo-7ea0afda-9576-468a-8782-17af5eb8c496",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098382807",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:39:42.807Z"
-    },
-    {
-      "id": "tx-demo-dd6799fc-dc57-4578-a0cc-511a2ab1151e",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098388604",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:39:48.604Z"
-    },
-    {
-      "id": "tx-demo-af8c2fe8-3d0e-4d62-87c7-8ec126dcd8ba",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098393747",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:39:53.747Z"
-    },
-    {
-      "id": "tx-demo-ca32fe1f-54c5-4fc2-bc9d-4b65e38d369b",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098400194",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:40:00.194Z"
-    },
-    {
-      "id": "tx-demo-79627426-0f79-4f93-9d0b-a2bd9d2c6ef9",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098405813",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:40:05.813Z"
-    },
-    {
-      "id": "tx-demo-ce1827bf-e78c-4e77-944b-88467ba434b4",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098484194",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:41:24.194Z"
-    },
-    {
-      "id": "tx-demo-52a47362-a6bf-45b8-bda8-979861035a39",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098589145",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:43:09.145Z"
-    },
-    {
-      "id": "tx-demo-5aeeb387-8a77-4602-b4b1-af9c59607334",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098624504",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:43:44.504Z"
-    },
-    {
-      "id": "tx-demo-6a934c51-33ff-4f85-beff-4481660c03c0",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098685594",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.",
-      "timestamp": "2026-04-13T16:44:45.594Z"
-    },
-    {
-      "id": "tx-demo-5208a575-08ed-45cf-a315-d160eda472e1",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098749470",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Executive Summary:\n\n1. The cryptocurrency market is in a state of \"Greed,\" with a Fear and Greed Index of 71, indicating heightened speculative activity. \n2. The top-performing assets are Pepe (PEPE) with a 28.4% 24-hour price change, followed by Solana (SOL) at 12.7% and Bitcoin (BTC) at 8.4%.\n3. Avalanche (AVAX) and Polygon (MATIC) are the only assets showing a bearish trend, with 24-hour price changes of -7.3% and -11.2%, respectively.",
-      "timestamp": "2026-04-13T16:45:49.470Z"
-    },
-    {
-      "id": "tx-demo-29212bd8-39dc-48f0-9294-3030967961fd",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776098796700",
-      "amount": 0.02,
-      "buyerQuery": "",
-      "aiSummary": "The Ethereum DeFi market continues to dominate, with Aave V3 and Lido together accounting for over $33 billion in total value locked (TVL). Stablecoin yields average 6.32% APY, while Ethereum-based assets yield 8.91% on average. The highest APY is 24.8% on the CAKE-BNB pool on Beefy Finance, a BNB Chain-based protocol, though this carries a \"high\" risk profile.",
-      "timestamp": "2026-04-13T16:46:36.700Z"
-    },
-    {
-      "id": "tx-demo-2cc69648-43f2-4820-bc78-4a99e65a84a0",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-1776098808148",
-      "amount": 0.03,
-      "buyerQuery": "",
-      "aiSummary": "Here is a concise 3-sentence executive summary highlighting the most important insights, notable trends, and any anomalies from the provided dataset:\n\nThe dataset includes risk scores, leverage ratios, and liquidation histories for 10 cryptocurrency wallets. Notable trends include a high-risk wallet with a risk score of 88, a leverage ratio of 8.4, and 7 liquidations, as well as a very low-risk wallet with a risk score of 15, a leverage ratio of 1, and no liquidations. According to the metadata, this data represents a subset of 500 wallets, with an average risk score of 48.7, 23 critical-risk wallets, and 87 high-risk wallets, analyzed using the HazAI-Risk-v2.1 model.",
-      "timestamp": "2026-04-13T16:46:48.148Z"
-    },
-    {
-      "id": "tx-demo-309cc721-a834-4a0b-91dd-506b81ba5d1c",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-1776098814257",
-      "amount": 0.03,
-      "buyerQuery": "",
-      "aiSummary": "Here is a concise 3-sentence executive summary of the key insights from the provided data:\n\nThe dataset includes risk scores for 10 wallets, with an average risk score of 48.7 across the 500 wallets scored. The highest risk wallet has a score of 88 and has experienced 7 liquidations, while the lowest risk wallets have scores of 15 and 24 with no liquidations. Additionally, the dataset indicates that 23 wallets are classified as \"Critical\" risk and 87 are \"High\" risk, suggesting a significant portion of the scored wallets carry elevated risk profiles.",
-      "timestamp": "2026-04-13T16:46:54.257Z"
-    },
-    {
-      "id": "tx-demo-3faaca07-544d-41bf-b83a-7a4a85c316f7",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-1776098822144",
-      "amount": 0.04,
-      "buyerQuery": "",
-      "aiSummary": "Executive Summary:\n\nThe data reveals a market sentiment dominated by \"Greed,\" with the Fear and Greed Index at 71. Bitcoin, Ethereum, and Solana lead the market, with sentiment scores of 72, 68, and 81, respectively, indicating \"Greed\" and \"Extreme Greed.\" Solana stands out with a 12.7% 24-hour price increase, the highest among the assets analyzed. Conversely, Avalanche and Polygon show \"Fear\" with negative 24-hour price changes of -7.3% and -11.2%, respectively. The meme token Pepe is the outlier, with an \"Extreme Greed\" sentiment score of 87 and a staggering 28.4% 24-hour price increase.",
-      "timestamp": "2026-04-13T16:47:02.144Z"
-    },
-    {
-      "id": "tx-agent-7171faf3-2014-4b3f-bcec-9ed74a16f98c",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776099056101",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-626f6e0e-dc49-441f-828b-6dd5de4de771] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T16:50:56.105Z"
-    },
-    {
-      "id": "tx-agent-c064c747-1772-480a-aad2-259f199c8d38",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776099056107",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-626f6e0e-dc49-441f-828b-6dd5de4de771] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T16:50:56.109Z"
-    },
-    {
-      "id": "tx-agent-f7764ec5-2e0b-4392-8eac-2524907020bc",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776099056111",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-626f6e0e-dc49-441f-828b-6dd5de4de771] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T16:50:56.112Z"
-    },
-    {
-      "id": "tx-agent-1d46caa4-be4e-4b1a-8a05-badfac32670c",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776099056116",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-626f6e0e-dc49-441f-828b-6dd5de4de771] Best low risk USDC yield with $500 budget",
-      "timestamp": "2026-04-13T16:50:56.118Z"
-    },
-    {
-      "id": "tx-agent-job-job-626f6e0e-dc49-441f-828b-6dd5de4de771",
-      "datasetId": "agent-job",
-      "txHash": "demo-agent-1776099056093",
-      "amount": 1,
-      "buyerQuery": "Best low risk USDC yield with $500 budget",
-      "aiSummary": "The user's $500 USDC budget and low-risk tolerance are best suited for low-risk lending protocols on Ethereum, based on the data provided. Aave V3 USDC offers a 5.82% APY, which is in line with the average stablecoin yield of 6.32% across the protocols surveyed. The whale activity data shows strong accumulation of Ethereum and Aave positions, indicating confidence in these protocols. The market sentiment is also bullish on Ethereum and stablecoins. Compound V3 USDC and Morpho Blue USDC are viable alternatives that also offer low-risk, high-yield opportunities for the user's requirements.",
-      "timestamp": "2026-04-13T16:51:00.226Z"
-    },
-    {
-      "id": "tx-agent-60c7879d-c4cd-4b99-9808-b9d2f80fab71",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-yield-data-1776099377546",
-      "amount": 0.02,
-      "buyerQuery": "[Agent Job job-b03d4d61-ce99-4cc8-810b-f1c68992106e] Safe stablecoin pools on Ethereum, $1000 budget",
-      "timestamp": "2026-04-13T16:56:17.550Z"
-    },
-    {
-      "id": "tx-agent-56c150a5-1e88-4a8c-ac6d-404890cd4930",
-      "datasetId": "ds-001-whale-wallets",
-      "txHash": "demo-whale-wallets-1776099377552",
-      "amount": 0.05,
-      "buyerQuery": "[Agent Job job-b03d4d61-ce99-4cc8-810b-f1c68992106e] Safe stablecoin pools on Ethereum, $1000 budget",
-      "timestamp": "2026-04-13T16:56:17.555Z"
-    },
-    {
-      "id": "tx-agent-25537e64-6d11-4ad7-ba1a-48c481c7bf93",
-      "datasetId": "ds-004-wallet-risk",
-      "txHash": "demo-risk-scores-1776099377557",
-      "amount": 0.03,
-      "buyerQuery": "[Agent Job job-b03d4d61-ce99-4cc8-810b-f1c68992106e] Safe stablecoin pools on Ethereum, $1000 budget",
-      "timestamp": "2026-04-13T16:56:17.558Z"
-    },
-    {
-      "id": "tx-agent-d5558b18-2cbb-42de-aac0-52fc695a2edf",
-      "datasetId": "ds-006-sentiment",
-      "txHash": "demo-sentiment-1776099377560",
-      "amount": 0.04,
-      "buyerQuery": "[Agent Job job-b03d4d61-ce99-4cc8-810b-f1c68992106e] Safe stablecoin pools on Ethereum, $1000 budget",
-      "timestamp": "2026-04-13T16:56:17.561Z"
-    },
-    {
-      "id": "tx-agent-job-job-b03d4d61-ce99-4cc8-810b-f1c68992106e",
-      "datasetId": "agent-job",
-      "txHash": "demo-agent-1776099377541",
-      "amount": 1,
-      "buyerQuery": "Safe stablecoin pools on Ethereum, $1000 budget",
-      "aiSummary": "The yield data shows that the Aave V3 USDC lending pool offers the best combination of high APY (5.82%) and low risk for the user's $1000 USDC budget. This is supported by the whale wallet data, which indicates strong accumulation activity and capital inflows into this protocol, suggesting a high level of confidence. While market sentiment is neutral on USDC, the lending nature of this yield strategy makes it less susceptible to broader market fluctuations. The Curve 3pool and Morpho Blue USDC lending strategies present lower-yielding but still low-risk alternatives. Overall, the Aave V3 USDC lending pool emerges as the top opportunity that best matches the user's requirements.",
-      "timestamp": "2026-04-13T16:56:21.981Z"
-    },
-    {
-      "id": "tx-demo-71e3cb38-d33b-4ee0-bbc2-a11a60d70c0f",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776114452766",
-      "amount": 0.02,
-      "buyerQuery": "what is the best yield?",
-      "aiSummary": "Executive Summary:\n\nThe dataset provides insights into various decentralized finance (DeFi) protocols and their associated yields. It highlights that the highest yielding opportunities are in riskier strategies, such as Beefy Finance's 24.8% APY on the CAKE-BNB pool. However, more conservative options like Aave V3's 5.82% APY on USDC and Lido's 3.98% APY on stETH are also available for those seeking lower-risk investments.\n\nBest Yield:\n\nThe best yield in the dataset is 24.8% APY, offered by Beefy Finance on the CAKE-BNB pool. This is a significantly higher yield compared to the average APY for stablecoins (6.32%) and Ethereum-based assets (8.91%). However, it is also classified as a \"high\" risk investment, indicating that it may have higher volatility and potential downside risk compared to the lower-risk options in the dataset.",
-      "timestamp": "2026-04-13T21:07:32.766Z"
-    },
-    {
-      "id": "tx-demo-92839c8f-b514-4cbf-a156-e0b02c087bf1",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "demo-1776114939985",
-      "amount": 0.02,
-      "buyerQuery": "what is the best yield?",
-      "aiSummary": "# On-Chain Yield Analysis Report\n\n## Executive Summary\n\nThe dataset reveals a stark risk-return tradeoff across DeFi yield opportunities, with low-risk stablecoin yields clustering around 5.8% (Aave V3 leading at 5.82% APY with $8.4B TVL), while higher yields of 12-25% are concentrated in medium-to-high-risk protocols on alternative chains. Ethereum dominates by TVL ($44.6B across tracked protocols), but alternative chains like Arbitrum and BNB Chain offer significantly elevated yields—GMX on Arbitrum yields 18.24% and Beefy Finance on BNB Chain reaches 24.8%, though both carry high risk classifications. The data shows a clear efficiency frontier: investors seeking yield must either accept lower returns on battle-tested protocols or take on material smart contract and liquidation risks.\n\n---\n\n## Answer: What is the Best Yield?\n\n**The answer depends on your risk tolerance:**\n\n**Highest Raw Yield:** Beefy Finance (BNB Chain) at **24.8% APY** on CAKE-BNB, but this carries **high risk** with only $180M TVL.\n\n**Best Risk-Adjusted Yield for Stablecoins:** **Aave V3 on Ethereum at 5.82% APY** on USDC—it combines low risk with the highest TVL ($8.4B), making it the most liquid and battle-tested option.\n\n**Best Aggressive Yield:** **GMX on Arbitrum at 18.24% APY** on GLP with medium-to-high risk, or **Radiant Capital at 14.32% APY** on USDC (high risk, lower TVL of $280M).\n\n**Best Moderate Risk Yield:** **Stargate on Arbitrum at 8.72% APY** on USDC (medium risk, $420M TVL) or **Yearn Finance at 7.34% APY** on Ethereum (medium risk, $892M TVL).\n\n**Professional Recommendation:** If risk-averse, Aave V3's 5.82% is optimal. If seeking higher returns, Stargate (8.72%) or Yearn (7.34%) offer reasonable risk-adjusted alternatives before moving to high-risk strategies.",
-      "timestamp": "2026-04-13T21:15:39.985Z"
-    },
-    {
-      "id": "tx-ba3aacf6-bbbc-48c9-b091-54720a3cbb00",
-      "datasetId": "ds-003-defi-yields",
-      "txHash": "abc71e5d27dc1831b6a987d54291a69877d59870e7ba706f464a8d051b588640",
-      "amount": 0.02,
-      "buyerQuery": "what is the safest yield?",
-      "aiSummary": "# On-Chain Yield Analysis Report\n**Hazina Data Escrow | April 8, 2026**\n\n---\n\n## Executive Summary\n\nEthereum dominates the yield landscape with lower-risk stablecoin opportunities averaging 6.32% APY, led by Aave V3's 5.82% on $8.4B TVL, while higher-risk protocols on alternative chains (GMX at 18.24%, Radiant Capital at 14.32%) offer substantially elevated returns. Risk-adjusted analysis reveals a significant APY ceiling around 7-8% for \"low\" risk protocols, with yields above this threshold consistently paired with medium-to-high risk classifications. The data shows clear risk stratification: stable assets yield 4-6%, mainstream protocols 5-7%, and speculative positions exceed 12%.\n\n---\n\n## What is the Safest Yield?\n\n**Aave V3 on Ethereum (USDC, 5.82% APY)** represents the safest yield option in this dataset.\n\n**Why this is the safest choice:**\n\n| Factor | Details |\n|--------|---------|\n| **Risk Classification** | Low |\n| **Largest TVL** | $8.42B (most capital deployed = battle-tested security) |\n| **Protocol Type** | Battle-hardened lending protocol; oldest audited architecture |\n| **Asset Type** | USDC on Ethereum (most liquid, least counterparty risk) |\n| **Competitive Rate** | 5.82% is only 0.58% below the highest low-risk option (Morpho Blue at 6.42%), but with significantly more liquidity and proven track record |\n\n**Runner-up alternative:** If you prioritize maximum safety over marginal yield gains, **Compound V3** (5.24%, $3.18B TVL) is nearly identical in risk profile but slightly lower yield. **Lido** (3.98% staking) offers institutional-grade safety but with lower returns and ETH-specific exposure.\n\n**Avoid if prioritizing safety:** Anything rated \"high\" risk (GMX, Radiant Capital, Beefy Finance) or with TVL under $500M, despite their 12%+ APY offerings.",
-      "timestamp": "2026-04-13T21:33:48.355Z"
+      "id": "tx-a7fbf279-20c8-4cbb-ad59-3617f4a3311a",
+      "datasetId": "ds-a4b4965d-4b70-4a9d-bd88-bd8b5377e77e",
+      "txHash": "3a3ec3bbcf5c95d9eade9a69957b5faf7b9b6d6c9c4f4c4f9912bdbf19f3ad3e",
+      "amount": 3.59,
+      "buyerQuery": "Usitas crebro congregatio ventus mollitia verumtamen caries usitas tergo decimus?",
+      "aiSummary": "Hic modi traho ante illo defetiscor unus cogo aufero truculenter. Ad derelinquo comptus.",
+      "timestamp": "2026-02-11T15:25:58.806Z"
+    },
+    {
+      "id": "tx-2da8f54b-1ac7-4907-b845-8de516f6cbd6",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "865efd714d0ac2062ad5bf9c9075b3fdfbb0372aa8a28d01a3449dfa4c8226b4",
+      "amount": 1.1,
+      "buyerQuery": "Combibo tremo tersus corrigo ater adinventitias callide deficio acer?",
+      "aiSummary": "Perspiciatis claustrum sed vulticulus ager thema cubitum. Voco curvo tunc delectatio cultellus compono vacuus sollers vulticulus.",
+      "timestamp": "2026-02-10T00:37:30.041Z"
+    },
+    {
+      "id": "tx-87297219-2aec-4e73-8ed7-b7e39edd32bc",
+      "datasetId": "ds-22fa4864-8c04-49f7-8b5c-efb9499e161e",
+      "txHash": "2ccbeff9b3bce5c7cba9adb48502bdcb9cbbad30f81e6bdee482be8acbc89ed0",
+      "amount": 4.49,
+      "buyerQuery": "Demoror nemo pauci capillus deprecator perferendis torrens verus debitis?",
+      "aiSummary": "Considero animus audeo commodo tondeo triumphus tyrannus. Vulgo adeo truculenter.",
+      "timestamp": "2026-03-01T18:47:47.077Z"
+    },
+    {
+      "id": "tx-991217f2-59a1-4bd6-8d1a-457b3cc66f79",
+      "datasetId": "ds-69e424ac-2c6f-4b81-8ea1-a6641352d486",
+      "txHash": "80a6bb050efeb83cd5f2fbd4d9e60e3d1f6396585343f1e62df259b5eae949a9",
+      "amount": 1.37,
+      "buyerQuery": "Aliquid crux tui copiose laborum?",
+      "aiSummary": "Trans alii cubitum. Tam attero excepturi accusantium ut necessitatibus.",
+      "timestamp": "2026-02-20T12:21:48.784Z"
+    },
+    {
+      "id": "tx-b35b32fe-c38d-4912-ac43-811d9594444f",
+      "datasetId": "ds-a4b4965d-4b70-4a9d-bd88-bd8b5377e77e",
+      "txHash": "fafaa7dcda427d3f9a3c1fee292c0aeb19ec2baa1f2a49cd791a9aab2daed8d7",
+      "amount": 3.59,
+      "buyerQuery": "Cubo ratione consequuntur agnosco curo tristis?",
+      "aiSummary": "Rem ullam itaque. Aspernatur brevis quo cruciamentum calco maxime carmen curriculum nostrum.",
+      "timestamp": "2026-02-22T09:06:31.415Z"
+    },
+    {
+      "id": "tx-bc6fb959-0a01-44b1-adae-541c0a54116f",
+      "datasetId": "ds-69e424ac-2c6f-4b81-8ea1-a6641352d486",
+      "txHash": "5ce00bdc8aaa6eba9dc0d2ef01450e74ce52ddc058ec2e854af242c1dbd11e1e",
+      "amount": 1.37,
+      "buyerQuery": "Validus aeneus doloremque tolero?",
+      "aiSummary": "Dedico usque umerus texo cupiditas patruus canonicus campana defendo expedita. Canto defaeco attero eaque quibusdam tepidus tamquam argumentum decet asper.",
+      "timestamp": "2026-04-20T14:30:27.124Z"
+    },
+    {
+      "id": "tx-8f4ed7d3-c040-4945-9658-1f9b1a7497b7",
+      "datasetId": "ds-c7e99393-6bc4-4872-8919-92f9448445aa",
+      "txHash": "4fd973edbe8c865d38dbb2ffabc0d08cd2f90244afbccf9c86c2c9afca2c52db",
+      "amount": 1.93,
+      "buyerQuery": "Caelestis desolo textor termes repellendus ademptio venio adstringo tredecim?",
+      "aiSummary": "Aedificium coadunatio consequuntur deludo acidus cruentus antea. Corrigo bellicus auditor chirographum.",
+      "timestamp": "2026-03-31T10:08:02.106Z"
+    },
+    {
+      "id": "tx-21da248c-9e28-4747-b04b-24649230d4e7",
+      "datasetId": "ds-2c4373e0-5d3d-4068-b683-055c8045faa5",
+      "txHash": "0e5cddcce79aa6cef24fee8d5de65bb679bda36546fb5f3d55fc6b8d7acef7bf",
+      "amount": 0.25,
+      "buyerQuery": "Consequatur correptius vere aptus?",
+      "aiSummary": "Minima voluptatem magni vulariter cimentarius. Cumque esse barba crebro sumo debitis argentum carus.",
+      "timestamp": "2026-03-16T23:19:57.287Z"
+    },
+    {
+      "id": "tx-afafeb12-4775-4c51-a020-c356bc36c7ee",
+      "datasetId": "ds-fec99f3a-7fc7-4af9-a9a6-aab8277e0860",
+      "txHash": "3cefbc8eb502edffd63d76fa924810e0968ebb756b77fdb9cfaab4ceb64ee1a0",
+      "amount": 4.57,
+      "buyerQuery": "Suspendo tardus sui?",
+      "aiSummary": "Vilitas administratio summisse cur crinis acceptus cognatus alias sollicito. Addo administratio labore vir degero adamo.",
+      "timestamp": "2026-03-17T08:59:43.013Z"
+    },
+    {
+      "id": "tx-1fa6a69a-5c3e-4b52-9811-52b1296f3983",
+      "datasetId": "ds-70b1014e-7f9c-4177-80d5-8f3f50a9c797",
+      "txHash": "8dd91acb74acce1f7f27d6afcfb7bfd16e5ca654de557ea20dcaec3cee07ffb7",
+      "amount": 2.75,
+      "buyerQuery": "Vae quas asporto bis magni sortitus tenetur?",
+      "aiSummary": "Tui cariosus astrum terminatio itaque. Vestrum cumque speculum vel vos sodalitas bardus.",
+      "timestamp": "2026-04-02T14:03:33.590Z"
+    },
+    {
+      "id": "tx-b07a087b-36c6-4209-9ee2-d4b1315dad85",
+      "datasetId": "ds-16002d3a-50f7-41c4-b5ec-bb6663757580",
+      "txHash": "a04be3cab3c8d38a07ccbbf1aa48ddbdbdaead3cd36ee13a8b0b8b59cf29068e",
+      "amount": 1.61,
+      "buyerQuery": "Nihil apto depromo iusto aveho arcesso desipio carbo cometes?",
+      "aiSummary": "Bonus comitatus tracto attero cohibeo arbor. Cilicium vita vulnus aedificium talus commodo trepide ciminatio suscipio similique.",
+      "timestamp": "2026-04-03T02:24:45.774Z"
+    },
+    {
+      "id": "tx-4a043959-1d86-4179-a29d-e2996f095819",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "99dea9ad87c78fafddb4ffd6dd7d0eb3caed441ba8addc611b084ca2bdf4bd5f",
+      "amount": 3.21,
+      "buyerQuery": "Ager viduo acer caste?",
+      "aiSummary": "Vilicus celo sumptus conor voluptates sollicito textus. Aiunt volva auctor tantillus quia sapiente curto atrocitas iure.",
+      "timestamp": "2026-02-21T10:14:24.400Z"
+    },
+    {
+      "id": "tx-cee18af5-31fe-49a2-b3b8-e37ad792242c",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "8147cdf1231aabaecfadc7cdcffcface29eadfbceefe07aabe946282bedde3f1",
+      "amount": 1.1,
+      "buyerQuery": "Statim adfero ancilla demo amet pecto crebro?",
+      "aiSummary": "Alioqui culpa votum tunc stillicidium vinitor vulgaris volubilis tollo demonstro. Creber torrens officiis.",
+      "timestamp": "2026-03-14T18:17:15.454Z"
+    },
+    {
+      "id": "tx-6641f0a7-ad5c-424d-9684-9d5a59df789f",
+      "datasetId": "ds-a4b4965d-4b70-4a9d-bd88-bd8b5377e77e",
+      "txHash": "f0abdbec20acd5dec619c46048d1fc4eeda5bdd6fa2fd4b5dcd9ddfaad7be0ab",
+      "amount": 3.59,
+      "buyerQuery": "Utilis optio valens clementia acsi attollo crinis volup cervus?",
+      "aiSummary": "Curso vito depono. Adipiscor certus ago dignissimos considero stillicidium deripio aegre.",
+      "timestamp": "2026-03-28T11:04:15.780Z"
+    },
+    {
+      "id": "tx-a219a936-17c5-431c-807c-e41609ea9c96",
+      "datasetId": "ds-69e424ac-2c6f-4b81-8ea1-a6641352d486",
+      "txHash": "8a587af2afbcafee5ba4ffb51a653b7ba8ba7b395ed9660fafac769bbf3e3a27",
+      "amount": 1.37,
+      "buyerQuery": "Averto patria avaritia utrum deleniti modi corona?",
+      "aiSummary": "Solitudo undique vomer strenuus careo sum sono arto uterque. Aliquid sopor vulgaris maxime.",
+      "timestamp": "2026-02-21T15:06:31.404Z"
+    },
+    {
+      "id": "tx-e6ddc46e-8192-4134-86e9-473db280a879",
+      "datasetId": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "txHash": "ad7fd7817f05a6dea1ddadeb9daf550258a479d3fac54880f5f1232dddeb3f68",
+      "amount": 2.66,
+      "buyerQuery": "Aperiam trepide volutabrum?",
+      "aiSummary": "Adulatio vaco beatus vitium aestas deleo vomito demonstro caute odio. Debitis utilis aufero pecto aequitas assentator.",
+      "timestamp": "2026-02-25T08:22:29.935Z"
+    },
+    {
+      "id": "tx-6d522868-ff62-4d76-be1f-8a0bb588d91e",
+      "datasetId": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "txHash": "ceb27dd7d728bdf4daa5ded4ac84ce5ac4aef6e6cada1bfdcfe01dbdbaabd138",
+      "amount": 1.33,
+      "buyerQuery": "Spoliatio arcus arbor tempora patrocinor attonbitus abstergo appositus?",
+      "aiSummary": "Denego canis umerus. Aliquam sustineo thymbra pauper tredecim tero alo patruus cogo.",
+      "timestamp": "2026-02-08T21:55:59.146Z"
+    },
+    {
+      "id": "tx-3715711d-7d22-4a3a-bfe0-a1b1d87fd52c",
+      "datasetId": "ds-69e424ac-2c6f-4b81-8ea1-a6641352d486",
+      "txHash": "fddc08d4fad28bd54c61bb49a1bef58f38f0e7bcde482ec3fc6df0071a5f7fc5",
+      "amount": 1.37,
+      "buyerQuery": "Tibi voluptatem voveo vir beneficium?",
+      "aiSummary": "Crudelis eveniet placeat aurum adopto arbitro. Cruentus utpote odit alter cenaculum vorago attero.",
+      "timestamp": "2026-04-06T07:51:21.848Z"
+    },
+    {
+      "id": "tx-f40a1825-196d-451b-ad40-dab5b6129351",
+      "datasetId": "ds-22fa4864-8c04-49f7-8b5c-efb9499e161e",
+      "txHash": "df84cabe96be3f7aa0bf8e81fc5d1c6873effbdfbbb1c761ec7911c0d2683ea2",
+      "amount": 4.49,
+      "buyerQuery": "Adicio ultra cupiditate?",
+      "aiSummary": "Cetera bellicus amplexus balbus desidero adinventitias sortitus usque talio solus. Versus dedico cohaero sto adnuo.",
+      "timestamp": "2026-04-24T03:52:46.318Z"
+    },
+    {
+      "id": "tx-48b7b50e-1c2e-40e1-bace-c46bee8fdae7",
+      "datasetId": "ds-d3403e8e-4f65-4ef5-896c-6763d20aaa9e",
+      "txHash": "ebdd1a4fd0e63c49fed2da734dfe6c77481e7ff86eca45bdb8dfd0ef3bdb82f3",
+      "amount": 2.14,
+      "buyerQuery": "Ut ipsum peior amitto angelus desidero abscido solvo similique?",
+      "aiSummary": "Talio conservo desidero collum tumultus. Reiciendis cunae vereor tantum vae dicta valde tot nostrum.",
+      "timestamp": "2026-02-01T12:35:23.953Z"
+    },
+    {
+      "id": "tx-f8a85bf0-77a1-4cce-9102-3466907b2559",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "afba749fdf1985ed3b2e0bd03eddcbdcde7e4cbe0e518cf526cad9b9a14ca80b",
+      "amount": 3.21,
+      "buyerQuery": "Abbas ipsam crepusculum vere voco?",
+      "aiSummary": "Aspernatur asper vero cumque vinitor. Voluptatem auditor doloribus.",
+      "timestamp": "2026-03-18T05:45:21.427Z"
+    },
+    {
+      "id": "tx-22e6b6ab-d937-4094-b8e9-6a696dc4f4ae",
+      "datasetId": "ds-17b1d97f-10f0-4d25-9cde-6a98a947a300",
+      "txHash": "5bd1449655878b501bb990cc61526d3cee53dfcff6a7ccde1e4a9ddbb5680ffc",
+      "amount": 1.7,
+      "buyerQuery": "Adaugeo adsum benevolentia umbra adulatio cometes comis fugiat?",
+      "aiSummary": "Necessitatibus auctor balbus nisi terror abundans blanditiis. Cenaculum suasoria adinventitias cometes triumphus benigne sub defero depereo ulterius.",
+      "timestamp": "2026-03-27T07:13:36.140Z"
+    },
+    {
+      "id": "tx-bcd2230b-4aa4-4095-be70-0a9717988ff5",
+      "datasetId": "ds-7826fa26-3a3a-437a-8e2f-14ec8456c5ac",
+      "txHash": "f6f34764b58a7ffaaf322a3d2ddbfb2b9a6e5d8bea09611fc6b7f1dac441871b",
+      "amount": 3.82,
+      "buyerQuery": "Tubineus avaritia a cibus itaque vulnus audentia?",
+      "aiSummary": "Utpote consuasor arbor libero. Patria soluta coadunatio venustas ambulo utrum tandem.",
+      "timestamp": "2026-03-01T03:08:47.915Z"
+    },
+    {
+      "id": "tx-465b2c94-5fd5-42f7-9289-ecff82f8d7b7",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "dfb7ac97a42fcabcba34ec81a477df38ef8c33c64c7d6ebae55caf7cabfc5f4c",
+      "amount": 4.58,
+      "buyerQuery": "Cuppedia vae cunae adduco?",
+      "aiSummary": "Maxime denuncio blandior tergeo natus. Denuo votum sordeo coerceo abduco bellum rerum.",
+      "timestamp": "2026-02-01T13:00:44.156Z"
+    },
+    {
+      "id": "tx-e19044b1-3d35-4789-8ed0-ff0060a87491",
+      "datasetId": "ds-d3403e8e-4f65-4ef5-896c-6763d20aaa9e",
+      "txHash": "a5afd7fb8090cf0a57ad2ae2d5c20656aeaf262dc05ef8aae0ecfcaa4a77a6c6",
+      "amount": 2.14,
+      "buyerQuery": "Color beatus timor solus?",
+      "aiSummary": "Tenax sumo unde reprehenderit. Vulgaris culpo cognatus.",
+      "timestamp": "2026-04-09T05:38:40.013Z"
+    },
+    {
+      "id": "tx-c3a727bc-21af-4de7-8ee2-fc35364d3e75",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "4efcedc92ddc24a87d26ef1fe1a5abaebc45ed3f95ea5f2accfd24f88dd7b94a",
+      "amount": 1.1,
+      "buyerQuery": "Saepe valens termes ipsum triumphus?",
+      "aiSummary": "Ademptio urbs compono tot sollicito paulatim. Tabernus circumvenio creptio fugiat sono architecto xiphias ventus.",
+      "timestamp": "2026-04-21T09:17:27.387Z"
+    },
+    {
+      "id": "tx-b88858ee-8ebd-4b39-afb6-d0c790983158",
+      "datasetId": "ds-fec99f3a-7fc7-4af9-a9a6-aab8277e0860",
+      "txHash": "aff3ad7d9ce6f9a59bfedb0adddc4a6d70efc7916db6ed35c2e1a8d189105df4",
+      "amount": 4.57,
+      "buyerQuery": "Tenus recusandae voluptatem tubineus acsi tabella depono?",
+      "aiSummary": "Cuius tenetur abundans peccatus strenuus capio. Admoneo succedo defendo speciosus.",
+      "timestamp": "2026-02-13T09:53:59.976Z"
+    },
+    {
+      "id": "tx-0240e2f9-182e-4063-bdfa-f24942c1f2f9",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "fbde7baf2e2c6011c893ddf4e1f8cf65cbbbed33cf6efdeec6bc2e7214bdf112",
+      "amount": 0.44,
+      "buyerQuery": "Cultura delectus admoveo?",
+      "aiSummary": "Sub quod appositus arbustum statim copiose. Coerceo curiositas tepesco chirographum coma defetiscor.",
+      "timestamp": "2026-02-11T19:38:32.596Z"
+    },
+    {
+      "id": "tx-9930849a-23fd-4946-bf51-c6ea68343849",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "c3212ea3176c7b3abd9fb89e27edebdced0f86b2215a5bddea6dbff2f2f0fcb4",
+      "amount": 0.44,
+      "buyerQuery": "Usque defetiscor acsi vilis terror careo avaritia bestia ventito autus?",
+      "aiSummary": "Decens utilis usitas tactus. Ait debitis truculenter commodi deduco coaegresco adulatio.",
+      "timestamp": "2026-04-13T17:37:24.182Z"
+    },
+    {
+      "id": "tx-4e4ea77f-99d6-4e5b-b9ee-401a76813f39",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "ec6f72fb4ffff9c46ddfaaad3d13a6d2d4c20afd21bf5ce1cb3acc22bedfee64",
+      "amount": 3.21,
+      "buyerQuery": "Angulus sumo patruus vulticulus aestas terebro trans?",
+      "aiSummary": "Deprimo desparatus adfero adaugeo usus tenus reiciendis. Advenio adficio architecto theca alii officia synagoga tantillus amplitudo.",
+      "timestamp": "2026-02-24T23:29:19.023Z"
+    },
+    {
+      "id": "tx-b87cb1e4-a643-4ea3-9a0a-8047b7caf718",
+      "datasetId": "ds-fec99f3a-7fc7-4af9-a9a6-aab8277e0860",
+      "txHash": "d0acca1af14bfdfb9dae8f098af943ccb23eefe9b8a2ae5e72c6e4bdea8771a7",
+      "amount": 4.57,
+      "buyerQuery": "Carpo maiores tristis verbera?",
+      "aiSummary": "Patria argentum tardus optio eligendi taedium pectus. Avaritia supplanto vorago maiores.",
+      "timestamp": "2026-02-18T05:43:14.339Z"
+    },
+    {
+      "id": "tx-d4066dd6-5576-489a-a286-4de0e3c1df68",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "7efef1363cc1528daccfbfbb6ed777debdfae4e2cfc1bc8eb3e92dccfdfb88b7",
+      "amount": 0.44,
+      "buyerQuery": "Accusator casus congregatio torqueo voluptatem reiciendis speciosus?",
+      "aiSummary": "Vel ara calco tantum quo pecco aperiam vinculum. Clamo solvo defluo ustilo absorbeo convoco nulla deputo.",
+      "timestamp": "2026-04-07T21:00:54.085Z"
+    },
+    {
+      "id": "tx-bb70fba3-9355-4b0f-8e51-0120ac31ac13",
+      "datasetId": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "txHash": "ccbad8cdda45a5b9e0a39074d63359fa8c0bacaebca8161aa0f5084dfb51e264",
+      "amount": 1.33,
+      "buyerQuery": "Inventore sollicito adimpleo cupiditas?",
+      "aiSummary": "Vos vergo succedo aggero perspiciatis cernuus. Ante bonus custodia solum.",
+      "timestamp": "2026-02-05T22:10:50.575Z"
+    },
+    {
+      "id": "tx-8072b136-4af6-474a-8457-c65b4fd82fd1",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "f9fd6bc4eed0f1ecc172def2ab8d8aa9bec3ddf66becc79bb736dcbd6b53d9ec",
+      "amount": 1.1,
+      "buyerQuery": "Animi stultus vallum?",
+      "aiSummary": "Defetiscor charisma bellum deprimo creo ceno volo adopto vesco talus. Valeo enim censura cruciamentum tristis cursus adstringo decretum adduco.",
+      "timestamp": "2026-02-24T00:47:34.775Z"
+    },
+    {
+      "id": "tx-dcb265ff-667e-46b9-8f12-405aa348d9be",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "dc289f7a7efa6b2c8f6b622681d5feaeb219acccf1bcf225304cdeceec677c5b",
+      "amount": 2.57,
+      "buyerQuery": "Bellum victus assentator mollitia copia cattus apud calco tristis suggero?",
+      "aiSummary": "Somnus illum sint celo in arbustum corrupti cedo addo. Volo aliqua deserunt.",
+      "timestamp": "2026-04-12T03:34:48.732Z"
+    },
+    {
+      "id": "tx-749fe754-8d1d-4b36-a707-1d40cf5e86ac",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "60aca19ca0cec02f9ee9eacf244ba4fe5cf67d05decf398de2af7adcda811201",
+      "amount": 0.44,
+      "buyerQuery": "Terga suppellex adfectus uter?",
+      "aiSummary": "Color contra occaecati torqueo odio abscido. Crinis adimpleo carus delibero adopto sui demonstro video.",
+      "timestamp": "2026-01-29T00:04:59.000Z"
+    },
+    {
+      "id": "tx-d84cfac2-9892-460e-b6d8-8a5116ea7ab2",
+      "datasetId": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "txHash": "2a24f8d54991acefa6deccecc8a90c87cc62ed71ccca2424b35201af24149ced",
+      "amount": 2.66,
+      "buyerQuery": "Vestigium antepono vix aperiam audacia aer somnus absum synagoga?",
+      "aiSummary": "Tutis decipio dolorum aliquam aureus exercitationem canto dolores depromo vestigium. Valeo approbo cubicularis tendo totam illum torqueo laborum.",
+      "timestamp": "2026-01-31T15:37:21.761Z"
+    },
+    {
+      "id": "tx-66669ffa-0e2a-4e2c-8d18-2e6a81ab6bce",
+      "datasetId": "ds-e8f6ca95-79ab-4646-a8ff-3f05d2ae180e",
+      "txHash": "9a51aae27898bee99fdb32eebb3fcadac61accf68e4d4cad5f9cc8bcd01efdbd",
+      "amount": 3.54,
+      "buyerQuery": "Temperantia voco amoveo?",
+      "aiSummary": "Concedo calculus tametsi vorax. Nisi comitatus degusto.",
+      "timestamp": "2026-02-05T03:04:48.451Z"
+    },
+    {
+      "id": "tx-8ceb9c33-f887-40c0-a7a0-a07d5d8b602b",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "ab5fedd5d8aaaddcf94a6e573c9e7cf8936f28e1bcc9ce21cb7226ada9b39f33",
+      "amount": 4.58,
+      "buyerQuery": "Defluo ratione commemoro architecto curo aqua nostrum allatus?",
+      "aiSummary": "Tepidus cuppedia capillus ulterius absens aliquam. Solio adhuc esse.",
+      "timestamp": "2026-03-11T07:00:18.158Z"
+    },
+    {
+      "id": "tx-ea1eb4b9-ad08-4129-b030-c964982f74bb",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "ceedbcdece45f3fa1fcf3ffa2fbb26bab32ee2a873b619dfea1ecf4d6d7f3bde",
+      "amount": 0.44,
+      "buyerQuery": "Usitas solutio crux exercitationem tremo praesentium sulum caecus?",
+      "aiSummary": "Abundans tutamen cotidie. Clibanus veritas abutor adopto.",
+      "timestamp": "2026-03-22T08:15:14.392Z"
+    },
+    {
+      "id": "tx-0fa716de-6ca7-452b-8993-99b8cc69245a",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "345599ad5d0ddf9034ca21cf7b769ead0eb2e6a910dadec7cbbf9cae1ddecdad",
+      "amount": 2.57,
+      "buyerQuery": "Arceo adhaero patria tametsi ex?",
+      "aiSummary": "Sapiente arbustum aveho cubicularis stella. Atavus uter usque verecundia rerum aliquid patria.",
+      "timestamp": "2026-01-29T01:53:59.808Z"
+    },
+    {
+      "id": "tx-781237af-2fa6-4715-8d65-267017fedfb5",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "9a2aecac0aaacbdfee7d97f63eb1f3aeab91aea4f54c8f650f56a65ee815cf3f",
+      "amount": 2.57,
+      "buyerQuery": "Crepusculum unus vulgaris vos solvo toties pectus certe exercitationem?",
+      "aiSummary": "Deprecator vigor brevis trepide vomer claro arbor admiratio. Adversus chirographum tendo usque.",
+      "timestamp": "2026-03-04T05:02:43.984Z"
+    },
+    {
+      "id": "tx-1227bc00-070b-47c1-81de-14984de03aa4",
+      "datasetId": "ds-fcdadf0d-afa1-4e18-9cc8-54abe0670016",
+      "txHash": "6bac365c8bd6d97b8cf48c096831baca8ebce68d11695d2e393fcfa6aac5c1e0",
+      "amount": 2.77,
+      "buyerQuery": "Anser viridis contigo vae stella aspicio bene vigilo?",
+      "aiSummary": "Labore illo curatio. Comptus admoveo tergo doloribus cresco sto ducimus nihil.",
+      "timestamp": "2026-04-11T20:07:41.772Z"
+    },
+    {
+      "id": "tx-4f4f45bc-5a81-4f3f-bfb0-704350eb87e7",
+      "datasetId": "ds-a4b4965d-4b70-4a9d-bd88-bd8b5377e77e",
+      "txHash": "b02daa18b60a2714eeb143d4acc54fbdb7d73528eb3e9ebfecebe568f3bce4b9",
+      "amount": 3.59,
+      "buyerQuery": "Vinitor toties custodia recusandae suscipit adficio?",
+      "aiSummary": "Id praesentium bibo crebro brevis ventosus appositus audeo. Aro suus amor.",
+      "timestamp": "2026-03-28T06:30:11.125Z"
+    },
+    {
+      "id": "tx-1e0ade1c-8213-402e-8e32-0d6a1208bbf0",
+      "datasetId": "ds-7826fa26-3a3a-437a-8e2f-14ec8456c5ac",
+      "txHash": "153812260f043bbe7ad4dfdd7010a2f0efaf81ccce1cac88fbc92f54eedfdf20",
+      "amount": 3.82,
+      "buyerQuery": "Victus crustulum venia textilis spectaculum solvo?",
+      "aiSummary": "Tutamen votum trepide ancilla dedecor candidus minima calcar suscipio conspergo. Subvenio nesciunt adinventitias centum calamitas.",
+      "timestamp": "2026-02-13T12:19:22.016Z"
+    },
+    {
+      "id": "tx-f3fe5d0b-e80e-42bd-a528-c542f337fce3",
+      "datasetId": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "txHash": "aca2107f2717a72e91e2e03a37bf16fe3dd51dbe0e6ecd463d0cebb4edb7cb6a",
+      "amount": 3.52,
+      "buyerQuery": "Taedium aperte addo magni canto cruentus?",
+      "aiSummary": "Verecundia deserunt uberrime cuppedia adaugeo. Ancilla tandem textor via pecto antepono.",
+      "timestamp": "2026-02-02T10:42:26.891Z"
+    },
+    {
+      "id": "tx-8b945beb-f795-486d-8118-6e79a0071b39",
+      "datasetId": "ds-16002d3a-50f7-41c4-b5ec-bb6663757580",
+      "txHash": "b6fc6c4cdeacfcbe91a814e57fe2cecbacd2aceedd68bbaa5299cba2dadbf8f1",
+      "amount": 1.61,
+      "buyerQuery": "Dolore dedecor supplanto celer conitor teneo atque?",
+      "aiSummary": "Stipes demo ipsam cursim vapulus capio anser tui suscipio corporis. Tribuo subseco nihil occaecati alo bardus cras cresco unus comparo.",
+      "timestamp": "2026-03-08T08:08:50.586Z"
+    },
+    {
+      "id": "tx-55c3910b-2bda-4cb4-901a-50215d79103a",
+      "datasetId": "ds-17b1d97f-10f0-4d25-9cde-6a98a947a300",
+      "txHash": "b380b027047a66325256b4874ad15b7cdcf2aef2feafeb3e6ff74f9859ce5caf",
+      "amount": 1.7,
+      "buyerQuery": "Cursim subito utor?",
+      "aiSummary": "Tot suffoco aeger spiculum fugit amplitudo vilis tibi. Eligendi arbor cerno subito dens argentum cenaculum.",
+      "timestamp": "2026-02-22T12:08:52.225Z"
+    },
+    {
+      "id": "tx-27c53a9a-0746-4de4-b7c8-41fa39eff50c",
+      "datasetId": "ds-17b1d97f-10f0-4d25-9cde-6a98a947a300",
+      "txHash": "a686bc4ce6b3afeb0087f12450cce78ec8fdafdc1860bef1bec2feefcd6827bc",
+      "amount": 1.7,
+      "buyerQuery": "Vae canonicus ascisco arcus suffragium tribuo solum laborum vinitor?",
+      "aiSummary": "Caterva statua absens. Curiositas atque tredecim torrens volutabrum adversus certus aperte terminatio.",
+      "timestamp": "2026-03-18T12:01:56.692Z"
+    },
+    {
+      "id": "tx-ce5e3c45-27d4-44a6-b5bb-4e1466b33629",
+      "datasetId": "ds-c7e99393-6bc4-4872-8919-92f9448445aa",
+      "txHash": "1bcad06cf7b6ebdff4afd0b3ae6ccf7baddca4ccadeedab248b26ccf710fef27",
+      "amount": 1.93,
+      "buyerQuery": "Vomica vox careo aegrotatio ea volubilis texo valeo?",
+      "aiSummary": "Viridis crinis solutio. Demens addo audax vallum admitto volubilis balbus tabesco.",
+      "timestamp": "2026-03-20T22:09:24.049Z"
+    },
+    {
+      "id": "tx-c004bcec-ec47-4061-bc38-535b908a8aef",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "c0d4c7a1babf3cbbb2dcccddc7a9e9a8a83ebab4cce29caebf6fed21df1ddfad",
+      "amount": 1.1,
+      "buyerQuery": "Cur tristis asper?",
+      "aiSummary": "Comedo spiritus aspicio velum nam. Astrum benevolentia suppellex.",
+      "timestamp": "2026-04-03T01:22:39.146Z"
+    },
+    {
+      "id": "tx-f8fac69a-7ab0-43ed-bdc9-c45c5a20b9a1",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "fbfc2636ade8fd9bee7576d180bcbb0bbe060b7c8f2f61ebefdf70eea76bcdda",
+      "amount": 1.1,
+      "buyerQuery": "Suppellex atqui turba corrupti compello?",
+      "aiSummary": "Attollo cinis accusamus velociter aliquid somnus. Suasoria abscido quidem cicuta super quos clibanus vulgivagus condico tutamen.",
+      "timestamp": "2026-02-21T22:06:55.262Z"
+    },
+    {
+      "id": "tx-5061d66f-059f-471c-866f-68567eb6fc55",
+      "datasetId": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "txHash": "c92bac6286bfbee5adefdaf251f0ba9fedb6cfaaf5f1bd4f6a84cfec64954eea",
+      "amount": 2.66,
+      "buyerQuery": "Capio cerno adipisci viridis adulatio subnecto?",
+      "aiSummary": "Consequuntur conqueror ancilla doloremque uterque absorbeo reiciendis. Succurro conscendo cursim auditor aer attero ratione.",
+      "timestamp": "2026-03-01T16:42:34.891Z"
+    },
+    {
+      "id": "tx-b03dfc9d-ec98-41a1-a900-64e240e80bef",
+      "datasetId": "ds-fec99f3a-7fc7-4af9-a9a6-aab8277e0860",
+      "txHash": "dbf3cc2afd70d54b3f6fc280efa0e7bbe9cb9c659ace4adf01bb75100e5ace78",
+      "amount": 4.57,
+      "buyerQuery": "Delinquo coma natus decor aduro corroboro sed dicta tener?",
+      "aiSummary": "Cerno accedo ultio vesica ullus ocer vado. Coerceo minus adficio.",
+      "timestamp": "2026-04-04T13:27:45.273Z"
+    },
+    {
+      "id": "tx-238defb4-b6cf-4d67-a3fb-85aac876473d",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "e1bc3f7cf93e4ffdfbcfbaf12eaca4e113359fbeb04cd4eab90760ad5ff2cdee",
+      "amount": 3.21,
+      "buyerQuery": "Adulatio artificiose vallum capio tollo comitatus benevolentia?",
+      "aiSummary": "Cerno brevis delectus barba advoco curia conservo. Omnis crur constans sodalitas quod calco tibi dolore undique.",
+      "timestamp": "2026-02-16T12:59:49.061Z"
+    },
+    {
+      "id": "tx-240d379e-09a0-433f-9016-ca190dd75791",
+      "datasetId": "ds-a4b4965d-4b70-4a9d-bd88-bd8b5377e77e",
+      "txHash": "81a7f9f1aed7b65288febf5157cf42babfaf7dbcae4d7fc4f44f60944ef7e540",
+      "amount": 3.59,
+      "buyerQuery": "Vinculum creptio contabesco complectus?",
+      "aiSummary": "Apparatus color socius pecco aeneus thorax vita video colo. Deripio theca id omnis.",
+      "timestamp": "2026-04-02T08:24:23.800Z"
+    },
+    {
+      "id": "tx-faed5eec-c6b0-4ee0-84fc-33d1ac79c64d",
+      "datasetId": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "txHash": "81c3de2b0ebaa6dc34a43462a67eb08cd0d599a5fb948ad8bc9bbcced282dbc8",
+      "amount": 1.33,
+      "buyerQuery": "Verecundia auctus vivo vallum coadunatio vorago delego cena?",
+      "aiSummary": "Tantum admiratio conduco contego dignissimos quam comes bis. Carmen tres bardus quia reprehenderit voluptatibus communis eaque.",
+      "timestamp": "2026-02-03T01:05:19.433Z"
+    },
+    {
+      "id": "tx-5186d93d-62f1-4bfe-9a23-d67fcc7e77db",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "0d88d7e0bcd0cfae4a37f3deaf87dd16f93bbfee96ebabc057d8eafbe2ddc340",
+      "amount": 1.1,
+      "buyerQuery": "Animadverto canis umquam custodia admiratio?",
+      "aiSummary": "Vilis coniuratio vociferor depopulo viridis canis. Adhuc dolor denego sperno.",
+      "timestamp": "2026-03-19T14:41:05.527Z"
+    },
+    {
+      "id": "tx-12e4cf7b-cac2-47c1-a4f0-cefaa03d2658",
+      "datasetId": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "txHash": "58d37cb6142ffeeee06dafceeee84c2a4f0bca1fb575c57abcdbffaf68d6a6fa",
+      "amount": 3.52,
+      "buyerQuery": "Cibus cibo victus tui et defessus venustas curvo arcesso absconditus?",
+      "aiSummary": "At adstringo statua ea ducimus amita cetera. Eum subiungo tabernus alius annus testimonium itaque.",
+      "timestamp": "2026-04-08T00:55:41.489Z"
+    },
+    {
+      "id": "tx-9637c49e-92d8-4f9e-b5ed-3292432d89cd",
+      "datasetId": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "txHash": "fdb05c35e40ea75eafa561335f43340a93ea17249be5fda12eb137db8328c408",
+      "amount": 1.33,
+      "buyerQuery": "Arbustum careo conscendo vomica statua vero cubo tunc solum?",
+      "aiSummary": "Audio cariosus vox. Voluptatum suffragium crux ea.",
+      "timestamp": "2026-04-22T04:11:25.314Z"
+    },
+    {
+      "id": "tx-048bf972-6593-4a00-bb4d-8512bad07aaf",
+      "datasetId": "ds-41d20047-9895-400f-a721-c5f90ed37ac6",
+      "txHash": "c585acbcacf4fdd3978be3062db28bef82c524c202a4773065b0670be13064e8",
+      "amount": 4.39,
+      "buyerQuery": "Vix subvenio quasi?",
+      "aiSummary": "Turbo termes tondeo delectus degusto cubicularis caries trepide. Depono audeo ago maiores bene tergo adfero cribro defaeco.",
+      "timestamp": "2026-02-12T09:56:31.957Z"
+    },
+    {
+      "id": "tx-0bab8852-6ece-4e55-9b58-c4e3b3e08b50",
+      "datasetId": "ds-d3403e8e-4f65-4ef5-896c-6763d20aaa9e",
+      "txHash": "03c53085d7941b77dc8ca0f4aacdb1f757ebf0e90f7bf37ddd6e8869cda4cfcf",
+      "amount": 2.14,
+      "buyerQuery": "Urbs laudantium aut anser civitas?",
+      "aiSummary": "Undique crinis colo. Ambulo sursum audax ver aeternus beatus cupiditate.",
+      "timestamp": "2026-04-21T13:48:52.759Z"
+    },
+    {
+      "id": "tx-1a4e3c14-1953-46da-8fb2-bafd6b33b37c",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "b04435f68247ae902dedf6fada0f7ffcbfc4abeae0f5703be8eceeb59abbe8a7",
+      "amount": 2.57,
+      "buyerQuery": "Tempus ut defessus amaritudo eligendi?",
+      "aiSummary": "Timidus territo speciosus confero administratio contego corroboro amplexus cubo corporis. Xiphias nisi delicate.",
+      "timestamp": "2026-02-07T06:15:12.919Z"
+    },
+    {
+      "id": "tx-32722409-149f-4f94-9617-f79f608712a0",
+      "datasetId": "ds-2c4373e0-5d3d-4068-b683-055c8045faa5",
+      "txHash": "94010ad3240094de6cb87b3bf805af8d128c3f4944d0ccbd75aed3bdbc138621",
+      "amount": 0.25,
+      "buyerQuery": "Ducimus acer alias odit amplitudo uter ullam armarium deinde?",
+      "aiSummary": "Varietas comburo templum socius quo assentator. Deporto amor xiphias infit.",
+      "timestamp": "2026-03-19T05:06:51.773Z"
+    },
+    {
+      "id": "tx-c903e6b3-4eb5-4700-82a9-ef05eb9105f0",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "6b5820a09bfaffdc565cecdb2161da7bad6d3766f4ed0e9101e6d6a30379f36e",
+      "amount": 3.21,
+      "buyerQuery": "Aveho et debeo adflicto demitto suadeo?",
+      "aiSummary": "Aggredior adipiscor temptatio adipiscor totam succurro. Demonstro vesper eveniet molestias vociferor qui.",
+      "timestamp": "2026-04-05T16:50:13.591Z"
+    },
+    {
+      "id": "tx-1c2f60b2-51ef-496b-81fc-3d651859eb44",
+      "datasetId": "ds-16002d3a-50f7-41c4-b5ec-bb6663757580",
+      "txHash": "dbe10baa434bd26aff67efb9f845b69cfde5c0a95fcddd83cfe414abfedebfda",
+      "amount": 1.61,
+      "buyerQuery": "A vae coadunatio?",
+      "aiSummary": "Ducimus claro valde. Casus molestias curiositas atavus colo.",
+      "timestamp": "2026-02-23T03:55:29.142Z"
+    },
+    {
+      "id": "tx-e8727737-a029-466f-b3a6-c570d7d5aca7",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "8bedb00c1c98fcfa51ed0cbffe2ecf1f9de0593c5d2bcd3a906d3acb0ee2caff",
+      "amount": 3.21,
+      "buyerQuery": "Assumenda thymum sperno utrimque deficio caveo quibusdam attonbitus?",
+      "aiSummary": "Sol amiculum soleo sed velut sunt super praesentium hic. Sortitus curso vigor claro minima aliquid.",
+      "timestamp": "2026-03-23T01:20:08.444Z"
+    },
+    {
+      "id": "tx-11000ed5-9c51-417a-9950-8e129937a746",
+      "datasetId": "ds-fcdadf0d-afa1-4e18-9cc8-54abe0670016",
+      "txHash": "ffdde96cf9feb469ab4dcc7628caf47ac3309bbec4d233605bcd4a049a9fd34d",
+      "amount": 2.77,
+      "buyerQuery": "Adamo bis defungo accommodo subito strues?",
+      "aiSummary": "Vestrum ambitus surgo mollitia vobis curto amaritudo. Deprimo tendo cado adduco ventito textilis admiratio.",
+      "timestamp": "2026-04-21T23:35:26.416Z"
+    },
+    {
+      "id": "tx-a3d8b001-10d6-479c-9356-56d2c23c42e3",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "9912acb83a0a7aa1fcd11f260c371ddef3ac93fa4eefb8f6d8fd7e244aac10fc",
+      "amount": 3.21,
+      "buyerQuery": "Adsuesco tactus utilis sodalitas crux congregatio provident thalassinus considero?",
+      "aiSummary": "Stultus solutio ter vigor credo. Circumvenio timor thesaurus acervus.",
+      "timestamp": "2026-02-27T17:23:43.403Z"
+    },
+    {
+      "id": "tx-77a95361-9295-464f-8bbb-1f59ecadf926",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "5757c72de72dabecebca9935181fa45cccaf859dd2bfde56cc3aeea1f8fdc662",
+      "amount": 4.58,
+      "buyerQuery": "Copia earum strenuus?",
+      "aiSummary": "Umquam conculco auxilium statua deinde sponte surgo curvo. Utique barba defero sortitus totus eius templum.",
+      "timestamp": "2026-03-20T12:21:18.240Z"
+    },
+    {
+      "id": "tx-7df4f530-0435-44da-8346-4b728fb690da",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "ec9cf3ed7ad7aa7226b84d9f4caca8bdde2edd687f75c5a647bd7079d3fc8a53",
+      "amount": 4.58,
+      "buyerQuery": "Suadeo nam substantia debilito eius administratio?",
+      "aiSummary": "Tardus testimonium antea vinum aurum amissio arca aer possimus. Vos saepe sponte tollo pauper admitto texo.",
+      "timestamp": "2026-04-24T03:58:25.058Z"
+    },
+    {
+      "id": "tx-68e1b550-a1e8-4527-b781-7737cd34afe5",
+      "datasetId": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "txHash": "1ba09c227ac45eca1c49eb957548fcd6fd2a8836c96dac8e28e93e9dbdc2177f",
+      "amount": 2.66,
+      "buyerQuery": "Ambulo eligendi via acidus combibo cognomen convoco casus aestus vester?",
+      "aiSummary": "Ocer cilicium volaticus. Cohaero amaritudo verecundia asper valetudo maiores amoveo umerus supra umquam.",
+      "timestamp": "2026-02-25T18:31:56.275Z"
+    },
+    {
+      "id": "tx-3798b2b4-7bba-477d-b0ee-613fcc2ae19a",
+      "datasetId": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "txHash": "5c36c12bdaf1fbcb532ec7fd3ac93bfda38dacc91a93ef0f7d149a20ffacbcc3",
+      "amount": 2.66,
+      "buyerQuery": "Comis cado eius?",
+      "aiSummary": "Pauci comes adfectus despecto teneo sublime trado. Alias acer theologus desino umerus aspicio coerceo vox.",
+      "timestamp": "2026-03-14T17:11:53.599Z"
+    },
+    {
+      "id": "tx-e7eb5ee3-c575-48c5-b6cc-def7a00efd9f",
+      "datasetId": "ds-7826fa26-3a3a-437a-8e2f-14ec8456c5ac",
+      "txHash": "0c297c33fd1f6c3dc832aea96fa7bc49fe0abdc6aa9b048fc8ee319cc7a5bef6",
+      "amount": 3.82,
+      "buyerQuery": "Spero cavus aeger vehemens solus ratione paulatim acquiro arto umerus?",
+      "aiSummary": "Aliqua sed cunabula calculus thesis. Tutamen tibi aggredior ratione.",
+      "timestamp": "2026-02-05T00:45:10.806Z"
+    },
+    {
+      "id": "tx-ad54836f-0f46-4da5-a2e2-d7106f77fd3e",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "edbfed9f2fc6997c7c9f4b6ba7500e38a583e8b3aaa6c62cabbf1e5fb5fab5d9",
+      "amount": 4.58,
+      "buyerQuery": "Creta nostrum iure?",
+      "aiSummary": "Victoria bellicus vomito desidero hic terminatio. Varietas sono attero commodi.",
+      "timestamp": "2026-04-14T03:16:54.893Z"
+    },
+    {
+      "id": "tx-ac4862e1-3bcf-4f26-a542-dd91cbfeb5e0",
+      "datasetId": "ds-c7e99393-6bc4-4872-8919-92f9448445aa",
+      "txHash": "bbcf7c809e30da08a89edb3e172eff6d0a5594666cb3fa8b9fd16bda6f338abb",
+      "amount": 1.93,
+      "buyerQuery": "Sodalitas reprehenderit aer cado quaerat ulterius cursim curriculum nulla?",
+      "aiSummary": "Adulescens alienus valde. Laudantium excepturi ubi quisquam.",
+      "timestamp": "2026-02-07T21:46:37.426Z"
+    },
+    {
+      "id": "tx-be0e42e1-6fde-4c63-9673-f2d27c8794a1",
+      "datasetId": "ds-2c4373e0-5d3d-4068-b683-055c8045faa5",
+      "txHash": "e337470dfae7cf8e2f23bf2efddebbeaab5957fd89cccf075e79e1131f90aece",
+      "amount": 0.25,
+      "buyerQuery": "Comparo denuo voluptatum aer aegre vulariter absens alioqui terra apto?",
+      "aiSummary": "Acies patruus distinctio articulus doloremque illo. Quae cruciamentum atrox sortitus.",
+      "timestamp": "2026-04-06T21:05:01.075Z"
+    },
+    {
+      "id": "tx-3232e4d6-a395-4d07-81f0-3f74ff3cb483",
+      "datasetId": "ds-41d20047-9895-400f-a721-c5f90ed37ac6",
+      "txHash": "a98eeae45b02ab5fdc07b799dafb8ab76eda28318aac23d4ceab71e74b95caa9",
+      "amount": 4.39,
+      "buyerQuery": "Odio accommodo xiphias celo defero?",
+      "aiSummary": "Caecus adaugeo via alveus sortitus delectus ademptio curis allatus subito. Alius aestus temperantia verto possimus auctor talis toties solium.",
+      "timestamp": "2026-02-22T23:33:36.643Z"
+    },
+    {
+      "id": "tx-d5ffcd54-4636-4649-b2b6-7809cc3186a8",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "e8f61380d0ec4734fbaec4919e2751f7701fb95df97a9ea5acb50d593e5a2f6e",
+      "amount": 2.57,
+      "buyerQuery": "Aegre taceo beatae tripudio utpote casus confido cubicularis?",
+      "aiSummary": "Ater possimus quibusdam totus. Numquam culpo talio coruscus quidem.",
+      "timestamp": "2026-03-02T12:31:08.234Z"
+    },
+    {
+      "id": "tx-8dc37df0-e68a-46b0-95f7-b1af15252f82",
+      "datasetId": "ds-17b1d97f-10f0-4d25-9cde-6a98a947a300",
+      "txHash": "df58158fa57e1d3c04a99df1aa4daeb3bdf8ca2eea92cdbbd6c343ebeef7095c",
+      "amount": 1.7,
+      "buyerQuery": "Confido adhaero bis volup in avarus cibo tepesco?",
+      "aiSummary": "Placeat degero sol adulescens sit subseco tribuo. Convoco aduro exercitationem videlicet vorax ubi pecus pariatur.",
+      "timestamp": "2026-03-26T17:25:57.890Z"
+    },
+    {
+      "id": "tx-8f4f5bc4-5ad5-419b-82ab-319d113b0104",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "9edf8cf4cc968cf7acfe3e7044ccc2979be81e1dc30e64c8ae92a51a9aa5acab",
+      "amount": 4.58,
+      "buyerQuery": "Textus creptio aro clibanus aperiam peior summa?",
+      "aiSummary": "Animus desidero cibo unus. Sonitus aiunt alter vulticulus audacia valeo vivo statua.",
+      "timestamp": "2026-03-17T22:37:54.126Z"
+    },
+    {
+      "id": "tx-50ef3375-2d9e-4772-bd69-624dfc5a3981",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "2bb1cad20c79095bafebb3ecc1a5929eea1cf84597eec0a0db4865a99201ee9b",
+      "amount": 4.58,
+      "buyerQuery": "Aptus auctus aduro sapiente attero adfectus spargo charisma?",
+      "aiSummary": "Abstergo depulso cuius sit defleo cilicium sufficio testimonium torqueo. Attollo tamquam maiores dedecor verecundia ascisco desino ventosus.",
+      "timestamp": "2026-03-19T16:30:28.048Z"
+    },
+    {
+      "id": "tx-c5c49bbb-8fd7-47a3-b44b-3c255085f2b3",
+      "datasetId": "ds-d5544115-fa7c-403f-857c-a82513c0d07f",
+      "txHash": "c7861bd2c3c027997f2c7afd15b576df4cbdc9dbf13d8c8bfd4d4d0d7e28df96",
+      "amount": 3.27,
+      "buyerQuery": "Atavus adstringo volubilis auctor thesis?",
+      "aiSummary": "Aqua truculenter contego laboriosam curiositas sono. Corrumpo terra terreo benigne sit.",
+      "timestamp": "2026-04-04T18:19:36.427Z"
+    },
+    {
+      "id": "tx-18e68722-1e0b-4829-9a3a-7c77b3a642a8",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "22c3a0ddfb4709c62a25f4ff5eab6bead49cdc59ebbd7fee0dfa0b9b6d29eedf",
+      "amount": 0.44,
+      "buyerQuery": "Balbus aureus sollers solum est?",
+      "aiSummary": "Calamitas adfectus caterva annus cotidie. Sono curvo tam.",
+      "timestamp": "2026-02-19T11:57:29.014Z"
+    },
+    {
+      "id": "tx-113ee5d5-1fe8-48bf-abb7-51f9f6dbdc68",
+      "datasetId": "ds-fcdadf0d-afa1-4e18-9cc8-54abe0670016",
+      "txHash": "fe763bd1508c3b690aac0307ba96ccca6ba2ef62e8fdffa0893b0aa738bc55a9",
+      "amount": 2.77,
+      "buyerQuery": "Vilis suspendo truculenter attollo caecus?",
+      "aiSummary": "Valetudo admitto aliquam depono velit civitas aequus celebrer. Ipsa cetera laborum tui ceno vetus.",
+      "timestamp": "2026-02-17T07:44:48.868Z"
+    },
+    {
+      "id": "tx-de551ada-3ad6-4b41-aed5-51f349e2d279",
+      "datasetId": "ds-d5544115-fa7c-403f-857c-a82513c0d07f",
+      "txHash": "eaf2ada01bd9883cadbc9e30baced101ec3f0ae7dddc5fce9e3dc0ec920cd1ad",
+      "amount": 3.27,
+      "buyerQuery": "Vito ceno damno cresco ultio?",
+      "aiSummary": "Bestia stipes fugiat. Comptus decipio tempus speculum.",
+      "timestamp": "2026-02-07T04:41:53.670Z"
+    },
+    {
+      "id": "tx-7047d1d4-33f8-42fa-94e0-871cf056ad2e",
+      "datasetId": "ds-d3403e8e-4f65-4ef5-896c-6763d20aaa9e",
+      "txHash": "a955d25fd48d8be6c877b65554aa7ff9c298ca334e674b579efdfa8d15d29ce5",
+      "amount": 2.14,
+      "buyerQuery": "Strues capto subito utique degusto cresco dolorum voco?",
+      "aiSummary": "Venio sustineo culpa. Calculus quibusdam modi omnis aetas curo conspergo turpis aggero statua.",
+      "timestamp": "2026-02-27T22:56:14.918Z"
+    },
+    {
+      "id": "tx-9c3cdfd5-b6f7-4000-b249-9203e75e0c13",
+      "datasetId": "ds-e8f6ca95-79ab-4646-a8ff-3f05d2ae180e",
+      "txHash": "511ab3ddb1ba1db9dc22d9ff80cebcb7da325b5173c6bc803abd0dcedb8dfd6c",
+      "amount": 3.54,
+      "buyerQuery": "Adiuvo utilis arx conspergo sophismata?",
+      "aiSummary": "Contigo ut ver. Tondeo teneo celo vivo denuncio.",
+      "timestamp": "2026-04-17T22:01:03.731Z"
+    },
+    {
+      "id": "tx-8f75aa63-a600-4913-afac-f84e417708f1",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "d55e3767cf89f22a0abb5157eeb3db4900fa0e01fadef7ac1eb183aa31c1cba9",
+      "amount": 3.21,
+      "buyerQuery": "Reprehenderit tepidus cunabula teres quasi sapiente somnus conventus?",
+      "aiSummary": "Vinco similique similique beatus. Socius suspendo basium textilis quo cubo.",
+      "timestamp": "2026-02-04T11:59:40.144Z"
+    },
+    {
+      "id": "tx-46d64659-2e93-4aa5-9a8a-068b50ee906d",
+      "datasetId": "ds-22fa4864-8c04-49f7-8b5c-efb9499e161e",
+      "txHash": "02c4a4eab0dee4fdbea03bd5bebb59a9fb77db1e0b3feabff13b5dda83ebe850",
+      "amount": 4.49,
+      "buyerQuery": "Deleo sordeo verbum auctor creator universe?",
+      "aiSummary": "Uberrime tempore comes sumptus damnatio adipisci comis. Demum torrens tempora crinis damno adflicto vester.",
+      "timestamp": "2026-03-07T01:50:33.610Z"
+    },
+    {
+      "id": "tx-3fda2e71-56b4-4d95-b934-97f2a4acffd4",
+      "datasetId": "ds-d5544115-fa7c-403f-857c-a82513c0d07f",
+      "txHash": "be8bcaeddcdbd97a8cc27c549b042ce07666298b1e886eabb99875d6388fee4b",
+      "amount": 3.27,
+      "buyerQuery": "Deputo auditor capitulus cometes supplanto valde odit?",
+      "aiSummary": "Tamisium mollitia aliquid delicate vomer ultra minima curiositas. Adversus celer cognatus consuasor avaritia surculus patior corona.",
+      "timestamp": "2026-02-16T12:11:23.653Z"
+    },
+    {
+      "id": "tx-de41a3d9-8bf3-4ed9-9396-5d06e3741173",
+      "datasetId": "ds-54e53000-bf43-4f00-bc1d-20312afcf7de",
+      "txHash": "0f6fcf2e3dfadfac89eaa4fa0dc7f2c3a6af2d3b24ae69ec7ec1dc3a0aae0cd9",
+      "amount": 2.95,
+      "buyerQuery": "Tergeo vociferor curo pecus sui somniculosus degenero?",
+      "aiSummary": "Vindico vivo praesentium eligendi aegrus. Collum tredecim condico defetiscor.",
+      "timestamp": "2026-03-26T09:26:41.020Z"
+    },
+    {
+      "id": "tx-251ae5f8-5347-4c06-ac80-d8e31662f44e",
+      "datasetId": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "txHash": "bfccabc91b1ada6a24dfaa8e6fa5aba901f7be3de3fcdfad5bbbdb6c2bf5f8bc",
+      "amount": 1.33,
+      "buyerQuery": "Caste trans aureus theatrum depulso averto?",
+      "aiSummary": "Decor cupiditas brevis pel cohaero creator quam repudiandae. Crinis et antiquus.",
+      "timestamp": "2026-04-11T22:39:16.712Z"
+    },
+    {
+      "id": "tx-ab85182d-9869-432a-bdd3-2d2db2c761da",
+      "datasetId": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "txHash": "e5e5434fcadaef374aedb7850a8c65eed4157f0090fec7eea9edd31a0eab192e",
+      "amount": 2.66,
+      "buyerQuery": "Volubilis carmen sui consuasor versus cilicium ustilo conatus?",
+      "aiSummary": "Acsi causa illo atque correptius supellex incidunt. Torrens terga cohors.",
+      "timestamp": "2026-04-02T11:51:11.119Z"
+    },
+    {
+      "id": "tx-3591f7e6-7ed4-4a53-ad9c-352d82578abe",
+      "datasetId": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "txHash": "e0cd5334e6ba1cc0eca1b50e6d7a772dd7b2cad7faf8b0fafb58edf0bd149f15",
+      "amount": 3.52,
+      "buyerQuery": "Careo fugiat videlicet patrocinor adhaero asper astrum validus?",
+      "aiSummary": "Deripio capto depopulo bardus terra terebro tamisium sperno alioqui commemoro. Advenio creber cupressus curis tenax pecto.",
+      "timestamp": "2026-03-03T13:14:29.090Z"
+    },
+    {
+      "id": "tx-2187bb02-4d7b-4e5e-a978-87ec6e0306ad",
+      "datasetId": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "txHash": "199502f36b5ddae34f1ff8609df44a85f9ffafe646363fccf128f1fbbdd1ecea",
+      "amount": 3.52,
+      "buyerQuery": "Vapulus aedificium curtus aestus candidus ratione statua adipisci deorsum carcer?",
+      "aiSummary": "Suscipit officia tot caecus quis coniuratio cognatus. Bellum vita blandior ater cras adversus.",
+      "timestamp": "2026-03-09T23:53:23.067Z"
+    },
+    {
+      "id": "tx-c5462606-047a-4799-bc90-0b500ca23d1a",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "f03acdcaffbffe19d69b12cca8bc1fb57ce14381f160a6da9fc0a2fb2b8dda05",
+      "amount": 0.44,
+      "buyerQuery": "Vinum congregatio capitulus contabesco cogito terebro?",
+      "aiSummary": "Peior textor fuga sordeo sumptus. Vulnus subnecto vulnero terebro auctor demulceo.",
+      "timestamp": "2026-03-16T20:54:37.252Z"
+    },
+    {
+      "id": "tx-7ac2b7bb-1bfd-4b8e-841e-cfb1f5a010b4",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "cedcbde8fcfebeb158eccdb9c9a53e5dccd69b9bd1f8ab46effcab2dbacdcea8",
+      "amount": 3.21,
+      "buyerQuery": "Spargo thymum adipiscor tero sonitus fuga tui conitor?",
+      "aiSummary": "Velociter vulticulus quisquam umbra tolero sordeo deserunt arma. Tui cuius socius veritas caute tondeo bellicus cumque audio.",
+      "timestamp": "2026-02-18T16:06:00.906Z"
+    },
+    {
+      "id": "tx-e0c49193-197b-4ed8-8773-fede0928c66b",
+      "datasetId": "ds-2c4373e0-5d3d-4068-b683-055c8045faa5",
+      "txHash": "c93ada5ee2c015bb3f5a1d4fa6ddcfb3ecdcec2466623db98be1e0f8cf51cbb3",
+      "amount": 0.25,
+      "buyerQuery": "Audeo condico super incidunt succedo absorbeo officiis defaeco derideo?",
+      "aiSummary": "Solvo distinctio pauper collum nostrum vinculum atque acerbitas antepono caelestis. Coniecto sint cur.",
+      "timestamp": "2026-02-02T08:37:57.216Z"
+    },
+    {
+      "id": "tx-a6af1d98-955b-48a8-a068-7b35e8e23f37",
+      "datasetId": "ds-70b1014e-7f9c-4177-80d5-8f3f50a9c797",
+      "txHash": "ecdca996ef6d4bc00db382af22fdf6cadae5d65e5b241ef0ec5e5cb760c5ff7b",
+      "amount": 2.75,
+      "buyerQuery": "Maxime esse summisse?",
+      "aiSummary": "Tergiversatio vulgivagus conforto cimentarius valde studio. Aiunt decet alter velociter tergiversatio casso adipisci sophismata commemoro.",
+      "timestamp": "2026-04-03T22:35:11.018Z"
+    },
+    {
+      "id": "tx-2d8823c6-533f-49af-b84b-ba2b1fcda527",
+      "datasetId": "ds-c7e99393-6bc4-4872-8919-92f9448445aa",
+      "txHash": "be8abec34e96be5fb1ce5b20fe46e1b95ccfeaaf59827eb00ab94ad37490e822",
+      "amount": 1.93,
+      "buyerQuery": "Crepusculum cilicium tamisium virgo confugo quas sophismata architecto compello?",
+      "aiSummary": "Congregatio vespillo una. Fuga exercitationem deleo dolorum admitto quo voluntarius corrigo tam tracto.",
+      "timestamp": "2026-04-19T17:58:01.477Z"
+    },
+    {
+      "id": "tx-f9950f24-ba74-4874-9d02-872d1f8f9c5b",
+      "datasetId": "ds-e8f6ca95-79ab-4646-a8ff-3f05d2ae180e",
+      "txHash": "ec2e6354a73dca78a94c68cfe7999e53ff58efc2ff0dff2c4ca6b9b2acb15567",
+      "amount": 3.54,
+      "buyerQuery": "Sint amet vester amoveo avaritia damnatio suasoria consequatur odio?",
+      "aiSummary": "Cruciamentum texo tersus curso dolores. Quidem vicissitudo bos crastinus quidem neque tum dolorum nobis tribuo.",
+      "timestamp": "2026-03-25T22:53:21.754Z"
+    },
+    {
+      "id": "tx-c5146544-0a91-4a5f-a6cb-e195b36c27ef",
+      "datasetId": "ds-d5544115-fa7c-403f-857c-a82513c0d07f",
+      "txHash": "f32553d5bdbb114f43a400bd8170abddee9cbf6caaedcbdfed035fda3a8a915e",
+      "amount": 3.27,
+      "buyerQuery": "Umerus aduro verumtamen voluptatum?",
+      "aiSummary": "Cuppedia argentum conatus clarus. Canto textor ullam audacia votum cernuus vehemens.",
+      "timestamp": "2026-02-23T02:15:27.132Z"
+    },
+    {
+      "id": "tx-4feaa8cc-6b53-4608-a989-2c38057e42ef",
+      "datasetId": "ds-44399b8e-de47-4212-bff0-417ce20a345d",
+      "txHash": "25f7c6e4967abca5bbbc60c88b06ce0d4bcbbede3dad608bacdafdbbafeb00fe",
+      "amount": 2.66,
+      "buyerQuery": "Officiis vinitor quam virgo?",
+      "aiSummary": "Abduco stella spiculum. Cumque audentia aspicio carpo arguo.",
+      "timestamp": "2026-04-16T04:35:40.475Z"
+    },
+    {
+      "id": "tx-bad1a7fb-33b6-44fa-b638-3f6a97b1a08e",
+      "datasetId": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "txHash": "ec7e373c473119520b69afd5de1fd4aead7597926317a1092df4ec5d88ec7048",
+      "amount": 1.33,
+      "buyerQuery": "Admiratio civis abutor iste?",
+      "aiSummary": "Barba quae timor comitatus. Conspergo facere villa solitudo copiose harum adficio ullus vitae tum.",
+      "timestamp": "2026-01-31T01:27:06.690Z"
+    },
+    {
+      "id": "tx-3ed944fb-6300-4af5-adec-0ae8e67288c6",
+      "datasetId": "ds-c7e99393-6bc4-4872-8919-92f9448445aa",
+      "txHash": "c7b9bc9edeb7c8aba42ef907bb40f88c4fceb320dc5f85d87bbcd7413fee9b9a",
+      "amount": 1.93,
+      "buyerQuery": "Admiratio cruciamentum votum?",
+      "aiSummary": "Cinis cedo adipiscor degenero occaecati condico chirographum. Deficio amita tabula bardus tantillus aiunt voluptate cunctatio ventosus.",
+      "timestamp": "2026-02-03T11:31:55.290Z"
+    },
+    {
+      "id": "tx-824eb559-2679-44ce-8f6f-b2537f35a6f1",
+      "datasetId": "ds-e8f6ca95-79ab-4646-a8ff-3f05d2ae180e",
+      "txHash": "fafd5e7ef944bccc782acff084bd1b32ab2b9eda10c5f36d160a1fb0f62bca20",
+      "amount": 3.54,
+      "buyerQuery": "Aeneus universe carus charisma commemoro vox aptus?",
+      "aiSummary": "Careo cito vivo tabgo consequatur ademptio calamitas ventito vaco. Expedita teres vacuus voco coruscus aurum vel.",
+      "timestamp": "2026-03-27T12:40:47.638Z"
+    },
+    {
+      "id": "tx-e46a9642-a087-4598-be5b-354fa3bf8de5",
+      "datasetId": "ds-d5544115-fa7c-403f-857c-a82513c0d07f",
+      "txHash": "0eb8de21e5d3decd5be960122be190e5328ddb5da31ba11e844028b9d2e48faa",
+      "amount": 3.27,
+      "buyerQuery": "Admitto in speculum soluta volutabrum ultio?",
+      "aiSummary": "Causa eveniet tricesimus subnecto ultio correptius. Truculenter maiores aedificium comminor corroboro vorax subito cervus.",
+      "timestamp": "2026-04-05T07:54:45.681Z"
+    },
+    {
+      "id": "tx-03eca7b0-2d19-4aeb-bb70-38549bdd0179",
+      "datasetId": "ds-41d20047-9895-400f-a721-c5f90ed37ac6",
+      "txHash": "fd2dfc9c9ad73c19faaab5bf4588eaaba96cfeb062e5b596dfd8a61fd7b7dcc3",
+      "amount": 4.39,
+      "buyerQuery": "Copiose audacia tempore blanditiis bonus dolore fugiat vivo audio?",
+      "aiSummary": "Auctus adeo culpo super trans labore coniecto. Aspicio patior optio tametsi.",
+      "timestamp": "2026-03-22T23:22:49.757Z"
+    },
+    {
+      "id": "tx-df923b2d-51d7-4a79-80a9-2464d9367f13",
+      "datasetId": "ds-16002d3a-50f7-41c4-b5ec-bb6663757580",
+      "txHash": "1887c8e1d1cec1e7a6abfdc9ade9f04e6ebecf74c22db12aae9b092acfdba9d7",
+      "amount": 1.61,
+      "buyerQuery": "Termes bos studio tempore decet cribro nostrum demoror?",
+      "aiSummary": "Iure textus placeat supplanto. Convoco caritas talus adinventitias denuo statim vehemens adeo uter advenio.",
+      "timestamp": "2026-03-10T06:29:31.299Z"
+    },
+    {
+      "id": "tx-5426b536-ba5a-467d-93ac-a1ec23f3d777",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "6c98bb1f4aeb2ef3a3d00478dd2a67d7baf3cfa6ccc105dc62afb75efb34c6fe",
+      "amount": 0.44,
+      "buyerQuery": "Vespillo demitto ut?",
+      "aiSummary": "Amaritudo umquam delicate defungo blandior vitiosus ait anser crustulum inventore. Defetiscor coma conduco.",
+      "timestamp": "2026-03-12T04:31:23.679Z"
+    },
+    {
+      "id": "tx-a930b4f5-ec42-4f73-a911-2cc6b92152b7",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "ccdfecd7fbf10ce687caf7279a57638fb95f6ebe46a61248e6fd8c058fad9f2e",
+      "amount": 1.1,
+      "buyerQuery": "Utrum volaticus voluptatum tracto perferendis terminatio caute speciosus decens?",
+      "aiSummary": "Cohaero ait utroque utroque paens vir. Vulticulus animus turbo vulgivagus vinco delinquo molestiae.",
+      "timestamp": "2026-03-31T08:50:52.814Z"
+    },
+    {
+      "id": "tx-2f5e2da0-52ae-41d4-9920-da60d2530ac0",
+      "datasetId": "ds-41d20047-9895-400f-a721-c5f90ed37ac6",
+      "txHash": "b3f3fa9cacb460ba85efb74989d5f2022debfb7eadcb526d5eb3cba67ff9ff6f",
+      "amount": 4.39,
+      "buyerQuery": "Uberrime at vito laudantium patrocinor culpo trucido concido?",
+      "aiSummary": "Molestias villa spargo absens voluptas delinquo. Terreo conforto sonitus uredo cumque sumo thema.",
+      "timestamp": "2026-04-07T12:21:09.678Z"
+    },
+    {
+      "id": "tx-098faadc-faa6-4355-a8e3-b5468d6d6c0b",
+      "datasetId": "ds-69e424ac-2c6f-4b81-8ea1-a6641352d486",
+      "txHash": "e959ceea89bd2fd5bc501f54aee3f5b571ba81597abfbba7a7c4cf46ad11c18d",
+      "amount": 1.37,
+      "buyerQuery": "Vulpes spes sui socius spargo apparatus?",
+      "aiSummary": "Absque video umbra provident benigne amor vulpes admitto. Ager possimus campana cur caritas tardus conculco ambitus.",
+      "timestamp": "2026-02-09T20:21:28.646Z"
+    },
+    {
+      "id": "tx-cb466591-ce20-4c2d-8147-2def6cb44f92",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "abac5f1b0bf2a1d5ec9d89e652f92119ceed83fea33fc4c1c13ba32fb85e27d2",
+      "amount": 4.58,
+      "buyerQuery": "Agnitio peccatus valde?",
+      "aiSummary": "Cohibeo tergo aequitas acsi cursim spoliatio degusto rerum acsi. Taceo crux delectatio dedecor accommodo tabesco coruscus voco molestias.",
+      "timestamp": "2026-02-15T02:06:16.008Z"
+    },
+    {
+      "id": "tx-c8dcb15b-3888-49ff-83a5-e9b26ec3194e",
+      "datasetId": "ds-41d20047-9895-400f-a721-c5f90ed37ac6",
+      "txHash": "ecb24def4dd9c9ed5c4d9fa7aebe8eb3851600cf3212306f66daec6d0c6eadfc",
+      "amount": 4.39,
+      "buyerQuery": "Stipes inventore cohors ocer coerceo?",
+      "aiSummary": "Comptus tenus tersus turbo ventito cognatus vomito tergeo atqui capitulus. Summa delectus cotidie consuasor vobis amplitudo concido voluptatibus hic viscus.",
+      "timestamp": "2026-02-10T17:16:22.571Z"
+    },
+    {
+      "id": "tx-00c3eb03-fc38-4002-bda9-0de89699290f",
+      "datasetId": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "txHash": "2e848dc4a43d2968cf9710cb11c9da84f241ffb67dd24ed3e996feb9b6f59fc8",
+      "amount": 3.52,
+      "buyerQuery": "Tabula ventito delectus unde patruus acidus sui?",
+      "aiSummary": "Viduo voluptatem rem considero abbas adeo unde admiratio ulciscor campana. Voco somniculosus teneo complectus certus careo.",
+      "timestamp": "2026-03-13T05:57:35.321Z"
+    },
+    {
+      "id": "tx-463ccfec-c564-42b3-ae81-8294b2c7dccd",
+      "datasetId": "ds-fcdadf0d-afa1-4e18-9cc8-54abe0670016",
+      "txHash": "a15adf6e1f230ceaa6adb99d017d05aafb3f06b9e6bad3ef05fdeaf8dcdcb450",
+      "amount": 2.77,
+      "buyerQuery": "Collum crur sollicito impedit armarium sono totus?",
+      "aiSummary": "Dedico terga molestias consuasor aliqua est. Decumbo damno debilito carpo esse provident cultellus explicabo desipio veniam.",
+      "timestamp": "2026-03-08T01:46:08.461Z"
+    },
+    {
+      "id": "tx-557cf84d-dadd-4ab7-83f2-5bb97cd369fa",
+      "datasetId": "ds-a4b4965d-4b70-4a9d-bd88-bd8b5377e77e",
+      "txHash": "eb4bfafed6e2a84fd42ccf24bfee4ac6ac77bd077e29df0cc6cde99a90daeebe",
+      "amount": 3.59,
+      "buyerQuery": "Sufficio amaritudo tristis est sophismata ex appositus?",
+      "aiSummary": "Comburo cumque thermae contego conitor cubo consequuntur cubo solio. Cras nesciunt clamo benevolentia claudeo solium balbus.",
+      "timestamp": "2026-04-06T00:53:18.001Z"
+    },
+    {
+      "id": "tx-d9b8c432-f90f-4670-bf41-db0c14fccb93",
+      "datasetId": "ds-8af766b5-0847-4198-a204-93fe998787da",
+      "txHash": "cf91ee640c935c2420781e1d4ac402daa750213ac42fbe13376d3b8eb8bbaa94",
+      "amount": 1.33,
+      "buyerQuery": "Comes cerno deorsum?",
+      "aiSummary": "Caveo charisma cuius solus nulla velum cupiditate acervus. Sed super reprehenderit stipes uredo teres vinculum celo.",
+      "timestamp": "2026-03-02T10:03:42.332Z"
+    },
+    {
+      "id": "tx-dabd2a2f-a77d-435a-a61e-31348e25d633",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "ad98efef964bacde155cefcadd0ee252f959a0bed2087b9dfef1c75ecd3ffaa0",
+      "amount": 1.1,
+      "buyerQuery": "Vix teneo dolorem nulla capto?",
+      "aiSummary": "Defendo quo votum vulpes solus ciminatio trans subiungo demitto cena. Astrum curatio creo amplus.",
+      "timestamp": "2026-03-23T19:41:53.112Z"
+    },
+    {
+      "id": "tx-97c55143-fa4e-414c-b1b8-79e6325853cd",
+      "datasetId": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "txHash": "4fdccceedceba9fef39b42eae4b248aef0abfbefda7c690b6aea1abc0ba9ca40",
+      "amount": 3.52,
+      "buyerQuery": "Atrocitas validus aggredior ipsam sulum spes expedita ipsum?",
+      "aiSummary": "Articulus bibo excepturi cruciamentum clementia. Bibo tabella quam umerus ulciscor.",
+      "timestamp": "2026-04-02T15:22:46.951Z"
+    },
+    {
+      "id": "tx-ae6276e1-fc68-415b-a7ef-b9fa768ba470",
+      "datasetId": "ds-7826fa26-3a3a-437a-8e2f-14ec8456c5ac",
+      "txHash": "0804beac1fb5b3caacb0b1ab4edea1d72e3d1b66afdc7f2bdaed5d9ceebc5e70",
+      "amount": 3.82,
+      "buyerQuery": "Commodo arx tubineus spargo repudiandae demens cerno?",
+      "aiSummary": "Virga sperno antepono cibus varietas. Stella appositus culpa terebro audacia spargo pel vacuus denique anser.",
+      "timestamp": "2026-03-04T12:13:54.975Z"
+    },
+    {
+      "id": "tx-e5eb8aa1-5cb9-4e82-a808-0e24aebd6ea2",
+      "datasetId": "ds-70b1014e-7f9c-4177-80d5-8f3f50a9c797",
+      "txHash": "dddec71a6eb618a31fbc3af584ed57ef85dc2fedafb34bd35db6ccf35bd5d0d4",
+      "amount": 2.75,
+      "buyerQuery": "Thalassinus curriculum alii stultus comprehendo pecus vulgaris bardus illum virgo?",
+      "aiSummary": "Utrum coerceo tempora tamisium suspendo capto beatae. Ustulo conduco ulterius auditor anser.",
+      "timestamp": "2026-04-16T15:44:52.779Z"
+    },
+    {
+      "id": "tx-3a33a3e5-f1dd-4358-b986-b890c52095bc",
+      "datasetId": "ds-d4ca40bf-76c7-441d-9c7b-25111c13a401",
+      "txHash": "c3eb02fdbb52cd13ebb15ccf15f6f368c6ecadee8767fae6a8df1c1eb2c9bf9c",
+      "amount": 3.52,
+      "buyerQuery": "Accusator vinco distinctio aegre cubicularis mollitia aestus?",
+      "aiSummary": "Vulgo verto consectetur urbs. Crux amoveo cornu cubo.",
+      "timestamp": "2026-03-30T03:18:11.897Z"
+    },
+    {
+      "id": "tx-fa7b3fc8-64cf-4c68-8c51-834facf76b78",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "eadcf9d354db168f6a9eedeec6be16caa7dbe5cd9de58310cbadd709a6b19e2d",
+      "amount": 2.57,
+      "buyerQuery": "Cunae quibusdam adfectus texo maxime ratione atavus?",
+      "aiSummary": "Ultio anser cohaero. Voluptas suppono campana ultio acceptus exercitationem.",
+      "timestamp": "2026-04-20T09:31:10.865Z"
+    },
+    {
+      "id": "tx-43b97c96-7bc3-4a15-aa18-f68c35301330",
+      "datasetId": "ds-d3403e8e-4f65-4ef5-896c-6763d20aaa9e",
+      "txHash": "19eb8f30aa863bd5ffae3cef8bb7ecfab64cc62dafdaedca57bd6bfe6dfd0344",
+      "amount": 2.14,
+      "buyerQuery": "Advenio cohaero demitto theologus testimonium attero ago illo?",
+      "aiSummary": "Tyrannus talio utrimque timidus angulus vitae coadunatio. Vicissitudo benevolentia avaritia cribro.",
+      "timestamp": "2026-03-16T22:51:00.080Z"
+    },
+    {
+      "id": "tx-47f2dfba-9c6f-4d1e-a2b9-8ed91e6e4905",
+      "datasetId": "ds-16002d3a-50f7-41c4-b5ec-bb6663757580",
+      "txHash": "7e4fca1ef5b4f41abd8abcafaea6ee1cf8ffdc6619578e6d49f8ced1d19bac5a",
+      "amount": 1.61,
+      "buyerQuery": "Apto abundans temporibus?",
+      "aiSummary": "Thesaurus comis corrupti cattus casus amet decumbo deporto est aequus. Velut vapulus vulariter velit absum coniuratio id.",
+      "timestamp": "2026-02-11T17:47:23.314Z"
+    },
+    {
+      "id": "tx-5ea4c1c3-1052-4f0e-83f9-ed342295d3ae",
+      "datasetId": "ds-54e53000-bf43-4f00-bc1d-20312afcf7de",
+      "txHash": "1ea2ddfa3a22bbeceb051cdbe5f62e91d03c04a4dd7fa4eeefcded9e5aac343a",
+      "amount": 2.95,
+      "buyerQuery": "Super dapifer accendo?",
+      "aiSummary": "Angustus quidem virga defluo vicinus capto somnus vestigium stipes fugit. Inflammatio tricesimus ait.",
+      "timestamp": "2026-03-07T18:43:11.055Z"
+    },
+    {
+      "id": "tx-16ea5929-3d66-45d2-9a83-80ee993e51c2",
+      "datasetId": "ds-41d20047-9895-400f-a721-c5f90ed37ac6",
+      "txHash": "8cd4bde329a5cb61289f26e8b8ef9c23abe516cb6d55a988ba2abe54bf7a3eea",
+      "amount": 4.39,
+      "buyerQuery": "Vorago videlicet laboriosam sonitus tui iste?",
+      "aiSummary": "Aperiam absconditus ter facere aspernatur crebro tantillus temperantia antepono vulnero. Terror cupiditate veritas illum sit adversus aequus usque ambitus desipio.",
+      "timestamp": "2026-03-08T03:32:30.997Z"
+    },
+    {
+      "id": "tx-5e9441d9-af68-4194-8edb-507743b0622f",
+      "datasetId": "ds-9bda3d1b-c6b2-4e59-bfa2-7033589c6c81",
+      "txHash": "a3af3dfe8cea94d31ff8ff001cccbaf159e75e0401e239ec50fedf945f2ccbb8",
+      "amount": 3.21,
+      "buyerQuery": "Sordeo laboriosam cunabula speciosus talio crinis atavus aspicio damnatio optio?",
+      "aiSummary": "Vindico admitto ver absque unde decretum. Super deleniti aeger comprehendo adsidue quas.",
+      "timestamp": "2026-03-28T05:43:50.447Z"
+    },
+    {
+      "id": "tx-4c29a50b-5165-4541-a99b-43b8850016d6",
+      "datasetId": "ds-d097e2a4-aadf-4d54-8f7a-6bfe60fd643f",
+      "txHash": "f6bbce65c766e2c3bebff5df5dcde00cbac2b5a0acacb0dfa21ea7390466fa42",
+      "amount": 1.1,
+      "buyerQuery": "Acies labore videlicet cibo tabula cum quod?",
+      "aiSummary": "Conculco admiratio aedificium tardus animi crux. Defungo in triduana vomito sono aeger verus.",
+      "timestamp": "2026-04-15T12:09:54.837Z"
+    },
+    {
+      "id": "tx-747dc452-97c3-4d44-9169-6e6a64859532",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "6bbc2ef1ffad4bb5ca1ca170aa7c56fe8c2a5b0f57018920cd1c2a6e4727481c",
+      "amount": 2.57,
+      "buyerQuery": "Tollo comminor atrocitas ceno assumenda vorax peccatus?",
+      "aiSummary": "Necessitatibus sequi velit alias. Arbustum texo impedit accusator delibero victus comprehendo officia cruciamentum beneficium.",
+      "timestamp": "2026-01-29T12:40:24.160Z"
+    },
+    {
+      "id": "tx-7a0eada6-e451-4d88-9068-2a9cce2fcb9c",
+      "datasetId": "ds-85fdcbc1-7e02-4efe-a63e-90c6f0f0e39b",
+      "txHash": "e22a4fbf88e1d572e3aa216fb5d2ea2adf61be74fb5cc0dbefafe4e10b3e0ec1",
+      "amount": 0.27,
+      "buyerQuery": "Viridis conatus laborum conspergo taceo adflicto socius combibo suggero?",
+      "aiSummary": "Caries arma terra arca abeo argumentum denuncio exercitationem paulatim sophismata. Vitiosus casso cohibeo trado vivo abduco.",
+      "timestamp": "2026-04-18T17:00:09.971Z"
+    },
+    {
+      "id": "tx-a1a26111-99df-434a-8a46-5890d5b9872a",
+      "datasetId": "ds-16002d3a-50f7-41c4-b5ec-bb6663757580",
+      "txHash": "e0ac43dcc7ffc9a1bc6ca79a5eaf86adcc2cefc8d7f3101b689eeaff007fbffb",
+      "amount": 1.61,
+      "buyerQuery": "Vitiosus exercitationem temeritas addo dolores?",
+      "aiSummary": "Subseco sollers defluo vorago delibero cupressus cometes dignissimos facere. Attero titulus vomica decumbo appositus aperio deprimo.",
+      "timestamp": "2026-04-23T10:45:36.312Z"
+    },
+    {
+      "id": "tx-b85a0c67-56e4-47c5-950b-f1dbd2583b72",
+      "datasetId": "ds-17b1d97f-10f0-4d25-9cde-6a98a947a300",
+      "txHash": "cc3bdfccfddf0daeb2b8e5c0a7cccfdc77e7ddaa02d6f75e09abbb3b17641b72",
+      "amount": 1.7,
+      "buyerQuery": "Teres vivo abbas absens adduco delicate animus comparo?",
+      "aiSummary": "Abduco stultus vesco. Spes fuga tabella.",
+      "timestamp": "2026-02-02T03:10:12.984Z"
+    },
+    {
+      "id": "tx-bfb7fa62-9c09-4d9a-af9a-df83825f3ba4",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "cfc9fabac9c2c1fd2fb84e31a62749e43eea2c4ee8657b02aced3cc9d907af83",
+      "amount": 4.58,
+      "buyerQuery": "Subnecto dolorum aegrotatio omnis vito adinventitias trans desparatus cetera capitulus?",
+      "aiSummary": "Dignissimos abscido summopere. Subnecto venustas varietas.",
+      "timestamp": "2026-02-13T20:38:10.683Z"
+    },
+    {
+      "id": "tx-d0eb3358-c15a-48e2-8255-6efc210b209f",
+      "datasetId": "ds-e8f6ca95-79ab-4646-a8ff-3f05d2ae180e",
+      "txHash": "f34874cbe7d1fa7f41d3464c059d41aa7706ffed14881d8dbe1e944915aebb3a",
+      "amount": 3.54,
+      "buyerQuery": "Caecus ars tumultus facere contabesco confido despecto sponte cupiditate?",
+      "aiSummary": "Vulticulus utique audax surculus timor stipes est tricesimus quam deputo. Quis stips patria vinco vulnus.",
+      "timestamp": "2026-02-28T19:55:41.493Z"
+    },
+    {
+      "id": "tx-f20614c5-ad1d-4adf-ba4f-e9e3272ea510",
+      "datasetId": "ds-d3abf979-1c8d-48d7-82b8-706f54c32fd7",
+      "txHash": "3dc4be2d967db43bdbaae638eca8aa7bd1ee8a1273bfa3dc40cbec60487ac2c3",
+      "amount": 0.44,
+      "buyerQuery": "Curo spectaculum derideo virgo dolor?",
+      "aiSummary": "Amicitia contego uterque capitulus civis colo paens convoco cariosus termes. Audacia brevis brevis ubi quam decor aro sufficio torqueo.",
+      "timestamp": "2026-03-05T08:39:44.748Z"
+    },
+    {
+      "id": "tx-e31f31c7-5679-4147-aea4-a6e4dfcec8e2",
+      "datasetId": "ds-85fdcbc1-7e02-4efe-a63e-90c6f0f0e39b",
+      "txHash": "97eaab6d1128bbffca5fc3bccf42c2c29a4e01b5592f315ac5bd5ccf9d8a05d9",
+      "amount": 0.27,
+      "buyerQuery": "Tabella terra non maxime ciminatio expedita alienus undique recusandae doloremque?",
+      "aiSummary": "Ea volubilis velit patior distinctio vomito quisquam. Ara numquam astrum volutabrum.",
+      "timestamp": "2026-01-27T18:12:20.431Z"
+    },
+    {
+      "id": "tx-b4bd238f-3c47-4e48-a042-cbeaf81a598e",
+      "datasetId": "ds-fec99f3a-7fc7-4af9-a9a6-aab8277e0860",
+      "txHash": "83b941de4ededfec16a2b4b6cf3b4959ee1d6cae157ffbd292fafbbc3fe94a16",
+      "amount": 4.57,
+      "buyerQuery": "Talio pecus beatus peior abscido aeneus?",
+      "aiSummary": "Cicuta auxilium sapiente versus pariatur. Accendo desipio mollitia reprehenderit trucido.",
+      "timestamp": "2026-02-24T20:44:29.781Z"
+    },
+    {
+      "id": "tx-cb3081da-1fa9-4c96-85e0-05782c337366",
+      "datasetId": "ds-54e53000-bf43-4f00-bc1d-20312afcf7de",
+      "txHash": "19b49d0a8e2ea47b2bf00ce63efbcd34242d8ec7c4e8dfe24043dfdedb6e9eca",
+      "amount": 2.95,
+      "buyerQuery": "Aedificium expedita modi veritas est arbor?",
+      "aiSummary": "Coepi supra nisi studio crastinus thema arceo expedita. Vulgus adsuesco amplus beneficium ambulo tempus abscido suspendo laboriosam.",
+      "timestamp": "2026-03-28T02:42:41.220Z"
+    },
+    {
+      "id": "tx-1474a534-6035-4e52-a456-e8d59b51b07a",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "d6cf0d4dcbbecdc5af05ac5ebcbbedcd1d2e5edbe6eaffb190c0c7062cb0ed7b",
+      "amount": 4.58,
+      "buyerQuery": "Cogito commodi culpo argumentum amita cinis consequatur accusantium comprehendo?",
+      "aiSummary": "Abscido cometes unus bardus certus subito. Aggero civis suscipio adicio cur.",
+      "timestamp": "2026-03-23T07:42:26.199Z"
+    },
+    {
+      "id": "tx-96bdecec-fc90-4c7f-8a1e-f00179956c4c",
+      "datasetId": "ds-73a9c1b3-3f44-4d6e-90e8-3af658741847",
+      "txHash": "fda1e8dab73d0f96d8cde3e5bf1a87cdb36da8eac17aaa076ca2e3eedbe98ae1",
+      "amount": 2.57,
+      "buyerQuery": "Vinum tergiversatio certe crur?",
+      "aiSummary": "Carbo odio comis arcus molestias sollicito cogito. Pectus cedo adaugeo aliquam.",
+      "timestamp": "2026-03-18T05:22:38.245Z"
+    },
+    {
+      "id": "tx-7849961d-3ee6-4c8c-ab1c-763abd10e9d3",
+      "datasetId": "ds-2c4373e0-5d3d-4068-b683-055c8045faa5",
+      "txHash": "b3c8e3632d208c3aa48a9dfbf3c27b07cacd3cfbdaa34ec8f42b797c3ab02d6e",
+      "amount": 0.25,
+      "buyerQuery": "Clibanus amo pax non statua nam demitto tamdiu theca suggero?",
+      "aiSummary": "Hic peior coaegresco absorbeo debeo tamquam volubilis taceo autus valde. Civis suggero supra vigilo bellum tollo bardus repellendus aperio temeritas.",
+      "timestamp": "2026-02-01T19:21:30.542Z"
+    },
+    {
+      "id": "tx-73be1922-d8c3-45cb-aa83-e557be1ea3ad",
+      "datasetId": "ds-d5544115-fa7c-403f-857c-a82513c0d07f",
+      "txHash": "073aa3ebda2e3df5bcce111f9cb4302abd25694fa0af1d3e479f50dbea9cd5bd",
+      "amount": 3.27,
+      "buyerQuery": "Virga cena cupiditas impedit tot avaritia?",
+      "aiSummary": "Totus depono thalassinus patruus clibanus amo tardus acies vivo tergo. Odio comprehendo inventore.",
+      "timestamp": "2026-02-20T10:42:16.280Z"
+    },
+    {
+      "id": "tx-a03d57e4-4e5b-45f4-a504-309a991d0264",
+      "datasetId": "ds-2c4373e0-5d3d-4068-b683-055c8045faa5",
+      "txHash": "e2cb806acfe28b6bf13ba7effa5ecf5baba6ddad8ae6c8a8dafeda33ba065887",
+      "amount": 0.25,
+      "buyerQuery": "Tui magni modi beatus?",
+      "aiSummary": "Consequatur cimentarius tardus ulterius calco undique defungo depraedor. Explicabo taedium cruentus spectaculum adsidue absens saepe.",
+      "timestamp": "2026-04-22T13:08:50.941Z"
+    },
+    {
+      "id": "tx-c3482a3e-e034-448e-b727-557c87cb4738",
+      "datasetId": "ds-5bb72a93-6a64-4262-b906-41be1eea74e8",
+      "txHash": "f46f4db8e90a01cb6bc6410571e6caf65b4c26b04f78ec46ce4a4c9b49bbeeec",
+      "amount": 4.58,
+      "buyerQuery": "Nulla astrum amissio porro aspernatur candidus volubilis alienus congregatio?",
+      "aiSummary": "Vigilo denuncio caries magni facilis bellicus consequuntur. Laudantium attero totidem cervus defleo aranea arto caelestis vaco.",
+      "timestamp": "2026-04-05T18:46:14.110Z"
+    },
+    {
+      "id": "tx-d5b6109c-3657-4033-9235-bb608a313b13",
+      "datasetId": "ds-22fa4864-8c04-49f7-8b5c-efb9499e161e",
+      "txHash": "2a927badffdc7a53ab573ef8abaeaa5b82d2f7f2cf53cdc02ff853d4b8c4ded9",
+      "amount": 4.49,
+      "buyerQuery": "Absorbeo candidus adficio suffragium sollers suggero consequuntur adipisci accusator censura?",
+      "aiSummary": "Saepe claro vesco ter eaque arto architecto. Ipsam debitis harum tripudio ventosus dapifer auctus.",
+      "timestamp": "2026-03-20T22:05:14.965Z"
+    },
+    {
+      "id": "tx-f7af821d-acb0-4e4a-856a-0951d0566382",
+      "datasetId": "ds-d3403e8e-4f65-4ef5-896c-6763d20aaa9e",
+      "txHash": "7f8e0918eb55cc8d9c9181faefcaa79be048eea25df5cf7fecf09fded9d1d1cb",
+      "amount": 2.14,
+      "buyerQuery": "Amplus venustas charisma aliqua?",
+      "aiSummary": "Audeo attollo earum vis nisi charisma. Strues tactus molestiae subito tutamen uterque turpis.",
+      "timestamp": "2026-03-05T20:36:24.394Z"
     }
   ],
   "webhooks": []
