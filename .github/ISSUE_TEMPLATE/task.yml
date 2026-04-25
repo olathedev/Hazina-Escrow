@@ -1,0 +1,91 @@
+name: Engineering Task
+description: Capture refactors, maintenance, cleanup, or other implementation work that is not a bug or net-new feature
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for engineering tasks such as cleanup, refactors, test debt, CI improvements, dependency work, or internal platform changes.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Task Summary
+      description: What should be done?
+      placeholder: |
+        Split payment verification into smaller testable modules and add coverage around tx hash replay detection.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why This Matters
+      description: What problem, risk, or maintenance cost does this address?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: area
+    attributes:
+      label: Affected Areas
+      options:
+        - label: Backend API
+        - label: Frontend UI
+        - label: Smart contract
+        - label: AI / agent workflows
+        - label: Data / storage
+        - label: CI / tooling
+        - label: Tests
+        - label: Documentation
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: In Scope
+      description: Be specific about what this task includes
+      placeholder: |
+        - Extract transaction validation helpers
+        - Add focused unit tests for replay prevention
+        - Preserve current API responses
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of Scope
+      description: Clarify what this task should not include
+      placeholder: |
+        - No UI redesign
+        - No escrow contract changes
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] Relevant tests are updated or added
+        - [ ] Existing behavior is preserved unless explicitly called out
+        - [ ] Docs or comments are updated if the internal workflow changes
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification Plan
+      description: Commands, checks, or scenarios that confirm the task is complete
+      placeholder: |
+        - Run `cd backend && npm test`
+        - Run `cd backend && npm run build`
+        - Manually verify the affected endpoint still returns the same payload shape
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies or Risks
+      description: Related issues, sequencing needs, or rollout concerns

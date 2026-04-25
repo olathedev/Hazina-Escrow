@@ -328,6 +328,9 @@ impl HazinaEscrow {
             .persistent()
             .set(&EscrowKey::Record(escrow_id), &record);
 
+        token_client.transfer(&env.current_contract_address(), &record.seller, &seller_cut);
+        token_client.transfer(&env.current_contract_address(), &admin, &platform_cut);
+
         env.events().publish(
             (soroban_sdk::symbol_short!("released"),),
             (
@@ -386,6 +389,8 @@ impl HazinaEscrow {
         env.storage()
             .persistent()
             .set(&EscrowKey::Record(escrow_id), &record);
+
+        token_client.transfer(&env.current_contract_address(), &record.buyer, &record.amount);
 
         env.events().publish(
             (soroban_sdk::symbol_short!("refunded"),),

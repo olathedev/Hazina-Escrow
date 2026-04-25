@@ -13,6 +13,7 @@ import { webhooksRouter } from "./webhooks/webhook.router";
 import { checkHealth } from "./common/health";
 import express from 'express';
 import cors from 'cors';
+import pinoHttp from 'pino-http';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import path from 'path';
@@ -21,14 +22,17 @@ import { paymentsRouter } from './payments/payments.router';
 import { agentRouter } from './agent/agent.router';
 import { checkHealth } from './common/health';
 import { rateLimitMiddleware } from './common/rateLimit';
+import { logger } from './lib/logger';
+import { errorHandler } from './common/errorMiddleware';
 import { BackupScheduler } from './common/backup.scheduler';
 import { backupRouter, setBackupScheduler } from './common/backup.router';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173" }));
-app.use(express.json({ limit: "10mb" }));
+app.use(pinoHttp({ logger }));
+app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
+app.use(express.json({ limit: '10mb' }));
 
 // Apply rate limiting to all API routes
 app.use('/api', rateLimitMiddleware);
@@ -103,14 +107,11 @@ app.use("/api", paymentsRouter);
 app.use("/api/agent", agentRouter);
 app.use("/api/webhooks", webhooksRouter);
 
+// Global Error Handler (MUST be last)
+app.use(errorHandler);
+
 app.listen(PORT, () => {
-  console.log(`\n  ██╗  ██╗ █████╗ ███████╗██╗███╗   ██╗ █████╗`);
-  console.log(`  ██║  ██║██╔══██╗╚══███╔╝██║████╗  ██║██╔══██╗`);
-  console.log(`  ███████║███████║  ███╔╝ ██║██╔██╗ ██║███████║`);
-  console.log(`  ██╔══██║██╔══██║ ███╔╝  ██║██║╚██╗██║██╔══██║`);
-  console.log(`  ██║  ██║██║  ██║███████╗██║██║ ╚████║██║  ██║`);
-  console.log(`  ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝`);
-  console.log(`\n  Data Escrow API running on http://localhost:${PORT}\n`);
+  logger.info(`Data Escrow API running on http://localhost:${PORT}`);
 });
 
 export default app;

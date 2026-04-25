@@ -15,25 +15,10 @@ import DatasetCard from "../components/ui/DatasetCard";
 import QueryModal from "../components/ui/QueryModal";
 import { DatasetCardSkeleton } from "../components/ui/SkeletonLoader";
 import clsx from "clsx";
-
-const TYPE_FILTERS = [
-  { value: "", label: "All Types" },
-  { value: "whale-wallets", label: "Whale Wallets" },
-  { value: "trading-signals", label: "Trading Signals" },
-  { value: "yield-data", label: "Yield Data" },
-  { value: "risk-scores", label: "Risk Scores" },
-  { value: "nft-data", label: "NFT Data" },
-  { value: "sentiment", label: "Sentiment" },
-];
-
-const SORT_OPTIONS = [
-  { value: "popular", label: "Most Popular", icon: TrendingUp },
-  { value: "price-asc", label: "Price: Low → High", icon: DollarSign },
-  { value: "price-desc", label: "Price: High → Low", icon: DollarSign },
-  { value: "newest", label: "Newest First", icon: Clock },
-];
+import { useI18n } from "../i18n";
 
 export default function MarketplacePage() {
+  const { locale, t } = useI18n();
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [sort, setSort] = useState("popular");
@@ -41,7 +26,7 @@ export default function MarketplacePage() {
     null,
   );
 
-  const { data: datasets = [], isLoading: loading, refetch } = useQuery({
+  const { data: datasets = [], isLoading: loading, refetch } = useQuery<DatasetMeta[]>({
     queryKey: ["datasets"],
     queryFn: api.getDatasets,
   });
@@ -69,6 +54,23 @@ export default function MarketplacePage() {
       });
   }, [datasets, search, typeFilter, sort]);
 
+  const typeFilters = [
+    { value: "", label: t("dataTypes.all") },
+    { value: "whale-wallets", label: t("dataTypes.whaleWallets") },
+    { value: "trading-signals", label: t("dataTypes.tradingSignals") },
+    { value: "yield-data", label: t("dataTypes.yieldData") },
+    { value: "risk-scores", label: t("dataTypes.riskScores") },
+    { value: "nft-data", label: t("dataTypes.nftData") },
+    { value: "sentiment", label: t("dataTypes.sentiment") },
+  ];
+
+  const sortOptions = [
+    { value: "popular", label: t("marketplace.sorts.popular"), icon: TrendingUp },
+    { value: "price-asc", label: t("marketplace.sorts.priceAsc"), icon: DollarSign },
+    { value: "price-desc", label: t("marketplace.sorts.priceDesc"), icon: DollarSign },
+    { value: "newest", label: t("marketplace.sorts.newest"), icon: Clock },
+  ];
+
   return (
     <div className="min-h-screen pt-28 pb-20">
       <Helmet>
@@ -82,14 +84,13 @@ export default function MarketplacePage() {
         {/* Header */}
         <div className="mb-10">
           <p className="text-gold text-sm font-body font-medium tracking-widest uppercase mb-2">
-            Browse & Buy
+            {t("marketplace.eyebrow")}
           </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-3">
-            Data Marketplace
+            {t("marketplace.title")}
           </h1>
           <p className="text-foreground-muted font-body text-lg">
-            Premium on-chain intelligence, priced per query. Pay only for what
-            you need.
+            {t("marketplace.subtitle")}
           </p>
         </div>
 
@@ -101,7 +102,7 @@ export default function MarketplacePage() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
               <input
                 type="text"
-                placeholder="Search datasets..."
+                placeholder={t("marketplace.searchPlaceholder")}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full bg-void/60 border border-border/60 rounded-xl pl-11 pr-4 py-3 text-sm font-body text-foreground placeholder:text-muted focus:outline-none focus:border-gold/40 transition-colors"
@@ -110,6 +111,7 @@ export default function MarketplacePage() {
                 <button
                   onClick={() => setSearch("")}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-foreground"
+                  aria-label={t("common.actions.resetSearch")}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -124,7 +126,7 @@ export default function MarketplacePage() {
                 onChange={(e) => setSort(e.target.value)}
                 className="bg-void/60 border border-border/60 rounded-xl px-4 py-3 text-sm font-body text-foreground focus:outline-none focus:border-gold/40 transition-colors"
               >
-                {SORT_OPTIONS.map((o) => (
+                {sortOptions.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
                   </option>
@@ -135,7 +137,7 @@ export default function MarketplacePage() {
 
           {/* Type filter pills */}
           <div className="flex flex-wrap gap-2 mt-4">
-            {TYPE_FILTERS.map(({ value, label }) => {
+            {typeFilters.map(({ value, label }) => {
               const meta = value ? DATA_TYPE_META[value] : null;
               return (
                 <button
@@ -161,13 +163,13 @@ export default function MarketplacePage() {
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-foreground-muted font-body">
             {loading ? (
-              "Loading..."
+              t("common.labels.loading")
             ) : (
               <>
                 <span className="text-foreground font-medium">
-                  {filtered.length}
+                  {filtered.length.toLocaleString(locale)}
                 </span>{" "}
-                datasets found
+                {t("common.units.datasetsFound")}
               </>
             )}
           </p>
@@ -186,10 +188,10 @@ export default function MarketplacePage() {
               <Search className="w-8 h-8 text-muted" />
             </div>
             <h3 className="font-display text-xl text-foreground mb-2">
-              No datasets found
+              {t("marketplace.noResultsTitle")}
             </h3>
             <p className="text-foreground-muted font-body text-sm">
-              Try adjusting your filters
+              {t("marketplace.noResultsBody")}
             </p>
           </div>
         ) : (

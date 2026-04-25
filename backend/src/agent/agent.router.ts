@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { runResearchAgent, runResearchAgentDemo } from './agent.service';
 import { getAgentPublicKey } from './agent.wallet';
+import { logger } from '../lib/logger';
 
 export const agentRouter = Router();
 
@@ -144,7 +145,7 @@ agentRouter.post('/research', async (req: Request, res: Response) => {
   }
 
   try {
-    console.log(`[Agent] New research job: "${query}"`);
+    logger.info({ query }, `[Agent] New research job: "${query}"`);
     const job = await runResearchAgent(query.trim(), txHash.trim());
 
     return res.json({
@@ -175,7 +176,7 @@ agentRouter.post('/research', async (req: Request, res: Response) => {
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Research agent error';
-    console.error('[Agent] Error:', err);
+    logger.error({ err }, '[Agent] Error');
 
     if (message.includes('Payment verification failed') || message.includes('verification failed')) {
       return res.status(402).json({ error: message });
@@ -197,7 +198,7 @@ agentRouter.post('/research/demo', async (req: Request, res: Response) => {
   }
 
   try {
-    console.log(`[Agent][Demo] New research job: "${query}"`);
+    logger.info({ query }, `[Agent][Demo] New research job: "${query}"`);
     const job = await runResearchAgentDemo(query.trim());
 
     return res.json({
@@ -229,7 +230,7 @@ agentRouter.post('/research/demo', async (req: Request, res: Response) => {
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Research agent error';
-    console.error('[Agent][Demo] Error:', err);
+    logger.error({ err }, '[Agent][Demo] Error');
     return res.status(500).json({ error: message });
   }
 });

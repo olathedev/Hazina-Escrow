@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import { DatasetMeta } from '../../lib/api';
 import { truncateAddress, formatUSDC, getTypeMeta, formatTimeAgo } from '../../lib/utils';
 
+import { useI18n } from '../../i18n';
+
 interface Props {
   dataset: DatasetMeta;
   onBuy: (dataset: DatasetMeta) => void;
@@ -12,7 +14,9 @@ interface Props {
 export default function DatasetCard({ dataset, onBuy }: Props) {
   const [hovered, setHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const { locale, t } = useI18n();
   const typeMeta = getTypeMeta(dataset.type);
+  const typeLabel = typeMeta.labelKey ? t(typeMeta.labelKey) : typeMeta.label;
 
   return (
     <div
@@ -54,7 +58,7 @@ export default function DatasetCard({ dataset, onBuy }: Props) {
         <div className="absolute top-4 left-4 z-10">
           <span className={clsx('type-badge backdrop-blur-md border border-gold/20 shadow-lg', typeMeta.color, typeMeta.bg)}>
             <Zap className="w-3 h-3" />
-            {typeMeta.label}
+            {typeLabel}
           </span>
         </div>
       </div>
@@ -73,13 +77,12 @@ export default function DatasetCard({ dataset, onBuy }: Props) {
             </div>
           </div>
           <div className="text-right flex-shrink-0">
-            <p className="text-xs text-muted-2 font-body">per query</p>
+            <p className="text-xs text-muted-2 font-body">{t("common.units.perQuery")}</p>
             <p className="text-lg font-display font-bold text-gold-gradient">
-              ${formatUSDC(dataset.pricePerQuery)}
+              ${formatUSDC(dataset.pricePerQuery, locale)}
             </p>
           </div>
         </div>
-
 
         {/* Description */}
         <p className="text-sm text-foreground-muted font-body leading-relaxed line-clamp-2 mb-5 h-10">
@@ -91,14 +94,14 @@ export default function DatasetCard({ dataset, onBuy }: Props) {
           <div className="flex items-center gap-1.5">
             <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
             <span className="text-xs font-body text-foreground-muted">
-              <span className="text-foreground font-medium">{dataset.queriesServed.toLocaleString()}</span> queries
+              <span className="text-foreground font-medium">{dataset.queriesServed.toLocaleString(locale)}</span> {t("common.units.queries")}
             </span>
           </div>
           <div className="w-px h-3 bg-border" />
           <div className="flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-muted" />
             <span className="text-xs font-body text-foreground-muted">
-              {formatTimeAgo(dataset.createdAt)}
+              {formatTimeAgo(dataset.createdAt, locale)}
             </span>
           </div>
         </div>
@@ -106,8 +109,8 @@ export default function DatasetCard({ dataset, onBuy }: Props) {
         {/* Earnings bar */}
         <div className="mb-5">
           <div className="flex justify-between items-center mb-1.5">
-            <span className="text-xs text-muted-2 font-body">Total earned</span>
-            <span className="text-xs font-body font-medium text-gold">${formatUSDC(dataset.totalEarned)} USDC</span>
+            <span className="text-xs text-muted-2 font-body">{t("dashboard.stats.totalEarned")}</span>
+            <span className="text-xs font-body font-medium text-gold">${formatUSDC(dataset.totalEarned, locale)} USDC</span>
           </div>
           <div className="h-1.5 bg-border/60 rounded-full overflow-hidden">
             <div
@@ -131,7 +134,7 @@ export default function DatasetCard({ dataset, onBuy }: Props) {
           )}
         >
           <ShoppingCart className="w-4 h-4" />
-          Buy Query — ${formatUSDC(dataset.pricePerQuery)} USDC
+          {t("sell.preview.buyLabel", { price: formatUSDC(dataset.pricePerQuery, locale) })}
         </button>
       </div>
     </div>

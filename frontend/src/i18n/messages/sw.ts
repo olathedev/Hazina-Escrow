@@ -1,0 +1,434 @@
+import type { EnglishMessages } from "./en";
+
+export const sw: EnglishMessages = {
+  meta: {
+    appName: "Hazina",
+    languageName: "Kiswahili",
+  },
+  common: {
+    actions: {
+      browseData: "Tazama data",
+      browseMarketplace: "Tembelea soko",
+      listData: "Orodhesha data yako",
+      goHome: "Rudi mwanzo",
+      learnMore: "Jifunze zaidi",
+      submit: "Wasilisha",
+      cancel: "Ghairi",
+      close: "Funga",
+      save: "Hifadhi",
+      back: "Rudi",
+      next: "Ifuatayo",
+      finish: "Maliza",
+      done: "Imekamilika",
+      downloadJson: "Pakua JSON",
+      tryAgain: "Jaribu tena",
+      openStellarLab: "Fungua Stellar Laboratory",
+      viewMarketplace: "Tazama soko",
+      listAnother: "Orodhesha nyingine",
+      proceedToPayment: "Endelea kwa malipo",
+      getAiAnalysis: "Pata uchambuzi wa AI",
+      verifyAndGetData: "Thibitisha na upate data",
+      runAgent: "Endesha wakala",
+      startResearch: "Anza utafiti",
+      viewAll: "Tazama zote",
+      startSellingNow: "Anza kuuza sasa",
+      exploreMarketplace: "Chunguza soko",
+      listNewDataset: "Orodhesha dataset mpya",
+      listFirstDataset: "Orodhesha dataset yako ya kwanza",
+      resetSearch: "Weka upya utafutaji",
+    },
+    labels: {
+      price: "Bei",
+      status: "Hali",
+      loading: "Inapakia...",
+      demoMode: "Hali ya demo",
+      language: "Lugha",
+      dataset: "Dataset",
+      walletAddress: "Anwani ya wallet",
+      total: "Jumla",
+      optional: "(hiari)",
+      network: "Mtandao",
+      seller: "Muuzaji",
+      protocol: "Itifaki",
+      chain: "Chain",
+      apy: "APY",
+      riskLevel: "Kiwango cha hatari",
+      whaleConfidence: "Imani ya whale",
+      sentiment: "Hisia",
+      paid: "Imelipwa",
+      sellerGets: "Muuzaji anapokea",
+      platform: "Jukwaa",
+      answerToQuestion: "Jibu la swali lako:",
+      rawDataPreview: "Muhtasari wa data ghafi",
+      simulated: "imeigwa",
+      currentLanguage: "Lugha ya sasa",
+    },
+    states: {
+      empty: "Hakuna cha kuonyesha bado.",
+      error: "Kuna hitilafu imetokea.",
+      success: "Imefanikiwa",
+      demo: "Demo",
+      noResults: "Hakuna matokeo",
+      validJson: "JSON sahihi — tayari kuorodheshwa",
+      noWarnings: "Hakuna onyo — inaonekana safi.",
+      testnet: "Stellar Testnet",
+    },
+    units: {
+      queries: "maswali",
+      queriesServed: "maswali yaliyohudumiwa",
+      datasetsFound: "dataset zilizopatikana",
+      listed: "zilizoorodheshwa",
+      total: "jumla",
+      sellers: "wauzaji",
+      perQuery: "kwa kila swali",
+      usdc: "USDC",
+    },
+    time: {
+      justNow: "sasa hivi",
+      minuteAgo: "dakika {count} zilizopita",
+      hourAgo: "saa {count} zilizopita",
+      dayAgo: "siku {count} zilizopita",
+    },
+  },
+  nav: {
+    marketplace: "Soko",
+    agent: "Wakala wa AI",
+    sell: "Uza data",
+    dashboard: "Dashibodi",
+    mobileMenu: "Menyu",
+    brand: "Hazina",
+  },
+  dataTypes: {
+    all: "Aina zote",
+    whaleWallets: "Whale Wallets",
+    tradingSignals: "Ishara za biashara",
+    yieldData: "Data za yield",
+    riskScores: "Alama za hatari",
+    nftData: "Data za NFT",
+    sentiment: "Hisia",
+  },
+  notFound: {
+    title: "Ukurasa haujapatikana",
+    body: "Ukurasa huu haupo kwenye hazina.",
+  },
+  landing: {
+    eyebrow: "Soko la data za Web3 kwenye Stellar",
+    headline: {
+      lineOne: "Data yako.",
+      lineTwo: "Bei yako.",
+      lineThree: "Mapato ya kiotomatiki.",
+    },
+    subheading:
+      "Hazina ni soko la kifahari la maarifa ya on-chain. Pakia dataset zako, weka bei yako, na mwache wakala wetu wa escrow wa AI akusanye malipo madogo ya Stellar huku ukiwa umelala.",
+    stats: {
+      datasetsListed: "Dataset zilizoorodheshwa",
+      queriesSold: "Maswali yaliyouzwa",
+      usdcEarned: "USDC iliyopatikana",
+    },
+    flow: {
+      eyebrow: "Mtiririko",
+      title: "Jinsi Hazina inavyofanya kazi",
+      body: "Kutoka kupakia hadi mapato kwa hatua tatu. Wakala wa escrow hushughulikia kila kitu kiotomatiki.",
+      steps: {
+        upload: {
+          title: "Pakia data yako",
+          description:
+            "Orodhesha dataset zako za on-chain — whale wallets, ishara za biashara, yield za DeFi — na weka bei kwa kila swali.",
+        },
+        escrow: {
+          title: "Escrow inalinda pande zote",
+          description:
+            "Wakala wetu wa escrow wa AI hulinda data na kuthibitisha kila malipo madogo ya Stellar x402 kiotomatiki.",
+        },
+        earn: {
+          title: "Pata mapato ukiwa umelala",
+          description:
+            "95% ya kila malipo huenda moja kwa moja kwenye wallet yako ya Stellar. Hakuna benki, hakuna kuchelewa, malipo ya papo hapo.",
+        },
+      },
+    },
+    features: {
+      eyebrow: "Kwa nini Hazina",
+      titleStart: "Imejengwa kwa uchumi mpya wa",
+      titleAccent: "uhuru wa data",
+      body:
+        "Hazina — treasure kwa Kiswahili — inawakilisha thamani iliyofichika ndani ya maarifa yako ya on-chain. Acha kuyatoa bure. Yafanye yaingize mapato kwa usalama.",
+      items: {
+        micropayments: {
+          label: "Micropayments za x402",
+          description: "Uthibitishaji wa malipo ya Stellar wa sekunde chache",
+        },
+        escrow: {
+          label: "Escrow inayoendeshwa na AI",
+          description: "Claude huthibitisha kila muamala kabla ya kuachilia data",
+        },
+        marketplace: {
+          label: "Soko la kimataifa",
+          description: "Wafikie wanunuzi wa data duniani kote mara moja",
+        },
+        earnings: {
+          label: "Mapato ya moja kwa moja",
+          description: "Tazama USDC ikiwasili kwenye wallet yako kwa wakati halisi",
+        },
+      },
+      vaultSecured: "VAULT IMELINDA",
+    },
+    featured: {
+      eyebrow: "Moja kwa moja",
+      title: "Dataset zilizochaguliwa",
+      browseAll: "Tazama dataset zote",
+    },
+    cta: {
+      titleStart: "Uko tayari kuweka thamani kwenye",
+      titleAccent: "maarifa yako ya on-chain?",
+      body:
+        "Jiunge na wauzaji ambao tayari wanapata USDC kwa njia ya pasivu. Data yako ni hazina yako — ni wakati wa kuifungua.",
+    },
+    footer: {
+      tagline: "Imejengwa kwenye Stellar Testnet · Inaendeshwa na Anthropic Claude · Itifaki ya x402",
+    },
+  },
+  marketplace: {
+    eyebrow: "Tafuta na nunua",
+    title: "Soko la data",
+    subtitle:
+      "Maarifa bora ya on-chain, yenye bei kwa kila swali. Lipa tu kwa unachohitaji.",
+    searchPlaceholder: "Tafuta dataset...",
+    sorts: {
+      popular: "Maarufu zaidi",
+      priceAsc: "Bei: chini hadi juu",
+      priceDesc: "Bei: juu hadi chini",
+      newest: "Mpya kwanza",
+    },
+    resultsCount: "dataset {count} zimepatikana",
+    noResultsTitle: "Hakuna dataset zilizopatikana",
+    noResultsBody: "Jaribu kurekebisha vichujio vyako",
+  },
+  sell: {
+    messages: {
+      invalidJson: "JSON si sahihi — tafadhali kagua muundo wa data yako",
+      createFailed: "Imeshindikana kuunda orodha",
+      publishing: "Inachapisha orodha...",
+      listingLive: "Orodha imeanza kazi!",
+      listingLiveBody: "{name} sasa ipo sokoni.",
+      listingLiveRevenue:
+        "Wanunuzi wanaweza kuuliza kwa {price} USDC kila moja. 95% huenda moja kwa moja kwenye wallet yako ya Stellar.",
+    },
+    eyebrow: "Pata mapato pasivu",
+    title: "Orodhesha data yako",
+    subtitle:
+      "Pakia maarifa yako ya on-chain. Weka bei yako. Pata USDC kiotomatiki kupitia micropayments za Stellar.",
+    tabs: {
+      form: "Hariri orodha",
+      preview: "Kagua kadi",
+    },
+    form: {
+      datasetName: "Jina la dataset",
+      datasetNamePlaceholder: "mf. Mienendo 100 bora ya whale wallets — Aprili 2026",
+      description: "Maelezo",
+      descriptionPlaceholder:
+        "Eleza data yako ina nini, ilikusanywaje, na kwa nini wanunuzi wataitaka...",
+      dataType: "Aina ya data",
+      pricePerQuery: "Bei / swali (USDC)",
+      quickPricePresets: "Bei za haraka:",
+      sellerWallet: "Anwani yako ya Stellar Wallet",
+      sellerWalletPlaceholder: "G... (ufunguo wa umma wa Stellar wa herufi 56)",
+      sellerWalletError: "Anwani za Stellar zina herufi 56 na huanza na G",
+      sellerWalletHelp:
+        "95% ya kila malipo ya swali hutumwa hapa kiotomatiki",
+      datasetJson: "Dataset (JSON)",
+      uploadFileTitle: "Pakia faili ya JSON au CSV",
+      uploadFileSubtitle: "Kiwango cha juu 10MB",
+      dataPlaceholder:
+        "Bandika data yako ya JSON hapa...\n\nMfano:\n{\n  \"wallets\": [\n    { \"address\": \"0x...\", \"balance\": 42847 }\n  ]\n}",
+      submit: "Chapisha sokoni",
+    },
+    preview: {
+      intro: "Hivi ndivyo orodha yako itaonekana sokoni:",
+      datasetNameFallback: "Jina la dataset yako",
+      descriptionFallback: "Maelezo ya dataset yako yataonekana hapa...",
+      walletFallback: "G...wallet",
+      buyLabel: "Nunua swali — {price} USDC",
+    },
+    earnings: {
+      title: "Kikokotoo cha mapato",
+      tenQueries: "maswali 10",
+      hundredQueries: "maswali 100",
+      thousandQueries: "maswali 1,000",
+      footnote:
+        "Baada ya ada ya jukwaa ya 5%. Hulipwa kwa USDC moja kwa moja kwenye wallet yako ya Stellar.",
+    },
+    tips: {
+      title: "Vidokezo vya mauzo zaidi",
+      items: [
+        "Tumia majina maalum yenye maelezo na tarehe",
+        "Jumuisha mtandao na chanzo cha data",
+        "Weka bei ndogo ili kupata maswali ya kwanza",
+        "Panga data kama arrays kwa uchambuzi bora wa AI",
+        "Jumuisha metadata kuhusu mbinu ya ukusanyaji",
+      ],
+    },
+    howItWorks: {
+      title: "Jinsi inavyofanya kazi",
+      items: [
+        "Wanunuzi hulipa kwa kila swali kwa kutumia Stellar USDC",
+        "Escrow ya AI huthibitisha malipo kiotomatiki",
+        "95% hutumwa kwenye wallet yako, 5% kwa jukwaa",
+      ],
+    },
+  },
+  dashboard: {
+    eyebrow: "Kituo cha wauzaji",
+    title: "Dashibodi",
+    subtitle: "Mapato yako ya wakati halisi na utendaji wa dataset zako.",
+    allSellers: "Wauzaji wote",
+    stats: {
+      totalEarned: "Jumla ya USDC iliyopatikana",
+      totalQueries: "Jumla ya maswali yaliyohudumiwa",
+      activeDatasets: "Dataset hai",
+      transactions: "Miamala",
+    },
+    charts: {
+      earningsTitle: "Mapato — siku 7 zilizopita",
+      earningsSubtitle: "USDC zilizopokelewa (95% ya bei ya swali)",
+      queriesTitle: "Maswali ya kila siku",
+      queriesSubtitle: "Maombi yaliyohudumiwa kwa siku",
+      earnedSeries: "mapato",
+      queriesSeries: "maswali",
+    },
+    datasets: {
+      title: "Dataset zako",
+      empty: "Bado hakuna dataset",
+      unknownDataset: "Dataset isiyojulikana",
+    },
+    transactions: {
+      title: "Miamala ya hivi karibuni",
+      empty: "Bado hakuna miamala",
+      demoMode: "hali-demo",
+    },
+  },
+  agent: {
+    exampleQueries: [
+      "Yield bora ya USDC yenye hatari ndogo kwa bajeti ya $500",
+      "Fursa za APY kubwa zenye imani kubwa ya whale",
+      "Stablecoin pools salama kwenye Ethereum, bajeti ya $1000",
+      "Yield za DeFi za kishupavu, uvumilivu mkubwa wa hatari",
+    ],
+    eyebrow: "Inaendeshwa na AI",
+    title: "Wakala wa utafiti",
+    subtitle:
+      "Muulize wakala chochote kuhusu yield za DeFi. Hununua data kutoka kwa wauzaji 4 wa on-chain kupitia micropayments za Stellar, kisha huunda ripoti inayotumia Claude.",
+    strip: {
+      youPay: "Unalipa",
+      datasetsQueried: "Dataset zilizoulizwa",
+      agentSpends: "Wakala hutumia",
+      protocol: "Itifaki",
+      sellersValue: "wauzaji 4",
+    },
+    inputLabel: "Unataka kutafiti nini?",
+    inputPlaceholder: "mf. yield bora ya USDC yenye hatari ndogo kwa bajeti ya $500",
+    demoModeNote: "Hali ya demo — malipo yameigwa kwenye Stellar testnet",
+    loading: "Inatafiti...",
+    errorTitle: "Hitilafu ya wakala",
+    result: {
+      topOpportunity: "Fursa bora",
+      reasoning: "Hoja",
+      alternatives: "Mbadala",
+      noAlternatives: "Hakuna mbadala uliopendekezwa.",
+      warnings: "Maonyo",
+      noWarnings: "Hakuna onyo — inaonekana safi.",
+      fullAnalysis: "Uchambuzi kamili",
+      paymentTrail: "Mfuatano wa malipo",
+      totalSpent: "Jumla iliyotumika kwenye data",
+      agentProfit: "Faida ya wakala",
+      youPaid: "Ulicholipa",
+    },
+    metrics: {
+      vaultPool: "Vault / pool",
+    },
+    scales: {
+      low: "Ndogo",
+      medium: "Wastani",
+      high: "Kubwa",
+      neutral: "Ya kati",
+      bullish: "Bullish",
+      bearish: "Bearish",
+    },
+  },
+  queryModal: {
+    verifyingStages: [
+      "Inaangalia blockchain ya Stellar…",
+      "Inaiga malipo kwenye Stellar testnet…",
+      "Inaipigia Claude AI…",
+      "Inatengeneza uchambuzi wa AI…",
+      "Inaandaa matokeo yako…",
+    ],
+    details: {
+      pricePerQuery: "Bei kwa kila swali",
+      queriesSold: "Maswali yaliyouzwa",
+      seller: "Muuzaji",
+      network: "Mtandao",
+      askQuestion: "Muulize Claude swali kuhusu data hii",
+      questionPlaceholder:
+        "mf. Wallet ipi ilisogeza ETH nyingi zaidi? Wallet ipi ina hatari zaidi?",
+      escrowNote:
+        "Escrow ya AI huthibitisha malipo yako kwenye Stellar kabla ya kuachilia data",
+    },
+    payment: {
+      headline: "USDC kwenye Stellar Testnet",
+      sendToAddress: "Tuma kwa anwani",
+      requiredMemo: "Memo inayohitajika",
+      stepsTitle: "Hatua za malipo:",
+      stepOne: "Pata testnet USDC kutoka Stellar Friendbot",
+      stepTwo: "Tuma hasa {amount} USDC kwa anwani iliyo juu",
+      stepThree: "Jumuisha memo kama ilivyoonyeshwa",
+      stepFour: "Bandika transaction hash hapa chini",
+      transactionHash: "Hash ya muamala",
+      transactionHashPlaceholder: "Bandika hash ya muamala wako wa Stellar...",
+      demoModeLabel: "Hali ya demo",
+      demoModeDescription:
+        "ruka malipo, pata tu uchambuzi wa AI (hali ya hackathon)",
+    },
+    verifying: {
+      runningDemo: "Inaendesha demo",
+      verifyingPayment: "Inathibitisha malipo",
+    },
+    result: {
+      paymentVerified: "Malipo yamethibitishwa",
+      aiAnalysis: "Uchambuzi wa Claude AI",
+    },
+    error: {
+      title: "Uthibitishaji umeshindikana",
+    },
+  },
+  onboarding: {
+    welcome: "Karibu Hazina",
+    stepCounter: "Hatua ya {current} kati ya {total}",
+    next: "Ifuatayo",
+    finish: "Maliza ziara",
+    back: "Rudi",
+    skip: "Ruka ziara",
+    steps: {
+      marketplace: {
+        title: "Tazama dataset",
+        description:
+          "Chunguza data bora za on-chain kutoka whale wallets, ishara za biashara, fursa za yield na zaidi.",
+      },
+      sell: {
+        title: "Orodhesha data yako",
+        description:
+          "Pakia dataset zako, weka bei kwa kila swali, na anza kupata USDC kwa njia pasivu kwenye Stellar.",
+      },
+      dashboard: {
+        title: "Fuatilia mapato yako",
+        description:
+          "Angalia utendaji wa dataset zako, tazama miamala, na uone mapato yako ya USDC kwa wakati halisi.",
+      },
+      cta: {
+        title: "Uko tayari kuanza?",
+        description:
+          "Bonyeza hapa kuorodhesha dataset yako ya kwanza au tembelea soko kununua maswali. Malipo yanathibitishwa kiotomatiki kupitia escrow ya AI kwenye Stellar testnet.",
+      },
+    },
+  },
+};

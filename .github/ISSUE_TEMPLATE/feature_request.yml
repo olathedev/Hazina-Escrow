@@ -1,27 +1,74 @@
 name: Feature / Enhancement
-description: Propose a new capability or improvement
+description: Propose a new capability, UX improvement, API change, or developer-experience enhancement
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        If this is a security-sensitive change (auth, payments, contract), open a Discussion first before writing code.
+        Use this template for product, platform, or engineering improvements.
+
+        If the proposal touches payments, wallets, escrow rules, or other security-sensitive behavior, add rollout and risk notes so reviewers can reason about it early.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Request Summary
+      description: One short paragraph describing the change
+      placeholder: |
+        Add a buyer transaction history view that shows payment status, dataset purchased, and seller payout proof.
+    validations:
+      required: true
 
   - type: textarea
     id: problem
     attributes:
-      label: Problem this solves
-      description: What is currently missing or painful?
+      label: Problem to Solve
+      description: What user, maintainer, or business problem is this addressing?
     validations:
       required: true
 
   - type: textarea
     id: solution
     attributes:
-      label: Proposed solution
-      description: How should it work? Include API shape, UI sketch, or pseudocode if helpful.
+      label: Proposed Solution
+      description: How should it work? Include flow, API shape, UI notes, or pseudocode if helpful.
     validations:
       required: true
+
+  - type: textarea
+    id: user_value
+    attributes:
+      label: Who Benefits and How
+      description: Describe the primary users and the expected outcome
+      placeholder: |
+        Buyers can verify previous purchases quickly, and support requests are reduced because payout proof is visible in-app.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Nice to have
+        - Important
+        - Urgent / blocking
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: surfaces
+    attributes:
+      label: Affected Areas
+      options:
+        - label: Frontend UI
+        - label: Backend API
+        - label: AI / research agent
+        - label: Stellar / x402 payments
+        - label: Smart contract
+        - label: Data model / storage
+        - label: CI / tooling
+        - label: Documentation
 
   - type: textarea
     id: acceptance
@@ -29,10 +76,9 @@ body:
       label: Acceptance Criteria
       placeholder: |
         - [ ] ...
-        - [ ] Tests cover the new behaviour
+        - [ ] Relevant automated tests cover the new behavior
         - [ ] Existing tests still pass
-        - [ ] No new `any` types introduced
-        - [ ] `npm run lint` passes
+        - [ ] Any required docs or examples are updated
     validations:
       required: true
 
@@ -42,16 +88,14 @@ body:
       label: Alternatives considered
       description: Why is this the right approach?
 
-  - type: dropdown
-    id: area
+  - type: textarea
+    id: risks
     attributes:
-      label: Area
-      options:
-        - Backend
-        - Frontend
-        - Smart Contract
-        - Infrastructure
-        - Tests
-        - Documentation
-    validations:
-      required: true
+      label: Risks, Dependencies, or Unknowns
+      description: Call out any migration work, external dependencies, or open questions
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Mockups, related issues, examples from other products, or implementation notes

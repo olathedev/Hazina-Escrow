@@ -7,6 +7,7 @@ import MarketplacePage from "./pages/MarketplacePage";
 import SellPage from "./pages/SellPage";
 import DashboardPage from "./pages/DashboardPage";
 import AgentPage from "./pages/AgentPage";
+import { useI18n } from "./i18n";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -51,18 +52,19 @@ export default function App() {
 }
 
 function NotFound() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen pt-28 flex items-center justify-center text-center px-4">
       <div>
         <p className="font-display text-8xl font-bold text-gold/20 mb-4">404</p>
         <h1 className="font-display text-3xl font-bold text-foreground mb-3">
-          Page not found
+          {t("notFound.title")}
         </h1>
         <p className="text-foreground-muted font-body mb-8">
-          This page doesn't exist in the vault.
+          {t("notFound.body")}
         </p>
         <a href="/" className="btn-gold px-8 py-3 text-sm inline-block">
-          Return Home
+          {t("common.actions.goHome")}
         </a>
       </div>
     </div>

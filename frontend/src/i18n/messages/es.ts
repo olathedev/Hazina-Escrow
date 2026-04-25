@@ -1,0 +1,435 @@
+import type { EnglishMessages } from "./en";
+
+export const es: EnglishMessages = {
+  meta: {
+    appName: "Hazina",
+    languageName: "Español",
+  },
+  common: {
+    actions: {
+      browseData: "Explorar datos",
+      browseMarketplace: "Explorar marketplace",
+      listData: "Publica tus datos",
+      goHome: "Volver al inicio",
+      learnMore: "Más información",
+      submit: "Enviar",
+      cancel: "Cancelar",
+      close: "Cerrar",
+      save: "Guardar",
+      back: "Atrás",
+      next: "Siguiente",
+      finish: "Finalizar",
+      done: "Listo",
+      downloadJson: "Descargar JSON",
+      tryAgain: "Intentar de nuevo",
+      openStellarLab: "Abrir Stellar Laboratory",
+      viewMarketplace: "Ver marketplace",
+      listAnother: "Publicar otro",
+      proceedToPayment: "Continuar al pago",
+      getAiAnalysis: "Obtener análisis IA",
+      verifyAndGetData: "Verificar y obtener datos",
+      runAgent: "Ejecutar agente",
+      startResearch: "Iniciar investigación",
+      viewAll: "Ver todo",
+      startSellingNow: "Empieza a vender",
+      exploreMarketplace: "Explorar marketplace",
+      listNewDataset: "Publicar nuevo dataset",
+      listFirstDataset: "Publica tu primer dataset",
+      resetSearch: "Restablecer búsqueda",
+    },
+    labels: {
+      price: "Precio",
+      status: "Estado",
+      loading: "Cargando...",
+      demoMode: "Modo demo",
+      language: "Idioma",
+      dataset: "Dataset",
+      walletAddress: "Dirección de wallet",
+      total: "Total",
+      optional: "(opcional)",
+      network: "Red",
+      seller: "Vendedor",
+      protocol: "Protocolo",
+      chain: "Cadena",
+      apy: "APY",
+      riskLevel: "Nivel de riesgo",
+      whaleConfidence: "Confianza whale",
+      sentiment: "Sentimiento",
+      paid: "Pagado",
+      sellerGets: "Recibe el vendedor",
+      platform: "Plataforma",
+      answerToQuestion: "Respuesta a tu pregunta:",
+      rawDataPreview: "Vista previa de datos sin procesar",
+      simulated: "simulado",
+      currentLanguage: "Idioma actual",
+    },
+    states: {
+      empty: "Aún no hay nada para mostrar.",
+      error: "Algo salió mal.",
+      success: "Éxito",
+      demo: "Demo",
+      noResults: "Sin resultados",
+      validJson: "JSON válido — listo para publicar",
+      noWarnings: "Sin advertencias — todo se ve bien.",
+      testnet: "Stellar Testnet",
+    },
+    units: {
+      queries: "consultas",
+      queriesServed: "consultas atendidas",
+      datasetsFound: "datasets encontrados",
+      listed: "publicados",
+      total: "total",
+      sellers: "vendedores",
+      perQuery: "por consulta",
+      usdc: "USDC",
+    },
+    time: {
+      justNow: "ahora mismo",
+      minuteAgo: "hace {count} min",
+      hourAgo: "hace {count} h",
+      dayAgo: "hace {count} d",
+    },
+  },
+  nav: {
+    marketplace: "Marketplace",
+    agent: "Agente IA",
+    sell: "Vender datos",
+    dashboard: "Panel",
+    mobileMenu: "Menú",
+    brand: "Hazina",
+  },
+  dataTypes: {
+    all: "Todos los tipos",
+    whaleWallets: "Whale Wallets",
+    tradingSignals: "Señales de trading",
+    yieldData: "Datos de rendimiento",
+    riskScores: "Puntuaciones de riesgo",
+    nftData: "Datos NFT",
+    sentiment: "Sentimiento",
+  },
+  notFound: {
+    title: "Página no encontrada",
+    body: "Esta página no existe en la bóveda.",
+  },
+  landing: {
+    eyebrow: "Marketplace de datos Web3 en Stellar",
+    headline: {
+      lineOne: "Tus datos.",
+      lineTwo: "Tu precio.",
+      lineThree: "Ganancias automáticas.",
+    },
+    subheading:
+      "Hazina es el marketplace premium para inteligencia on-chain. Sube tus datasets, fija tu precio y deja que nuestro agente de escrow con IA cobre micropagos en Stellar mientras duermes.",
+    stats: {
+      datasetsListed: "Datasets publicados",
+      queriesSold: "Consultas vendidas",
+      usdcEarned: "USDC ganados",
+    },
+    flow: {
+      eyebrow: "El flujo",
+      title: "Cómo funciona Hazina",
+      body: "Desde la carga hasta las ganancias en tres pasos. El agente de escrow se encarga de todo automáticamente.",
+      steps: {
+        upload: {
+          title: "Sube tus datos",
+          description:
+            "Publica tus datasets on-chain — whale wallets, señales de trading, rendimientos DeFi — y define tu precio por consulta.",
+        },
+        escrow: {
+          title: "El escrow protege a ambos",
+          description:
+            "Nuestro agente de escrow con IA mantiene los datos seguros y verifica automáticamente cada micropago Stellar x402.",
+        },
+        earn: {
+          title: "Gana mientras duermes",
+          description:
+            "El 95 % de cada pago va directamente a tu wallet Stellar. Sin bancos, sin esperas, liquidación instantánea.",
+        },
+      },
+    },
+    features: {
+      eyebrow: "Por qué Hazina",
+      titleStart: "Creado para la nueva economía de",
+      titleAccent: "la soberanía de los datos",
+      body:
+        "Hazina — tesoro en suajili — representa el valor desaprovechado de tu inteligencia on-chain. Deja de regalarla. Monetízala de forma segura.",
+      items: {
+        micropayments: {
+          label: "Micropagos x402",
+          description: "Verificación de pagos Stellar en segundos",
+        },
+        escrow: {
+          label: "Escrow impulsado por IA",
+          description: "Claude verifica cada transacción antes de liberar los datos",
+        },
+        marketplace: {
+          label: "Marketplace global",
+          description: "Llega a compradores de datos de todo el mundo al instante",
+        },
+        earnings: {
+          label: "Ganancias en tiempo real",
+          description: "Mira cómo llegan los USDC a tu wallet en tiempo real",
+        },
+      },
+      vaultSecured: "BÓVEDA SEGURA",
+    },
+    featured: {
+      eyebrow: "En vivo",
+      title: "Datasets destacados",
+      browseAll: "Explorar todos los datasets",
+    },
+    cta: {
+      titleStart: "¿Listo para monetizar tu",
+      titleAccent: "inteligencia on-chain?",
+      body:
+        "Únete a los vendedores que ya están ganando USDC de forma pasiva. Tus datos son tu tesoro: es hora de desbloquearlos.",
+    },
+    footer: {
+      tagline: "Construido sobre Stellar Testnet · Impulsado por Anthropic Claude · Protocolo x402",
+    },
+  },
+  marketplace: {
+    eyebrow: "Explora y compra",
+    title: "Marketplace de datos",
+    subtitle:
+      "Inteligencia on-chain premium, con precio por consulta. Paga solo por lo que necesitas.",
+    searchPlaceholder: "Buscar datasets...",
+    sorts: {
+      popular: "Más popular",
+      priceAsc: "Precio: menor a mayor",
+      priceDesc: "Precio: mayor a menor",
+      newest: "Más reciente primero",
+    },
+    resultsCount: "{count} datasets encontrados",
+    noResultsTitle: "No se encontraron datasets",
+    noResultsBody: "Prueba ajustando tus filtros",
+  },
+  sell: {
+    messages: {
+      invalidJson: "JSON no válido — revisa el formato de tus datos",
+      createFailed: "No se pudo crear la publicación",
+      publishing: "Publicando...",
+      listingLive: "¡Publicación activa!",
+      listingLiveBody: "{name} ya está en el marketplace.",
+      listingLiveRevenue:
+        "Los compradores pueden consultarlo por {price} USDC cada vez. El 95 % va directo a tu wallet Stellar.",
+    },
+    eyebrow: "Gana pasivamente",
+    title: "Publica tus datos",
+    subtitle:
+      "Sube tu inteligencia on-chain. Define tu precio. Gana USDC automáticamente mediante micropagos en Stellar.",
+    tabs: {
+      form: "Editar publicación",
+      preview: "Vista previa",
+    },
+    form: {
+      datasetName: "Nombre del dataset",
+      datasetNamePlaceholder:
+        "p. ej. Top 100 movimientos de whale wallets — abril de 2026",
+      description: "Descripción",
+      descriptionPlaceholder:
+        "Describe qué contiene tu dataset, cómo fue recopilado y por qué a los compradores les interesaría...",
+      dataType: "Tipo de dato",
+      pricePerQuery: "Precio / consulta (USDC)",
+      quickPricePresets: "Precios rápidos:",
+      sellerWallet: "Tu dirección Stellar",
+      sellerWalletPlaceholder: "G... (clave pública Stellar de 56 caracteres)",
+      sellerWalletError: "Las direcciones Stellar tienen 56 caracteres y empiezan con G",
+      sellerWalletHelp:
+        "El 95 % de cada pago por consulta se envía aquí automáticamente",
+      datasetJson: "Dataset (JSON)",
+      uploadFileTitle: "Subir archivo JSON o CSV",
+      uploadFileSubtitle: "Máx. 10 MB",
+      dataPlaceholder:
+        "Pega aquí tus datos JSON...\n\nEjemplo:\n{\n  \"wallets\": [\n    { \"address\": \"0x...\", \"balance\": 42847 }\n  ]\n}",
+      submit: "Publicar en el marketplace",
+    },
+    preview: {
+      intro: "Así se verá tu publicación en el marketplace:",
+      datasetNameFallback: "Nombre de tu dataset",
+      descriptionFallback: "La descripción de tu dataset aparecerá aquí...",
+      walletFallback: "G...wallet",
+      buyLabel: "Comprar consulta — {price} USDC",
+    },
+    earnings: {
+      title: "Calculadora de ganancias",
+      tenQueries: "10 consultas",
+      hundredQueries: "100 consultas",
+      thousandQueries: "1.000 consultas",
+      footnote:
+        "Después de la comisión de plataforma del 5 %. Pagado en USDC directamente a tu wallet Stellar.",
+    },
+    tips: {
+      title: "Consejos para vender más",
+      items: [
+        "Usa nombres específicos y descriptivos con fechas",
+        "Incluye la red y la fuente de datos",
+        "Pon precios más bajos al inicio para conseguir las primeras consultas",
+        "Estructura los datos como arreglos para un mejor análisis de IA",
+        "Incluye metadatos sobre el método de recopilación",
+      ],
+    },
+    howItWorks: {
+      title: "Cómo funciona",
+      items: [
+        "Los compradores pagan por consulta usando USDC en Stellar",
+        "El escrow con IA verifica el pago automáticamente",
+        "El 95 % va a tu wallet y el 5 % a la plataforma",
+      ],
+    },
+  },
+  dashboard: {
+    eyebrow: "Centro del vendedor",
+    title: "Panel",
+    subtitle: "Tus ganancias en tiempo real y el rendimiento de tus datasets.",
+    allSellers: "Todos los vendedores",
+    stats: {
+      totalEarned: "USDC totales ganados",
+      totalQueries: "Total de consultas atendidas",
+      activeDatasets: "Datasets activos",
+      transactions: "Transacciones",
+    },
+    charts: {
+      earningsTitle: "Ganancias — últimos 7 días",
+      earningsSubtitle: "USDC recibidos (95 % del precio por consulta)",
+      queriesTitle: "Consultas diarias",
+      queriesSubtitle: "Solicitudes atendidas por día",
+      earnedSeries: "ganado",
+      queriesSeries: "consultas",
+    },
+    datasets: {
+      title: "Tus datasets",
+      empty: "Aún no hay datasets",
+      unknownDataset: "Dataset desconocido",
+    },
+    transactions: {
+      title: "Transacciones recientes",
+      empty: "Aún no hay transacciones",
+      demoMode: "modo-demo",
+    },
+  },
+  agent: {
+    exampleQueries: [
+      "Mejor rendimiento USDC de bajo riesgo con un presupuesto de $500",
+      "Oportunidades de alto APY con fuerte confianza whale",
+      "Pools de stablecoins seguras en Ethereum, presupuesto de $1000",
+      "Rendimientos DeFi agresivos, alta tolerancia al riesgo",
+    ],
+    eyebrow: "Con IA",
+    title: "Agente de investigación",
+    subtitle:
+      "Pregúntale al agente cualquier cosa sobre rendimientos DeFi. Compra datos de forma autónoma a 4 vendedores on-chain mediante micropagos en Stellar y luego sintetiza un informe impulsado por Claude.",
+    strip: {
+      youPay: "Tú pagas",
+      datasetsQueried: "Datasets consultados",
+      agentSpends: "Gasto del agente",
+      protocol: "Protocolo",
+      sellersValue: "4 vendedores",
+    },
+    inputLabel: "¿Qué quieres investigar?",
+    inputPlaceholder: "p. ej. mejor rendimiento USDC de bajo riesgo con $500 de presupuesto",
+    demoModeNote: "Modo demo — pagos simulados en Stellar testnet",
+    loading: "Investigando...",
+    errorTitle: "Error del agente",
+    result: {
+      topOpportunity: "Mejor oportunidad",
+      reasoning: "Razonamiento",
+      alternatives: "Alternativas",
+      noAlternatives: "No se sugirieron alternativas.",
+      warnings: "Advertencias",
+      noWarnings: "Sin advertencias — se ve limpio.",
+      fullAnalysis: "Análisis completo",
+      paymentTrail: "Rastro de pagos",
+      totalSpent: "Total gastado en datos",
+      agentProfit: "Ganancia del agente",
+      youPaid: "Tú pagaste",
+    },
+    metrics: {
+      vaultPool: "Vault / pool",
+    },
+    scales: {
+      low: "Bajo",
+      medium: "Medio",
+      high: "Alto",
+      neutral: "Neutral",
+      bullish: "Alcista",
+      bearish: "Bajista",
+    },
+  },
+  queryModal: {
+    verifyingStages: [
+      "Comprobando la blockchain de Stellar…",
+      "Simulando pago en Stellar testnet…",
+      "Llamando a Claude AI…",
+      "Generando análisis IA…",
+      "Preparando tus resultados…",
+    ],
+    details: {
+      pricePerQuery: "Precio por consulta",
+      queriesSold: "Consultas vendidas",
+      seller: "Vendedor",
+      network: "Red",
+      askQuestion: "Hazle una pregunta a Claude sobre estos datos",
+      questionPlaceholder:
+        "p. ej. ¿Qué wallet movió más ETH? ¿Cuál es la wallet de mayor riesgo?",
+      escrowNote:
+        "El escrow con IA verifica tu pago en Stellar antes de liberar los datos",
+    },
+    payment: {
+      headline: "USDC en Stellar testnet",
+      sendToAddress: "Enviar a la dirección",
+      requiredMemo: "Memo requerido",
+      stepsTitle: "Pasos de pago:",
+      stepOne: "Consigue USDC de testnet en Stellar Friendbot",
+      stepTwo: "Envía exactamente {amount} USDC a la dirección de arriba",
+      stepThree: "Incluye el memo exactamente como se muestra",
+      stepFour: "Pega abajo el hash de la transacción",
+      transactionHash: "Hash de transacción",
+      transactionHashPlaceholder: "Pega tu hash de transacción de Stellar...",
+      demoModeLabel: "Modo demo",
+      demoModeDescription:
+        "omitir el pago y obtener solo el análisis IA (modo hackathon)",
+    },
+    verifying: {
+      runningDemo: "Ejecutando demo",
+      verifyingPayment: "Verificando pago",
+    },
+    result: {
+      paymentVerified: "Pago verificado",
+      aiAnalysis: "Análisis IA de Claude",
+    },
+    error: {
+      title: "Verificación fallida",
+    },
+  },
+  onboarding: {
+    welcome: "Bienvenido a Hazina",
+    stepCounter: "Paso {current} de {total}",
+    next: "Siguiente",
+    finish: "Finalizar recorrido",
+    back: "Atrás",
+    skip: "Omitir recorrido",
+    steps: {
+      marketplace: {
+        title: "Explora datasets",
+        description:
+          "Explora datos on-chain premium de whale wallets, señales de trading, oportunidades de rendimiento y más.",
+      },
+      sell: {
+        title: "Publica tus datos",
+        description:
+          "Sube tus datasets, define tu precio por consulta y empieza a ganar USDC pasivamente en Stellar.",
+      },
+      dashboard: {
+        title: "Sigue tus ganancias",
+        description:
+          "Monitorea el rendimiento de tus datasets, revisa transacciones y ve tus ganancias en USDC en tiempo real.",
+      },
+      cta: {
+        title: "¿Listo para empezar?",
+        description:
+          "Haz clic aquí para publicar tu primer dataset o explora el marketplace para comprar consultas. Los pagos se verifican automáticamente mediante escrow con IA en Stellar testnet.",
+      },
+    },
+  },
+};

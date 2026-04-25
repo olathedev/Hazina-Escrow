@@ -1,11 +1,13 @@
 name: Good First Issue
-description: A well-scoped task for new contributors
+description: Template for maintainers to define a well-scoped task for new contributors
 labels: ["good first issue"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for picking this up! Read [CONTRIBUTING.md](../../CONTRIBUTING.md) before starting — it has setup instructions and code quality standards.
+        Use this template when creating a contributor-friendly issue with clear scope, pointers, and a realistic path to done.
+
+        Aim for work that can be completed in a single focused PR without deep domain knowledge.
 
   - type: textarea
     id: context
@@ -15,6 +17,23 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Difficulty
+      options:
+        - Beginner-friendly
+        - Beginner-friendly with guidance
+        - Small but requires repo familiarity
+    validations:
+      required: true
+
+  - type: input
+    id: estimate
+    attributes:
+      label: Estimated Effort
+      placeholder: "About 1-3 hours"
+
   - type: textarea
     id: acceptance
     attributes:
@@ -23,18 +42,19 @@ body:
       placeholder: |
         - [ ] ...
         - [ ] All existing tests still pass
-        - [ ] New logic has at least one test
-        - [ ] `npm run lint` returns zero warnings
+        - [ ] New or changed behavior is covered by tests when practical
+        - [ ] Relevant docs or UI copy are updated if needed
     validations:
       required: true
 
   - type: textarea
     id: files
     attributes:
-      label: Files to change
+      label: Likely Files or Folders
       description: Which files are in scope for this issue?
       placeholder: |
-        - `backend/src/ai/research.service.ts` (line 78)
+        - `frontend/src/pages/DashboardPage.tsx`
+        - `frontend/src/components/...`
     validations:
       required: true
 
@@ -42,7 +62,19 @@ body:
     id: hints
     attributes:
       label: Implementation hints
-      description: Optional pointers to help a newcomer get started
+      description: Optional pointers, guardrails, or repo-specific gotchas
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: How to Verify
+      description: Commands or steps a contributor and reviewer can run
+      placeholder: |
+        - Run `cd frontend && npm test`
+        - Start the app with `npm run dev`
+        - Visit `/dashboard` and confirm the new empty state appears when there is no data
+    validations:
+      required: true
 
   - type: dropdown
     id: area

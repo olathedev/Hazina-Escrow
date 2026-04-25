@@ -1,0 +1,3 @@
+name: hazina-escrow
+runtime: nodejs
+description: Infrastructure for Hazina Escrow (AWS)

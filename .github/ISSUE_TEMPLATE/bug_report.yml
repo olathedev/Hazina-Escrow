@@ -1,17 +1,24 @@
 name: Bug Report
-description: Something is broken or behaving incorrectly
+description: Report a reproducible defect in the app, API, AI flows, or smart contract
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Before filing: check that you've set up `.env` correctly per [.env.example](../../.env.example) and run `npm install` in both `backend/` and `frontend/`.
+        Thanks for taking the time to file a bug.
+
+        Before submitting:
+        - Confirm the issue still reproduces on the latest `main`
+        - Double-check environment setup with [CONTRIBUTING.md](../../CONTRIBUTING.md), [/.env.example](../../.env.example), and [backend/.env.example](../../backend/.env.example)
+        - If the report is security-sensitive, please do not post it publicly as a bug report
 
   - type: textarea
-    id: description
+    id: summary
     attributes:
-      label: What is broken?
-      description: A clear description of the bug
+      label: Bug Summary
+      description: What is broken, and what impact does it have?
+      placeholder: |
+        When a buyer submits a valid demo query from the marketplace, the request returns a 500 and no dataset response is shown.
     validations:
       required: true
 
@@ -20,33 +27,42 @@ body:
     attributes:
       label: Steps to reproduce
       placeholder: |
-        1. Start backend with `npm run dev`
-        2. Open marketplace, click "Query Dataset"
-        3. Submit with demo mode checked
-        4. See error: ...
+        1. Run `npm run dev` from the repo root
+        2. Open `http://localhost:5173/marketplace`
+        3. Click "Query Dataset" on any listing
+        4. Enable demo mode and submit a question
+        5. Observe the error shown in the UI / terminal
     validations:
       required: true
 
   - type: textarea
     id: expected
     attributes:
-      label: Expected behaviour
+      label: Expected Behavior
+      placeholder: |
+        The buyer should receive the dataset response and AI summary, and the request should complete without errors.
     validations:
       required: true
 
   - type: textarea
     id: actual
     attributes:
-      label: Actual behaviour
-      description: Include the full error message or stack trace if available
+      label: Actual Behavior
+      description: Include the exact UI message, HTTP response, terminal output, or stack trace if available
+      render: shell
     validations:
       required: true
 
-  - type: input
-    id: node
+  - type: textarea
+    id: scope
     attributes:
-      label: Node.js version
-      placeholder: "e.g. 20.11.0"
+      label: Affected Flow or Endpoint
+      description: Mention the page, route, endpoint, dataset flow, or contract call involved
+      placeholder: |
+        Page: `/marketplace`
+        Endpoint: `POST /api/query/:id`
+        Mode: demo
+        Contract function: N/A
 
   - type: dropdown
     id: area
@@ -58,6 +74,39 @@ body:
         - Stellar / x402 payments
         - Claude AI
         - Smart Contract
+        - CI / Tooling
+        - Documentation
         - Other
     validations:
       required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Share versions, browser, wallet/network details, and anything else relevant
+      placeholder: |
+        OS: macOS 15.4
+        Node.js: 20.11.0
+        npm: 10.x
+        Browser: Chrome 135
+        Network: Stellar testnet
+        Mode: local dev
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Screenshots, recordings, related PRs/issues, or suspected root cause
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-Submission Checklist
+      options:
+        - label: I searched for existing issues and did not find a duplicate
+          required: true
+        - label: I can reproduce this on the current code in this repository
+          required: true
+        - label: I included enough detail for someone else to reproduce the bug
+          required: true
