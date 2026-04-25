@@ -11,6 +11,7 @@ import {
 } from '../common/storage';
 import { validateBody } from '../common/validate';
 import { notifySeller } from './webhook.service';
+import { requireApiKey } from '../common/auth.middleware';
 
 export const webhooksRouter = Router();
 
@@ -86,7 +87,7 @@ const updateWebhookSchema = z
   );
 
 // POST /api/webhooks — register a new webhook
-webhooksRouter.post('/', validateBody(createWebhookSchema), (req: Request, res: Response) => {
+webhooksRouter.post('/', requireApiKey, validateBody(createWebhookSchema), (req: Request, res: Response) => {
   const { sellerWallet, url, secret, events } = req.body as z.infer<typeof createWebhookSchema>;
 
   const webhook = {
@@ -124,7 +125,7 @@ webhooksRouter.get('/:sellerWallet', (req: Request, res: Response) => {
 });
 
 // DELETE /api/webhooks/:id — remove a webhook
-webhooksRouter.delete('/:id', (req: Request, res: Response) => {
+webhooksRouter.delete('/:id', requireApiKey, (req: Request, res: Response) => {
   const webhook = getWebhookById(req.params.id);
   if (!webhook) {
     return res.status(404).json({ error: 'Webhook not found' });
@@ -134,7 +135,7 @@ webhooksRouter.delete('/:id', (req: Request, res: Response) => {
 });
 
 // POST /api/webhooks/:id/test — send a test ping event
-webhooksRouter.post('/:id/test', async (req: Request, res: Response) => {
+webhooksRouter.post('/:id/test', requireApiKey, async (req: Request, res: Response) => {
   const webhook = getWebhookById(req.params.id);
   if (!webhook) {
     return res.status(404).json({ error: 'Webhook not found' });
@@ -156,7 +157,7 @@ webhooksRouter.post('/:id/test', async (req: Request, res: Response) => {
 });
 
 // PATCH /api/webhooks/:id — update webhook (url, secret, events, active)
-webhooksRouter.patch('/:id', validateBody(updateWebhookSchema), (req: Request, res: Response) => {
+webhooksRouter.patch('/:id', requireApiKey, validateBody(updateWebhookSchema), (req: Request, res: Response) => {
   const webhook = getWebhookById(req.params.id);
   if (!webhook) {
     return res.status(404).json({ error: 'Webhook not found' });

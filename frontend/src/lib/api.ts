@@ -118,9 +118,17 @@ export interface QueryResult {
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
 export const AGENT_REQUEST_TIMEOUT_MS = 120_000;
 
+const API_KEY = (import.meta.env.VITE_API_KEY ?? '').toString().trim();
+
 interface RequestOptions extends RequestInit {
   /** Per-call override of the abort timeout, in milliseconds. */
   timeoutMs?: number;
+}
+
+function authHeaders(extra?: HeadersInit): HeadersInit {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (API_KEY) headers['Authorization'] = `Bearer ${API_KEY}`;
+  return { ...headers, ...(extra as Record<string, string>) };
 }
 
 async function fetchWithTimeout(url: string, options?: RequestOptions): Promise<Response> {
@@ -232,6 +240,7 @@ export const api = {
   }) =>
     request<{ success: boolean; dataset: DatasetMeta }>(`${BASE}/datasets`, {
       method: 'POST',
+      headers: authHeaders(),
       body: JSON.stringify(payload),
     }).then((r) => r.dataset),
 };

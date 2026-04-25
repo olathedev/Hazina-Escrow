@@ -12,6 +12,7 @@ import {
 import { validateBody } from '../common/validate';
 import { sanitizeUserText } from '../common/sanitize';
 import { notifySeller } from '../webhooks/webhook.service';
+import { requireApiKey } from '../common/auth.middleware';
 
 const STELLAR_ADDRESS_REGEX = /^G[A-Z2-7]{55}$/;
 const MAX_DATA_BYTES = 500 * 1024;
@@ -374,7 +375,7 @@ datasetsRouter.get('/:id/transactions', (req: Request, res: Response) => {
  *       400:
  *         description: Missing required fields or invalid price
  */
-datasetsRouter.post('/', validateBody(createDatasetSchema), (req: Request, res: Response) => {
+datasetsRouter.post('/', requireApiKey, validateBody(createDatasetSchema), (req: Request, res: Response) => {
   const { name, description, type, pricePerQuery, sellerWallet, data } =
     req.body as z.infer<typeof createDatasetSchema>;
 

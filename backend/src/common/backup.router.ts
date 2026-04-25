@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { z } from 'zod';
 import { BackupScheduler } from './backup.scheduler';
 import { validateBody } from './validate';
+import { requireAdminKey } from './auth.middleware';
 
 const restoreBackupSchema = z.object({
   filename: z
@@ -34,7 +35,7 @@ export const backupRouter = Router();
  *       200:
  *         description: List of backups
  */
-backupRouter.get('/backups', (_req: Request, res: Response) => {
+backupRouter.get('/backups', requireAdminKey, (_req: Request, res: Response) => {
   if (!backupScheduler) {
     return res.status(503).json({ error: 'Backup service not initialized' });
   }
@@ -58,7 +59,7 @@ backupRouter.get('/backups', (_req: Request, res: Response) => {
  *       200:
  *         description: Backup statistics
  */
-backupRouter.get('/backups/stats', (_req: Request, res: Response) => {
+backupRouter.get('/backups/stats', requireAdminKey, (_req: Request, res: Response) => {
   if (!backupScheduler) {
     return res.status(503).json({ error: 'Backup service not initialized' });
   }
@@ -82,7 +83,7 @@ backupRouter.get('/backups/stats', (_req: Request, res: Response) => {
  *       200:
  *         description: Backup created successfully
  */
-backupRouter.post('/backups/create', async (_req: Request, res: Response) => {
+backupRouter.post('/backups/create', requireAdminKey, async (_req: Request, res: Response) => {
   if (!backupScheduler) {
     return res.status(503).json({ error: 'Backup service not initialized' });
   }
@@ -119,7 +120,7 @@ backupRouter.post('/backups/create', async (_req: Request, res: Response) => {
  *       200:
  *         description: Backup restored successfully
  */
-backupRouter.post('/backups/restore', validateBody(restoreBackupSchema), async (req: Request, res: Response) => {
+backupRouter.post('/backups/restore', requireAdminKey, validateBody(restoreBackupSchema), async (req: Request, res: Response) => {
   if (!backupScheduler) {
     return res.status(503).json({ error: 'Backup service not initialized' });
   }
