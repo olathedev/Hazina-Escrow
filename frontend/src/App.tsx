@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import type { ReactNode } from "react";
 import Navbar from "./components/layout/Navbar";
 import OnboardingTour from "./components/OnboardingTour";
 import LandingPage from "./pages/LandingPage";
@@ -8,6 +9,7 @@ import SellPage from "./pages/SellPage";
 import DashboardPage from "./pages/DashboardPage";
 import AgentPage from "./pages/AgentPage";
 import { useI18n } from "./i18n";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -39,16 +41,20 @@ export default function App() {
       <OnboardingTour />
       <main id="main-content" tabIndex={-1}>
         <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/marketplace" element={<MarketplacePage />} />
-        <Route path="/sell" element={<SellPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/agent" element={<AgentPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="/" element={<RouteBoundary><LandingPage /></RouteBoundary>} />
+          <Route path="/marketplace" element={<RouteBoundary><MarketplacePage /></RouteBoundary>} />
+          <Route path="/sell" element={<RouteBoundary><SellPage /></RouteBoundary>} />
+          <Route path="/dashboard" element={<RouteBoundary><DashboardPage /></RouteBoundary>} />
+          <Route path="/agent" element={<RouteBoundary><AgentPage /></RouteBoundary>} />
+          <Route path="*" element={<RouteBoundary><NotFound /></RouteBoundary>} />
+        </Routes>
       </main>
     </BrowserRouter>
   );
+}
+
+function RouteBoundary({ children }: { children: ReactNode }) {
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 }
 
 function NotFound() {
