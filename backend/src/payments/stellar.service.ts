@@ -36,10 +36,7 @@ export async function verifyStellarPayment(params: VerifyParams): Promise<Verify
     // Find USDC payment (issuer: testnet USDC)
     const usdcOps = paymentOps.filter((op) => {
       const payOp = op as StellarSdk.Horizon.ServerApi.PaymentOperationRecord;
-      return (
-        payOp.asset_code === 'USDC' ||
-        payOp.asset_type === 'native' // accept XLM as fallback for testnet demos
-      );
+      return payOp.asset_code === 'USDC';
     });
 
     if (usdcOps.length === 0) {

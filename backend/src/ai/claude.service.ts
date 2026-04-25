@@ -1,6 +1,47 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { sanitizeUserText } from '../common/sanitize';
 
+export function stripMarkdownFence(text: string): string {
+  return text
+    .replace(/^```(?:[a-z0-9_-]+)?\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+}
+
+export function parseClaudeSummaryResponse(
+  text: string,
+  hasBuyerQuestion: boolean,
+): { summary: string; answer?: string } {
+  const cleaned = stripMarkdownFence(text);
+  if (!hasBuyerQuestion) {
+    return { summary: cleaned };
+  }
+
+  const sectionParts = cleaned.split(/\n\n(?=2\.|Answer:|\*\*Answer)/i);
+  if (sectionParts.length > 1) {
+    const answer = sectionParts
+      .slice(1)
+      .join('\n\n')
+      .replace(/^(2\.\s*)?(?:\*\*)?Answer:?\s*/i, '')
+      .trim();
+    return {
+      summary: sectionParts[0]?.trim() || cleaned,
+      answer: answer || undefined,
+    };
+  }
+
+  const answerMatch = cleaned.match(/(?:\*\*)?Answer:?\s*([\s\S]+)$/i);
+  if (answerMatch && answerMatch.index !== undefined) {
+    const summary = cleaned.slice(0, answerMatch.index).trim();
+    return {
+      summary: summary || cleaned,
+      answer: answerMatch[1].trim() || undefined,
+    };
+  }
+
+  return { summary: cleaned };
+}
+
 export async function generateDataSummary(
   data: Record<string, unknown>,
   buyerQuestion?: string
@@ -42,14 +83,5 @@ ${JSON.stringify(data, null, 2)}`;
     .map((b) => (b as { type: 'text'; text: string }).text)
     .join('');
 
-  if (question) {
-    // Split on a recognisable boundary — look for "Answer:" or numbered sections
-    const parts = fullText.split(/\n\n(?=2\.|Answer:|\*\*Answer)/i);
-    return {
-      summary: parts[0]?.trim() || fullText,
-      answer: parts[1]?.trim(),
-    };
-  }
-
-  return { summary: fullText.trim() };
+  return parseClaudeSummaryResponse(fullText, Boolean(question));
 }

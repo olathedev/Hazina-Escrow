@@ -10,6 +10,8 @@ jobs:
   test-backend:
     name: Backend Tests
     runs-on: ubuntu-latest
+    env:
+      ALLOW_SOCKET_TESTS: "1"
     defaults:
       run:
         working-directory: backend
@@ -29,6 +31,9 @@ jobs:
 
       - name: Run tests with coverage
         run: npm run coverage
+
+      - name: Enforce payment path coverage (>=80%)
+        run: npm run coverage:payments
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
