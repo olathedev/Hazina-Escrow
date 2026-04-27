@@ -29,7 +29,7 @@ export default function QueryModal({ dataset, onClose, onSuccess }: Props) {
   const [result, setResult] = useState<QueryResult | null>(null);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState<string | null>(null);
-  const [useDemoMode, setUseDemoMode] = useState(true);
+  const [useDemoMode, setUseDemoMode] = useState(false);
   const [verifyStage, setVerifyStage] = useState(0);
   const verifyTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
