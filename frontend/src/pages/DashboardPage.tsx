@@ -164,12 +164,11 @@ export default function DashboardPage() {
   useEffect(() => {
     setLoading(true);
     setFetchError(null);
-    Promise.all([api.getDatasets()])
-      .then(([ds]) => {
+    Promise.all([api.getDatasets(), api.getTransactions()])
+      .then(([ds, txs]) => {
         setDatasets(ds);
-        return Promise.all(ds.map((d) => api.getTransactions(d.id)));
+        setTransactions(txs);
       })
-      .then((txArrays) => setTransactions(txArrays.flat()))
       .catch((err) => {
         setFetchError(
           err instanceof Error ? err.message : "Failed to load dashboard data.",
