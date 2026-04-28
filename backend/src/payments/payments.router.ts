@@ -356,15 +356,18 @@ paymentsRouter.post("/verify/:id/demo", validateBody(verifyDemoSchema), async (r
   });
 });
 
-paymentsRouter.get("/admin/unpaid-sellers", requireAdminKey, (_req: Request, res: Response) => {
-  const unpaidTransactions = getUnpaidTransactions().map((transaction) => {
-    const dataset = getDataset(transaction.datasetId);
-    return {
-      ...transaction,
-      datasetName: dataset?.name ?? null,
-      sellerWallet: dataset?.sellerWallet ?? null,
-    };
-  });
+paymentsRouter.get("/admin/unpaid-sellers", requireAdminKey, async (_req: Request, res: Response) => {
+  const unpaid = await getUnpaidTransactions();
+  const unpaidTransactions = await Promise.all(
+    unpaid.map(async (transaction) => {
+      const dataset = await getDataset(transaction.datasetId);
+      return {
+        ...transaction,
+        datasetName: dataset?.name ?? null,
+        sellerWallet: dataset?.sellerWallet ?? null,
+      };
+    }),
+  );
 
   return res.json({
     success: true,

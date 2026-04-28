@@ -197,3 +197,8 @@ export async function updateWebhook(id: string, updates: Partial<WebhookSubscrip
     return [store, store.webhooks[idx]];
   });
 }
+
+export async function getUnpaidTransactions(): Promise<Transaction[]> {
+  const store = await readStore();
+  return store.transactions.filter((t) => t.sellerPaid === false);
+}
