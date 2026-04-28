@@ -91,6 +91,9 @@ export const en = {
       hourAgo: "{count}h ago",
       dayAgo: "{count}d ago",
     },
+    errors: {
+      imageNotSupported: "Image not supported",
+    },
   },
   nav: {
     marketplace: "Marketplace",

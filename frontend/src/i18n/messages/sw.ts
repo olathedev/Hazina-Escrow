@@ -89,6 +89,9 @@ export const sw: EnglishMessages = {
       hourAgo: "saa {count} zilizopita",
       dayAgo: "siku {count} zilizopita",
     },
+    errors: {
+      imageNotSupported: "Picha haisisimamiwi",
+    },
   },
   nav: {
     marketplace: "Soko",

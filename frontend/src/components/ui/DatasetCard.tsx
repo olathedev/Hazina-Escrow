@@ -35,24 +35,26 @@ export default function DatasetCard({ dataset, onBuy }: Props) {
         )}
       />
 
-      {/* Dataset Image */}
-      <div className="relative h-40 overflow-hidden bg-void-2/50 group-hover:bg-void-2/30 transition-colors duration-500 flex items-center justify-center">
-        {imageError ? (
-          <div className="flex flex-col items-center gap-2 text-muted-2">
-            <ImageOff className="w-8 h-8 opacity-20" />
-            <span className="text-[10px] uppercase tracking-tighter opacity-30 font-body">Image unavailable</span>
-          </div>
-        ) : (
-          <>
-            <img
-              src={dataset.thumbnail || `https://source.unsplash.com/featured/?crypto,${dataset.type}`}
-              alt={dataset.name}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80"
-              onError={() => setImageError(true)}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60" />
-          </>
-        )}
+       {/* Dataset Image */}
+       <div className="relative h-40 overflow-hidden bg-void-2/50 group-hover:bg-void-2/30 transition-colors duration-500 flex items-center justify-center">
+         {imageError ? (
+           <div className="flex flex-col items-center gap-2 text-muted-2">
+             <ImageOff className="w-8 h-8 opacity-20" />
+             <span className="text-[10px] uppercase tracking-tighter opacity-30 font-body">
+               {t("common.errors.imageNotSupported")}
+             </span>
+           </div>
+         ) : (
+           <>
+             <img
+               src={dataset.thumbnail || `https://source.unsplash.com/featured/?crypto,${dataset.type}`}
+               alt={dataset.name}
+               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80"
+               onError={() => setImageError(true)}
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60" />
+           </>
+         )}
         
         {/* Floating badge over image */}
         <div className="absolute top-4 left-4 z-10">

@@ -89,6 +89,9 @@ export const fr: EnglishMessages = {
       hourAgo: "il y a {count} h",
       dayAgo: "il y a {count} j",
     },
+    errors: {
+      imageNotSupported: "Image non supportée",
+    },
   },
   nav: {
     marketplace: "Marketplace",

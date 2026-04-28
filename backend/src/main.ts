@@ -6,9 +6,10 @@ dotenv.config();
 initializeDatadog();
 initializeSentry();
 
-import express, { Request } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
+import http from 'http';
 import rateLimit from 'express-rate-limit';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
@@ -21,6 +22,7 @@ import { readStore } from './common/storage';
 import { BackupScheduler } from './common/backup.scheduler';
 import { backupRouter, setBackupScheduler } from './common/backup.router';
 import { createCompressionMiddleware } from './common/compression';
+import { initializeWebSocketServer } from './websocket/ws-server';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -205,14 +207,46 @@ app.use('/api/agent', agentRouter);
 app.use('/api/webhooks', webhooksRouter);
 app.use('/api', backupRouter);
 
-app.listen(PORT, () => {
+// Create HTTP server and attach Express app
+const server = http.createServer(app);
+
+// Initialize WebSocket server
+const wsApiKey = process.env.WEBSOCKET_API_KEY || '';
+const wsServer = initializeWebSocketServer(server, wsApiKey);
+
+// Add endpoint for WebSocket server stats
+app.get('/api/ws/stats', (_req: Request, res: Response) => {
+  res.json(wsServer.getStats());
+});
+
+server.listen(PORT, () => {
   console.log(`\n  ██╗  ██╗ █████╗ ███████╗██╗███╗   ██╗ █████╗`);
   console.log(`  ██║  ██║██╔══██╗╚══███╔╝██║████╗  ██║██╔══██╗`);
   console.log(`  ███████║███████║  ███╔╝ ██║██╔██╗ ██║███████║`);
   console.log(`  ██╔══██║██╔══██║ ███╔╝  ██║██║╚██╗██║██╔══██║`);
   console.log(`  ██║  ██║██║  ██║███████╗██║██║ ╚████║██║  ██║`);
   console.log(`  ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝`);
-  console.log(`\n  Data Escrow API running on http://localhost:${PORT}\n`);
+  console.log(`\n  Data Escrow API running on http://localhost:${PORT}`);
+  console.log(`  WebSocket server running on ws://localhost:${PORT}/ws\n`);
+});
+
+// Graceful shutdown for WebSocket server
+process.on('SIGTERM', () => {
+  console.log('[Server] Shutting down gracefully...');
+  wsServer.shutdown();
+  server.close(() => {
+    console.log('[Server] HTTP server closed');
+    process.exit(0);
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('[Server] Shutting down gracefully...');
+  wsServer.shutdown();
+  server.close(() => {
+    console.log('[Server] HTTP server closed');
+    process.exit(0);
+  });
 });
 
 export default app;

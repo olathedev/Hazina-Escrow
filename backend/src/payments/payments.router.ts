@@ -12,6 +12,7 @@ import { generateDataSummary } from "../ai/claude.service";
 import { notifySeller } from "../webhooks/webhook.service";
 import { getEscrow, releaseEscrow, refundEscrow, usdcToStroops } from "../lib/contract.client";
 import { sanitizeUserText } from "../common/sanitize";
+import { transactionEventEmitter } from "../websocket/transaction-events";
 
 export const paymentsRouter = Router();
 
@@ -180,24 +181,59 @@ paymentsRouter.post("/verify/:id", validateBody(verifySchema), async (req: Reque
     return res.status(400).json({ error: "Escrow already processed" });
   }
 
+  const transactionId = `tx-${uuidv4()}`;
+
   try {
+    // Emit verifying status
+    transactionEventEmitter.updateTransactionStatus(
+      transactionId,
+      dataset.id,
+      "verifying"
+    );
+
     // Verify the lock exists on the Soroban contract
     let escrow;
     try {
       escrow = await getEscrow(escrowId);
     } catch (err) {
+      transactionEventEmitter.updateTransactionStatus(
+        transactionId,
+        dataset.id,
+        "failed",
+        {
+          error: `Escrow #${escrowId} not found on contract`,
+        }
+      );
       return res.status(400).json({
         error: `Escrow #${escrowId} not found on contract: ${err instanceof Error ? err.message : err}`,
       });
     }
 
     if (escrow.released) {
+      transactionEventEmitter.updateTransactionStatus(
+        transactionId,
+        dataset.id,
+        "failed",
+        { error: "Escrow already released" }
+      );
       return res.status(400).json({ error: "Escrow already released" });
     }
     if (escrow.refunded) {
+      transactionEventEmitter.updateTransactionStatus(
+        transactionId,
+        dataset.id,
+        "failed",
+        { error: "Escrow already refunded" }
+      );
       return res.status(400).json({ error: "Escrow already refunded" });
     }
     if (escrow.dataset_id !== dataset.id) {
+      transactionEventEmitter.updateTransactionStatus(
+        transactionId,
+        dataset.id,
+        "failed",
+        { error: `Escrow dataset mismatch` }
+      );
       return res.status(400).json({
         error: `Escrow dataset mismatch: expected ${dataset.id}, got ${escrow.dataset_id}`,
       });
@@ -206,10 +242,23 @@ paymentsRouter.post("/verify/:id", validateBody(verifySchema), async (req: Reque
     const expectedStroops = usdcToStroops(dataset.pricePerQuery);
     const tolerance = usdcToStroops(0.001);
     if (escrow.amount < expectedStroops - tolerance) {
+      transactionEventEmitter.updateTransactionStatus(
+        transactionId,
+        dataset.id,
+        "failed",
+        { error: `Escrow amount too low` }
+      );
       return res.status(400).json({
         error: `Escrow amount too low: expected ${expectedStroops} stroops, got ${escrow.amount}`,
       });
     }
+
+    // Emit payment received
+    transactionEventEmitter.receivePayment(
+      transactionId,
+      dataset.id,
+      dataset.pricePerQuery.toString()
+    );
 
     // Generate AI summary — refund and abort if this fails
     let summary = "";
@@ -220,6 +269,12 @@ paymentsRouter.post("/verify/:id", validateBody(verifySchema), async (req: Reque
       answer = result.answer;
     } catch (aiErr) {
       console.error("[Escrow] AI step failed — refunding buyer:", aiErr);
+      transactionEventEmitter.updateTransactionStatus(
+        transactionId,
+        dataset.id,
+        "refunded",
+        { error: "AI processing failed" }
+      );
       try {
         const refundTxHash = await refundEscrow(escrowId);
         console.log(`[Escrow] Refunded escrow #${escrowId} → ${refundTxHash}`);
@@ -235,6 +290,14 @@ paymentsRouter.post("/verify/:id", validateBody(verifySchema), async (req: Reque
     try {
       releaseTxHash = await releaseEscrow(escrowId);
       console.log(`[Escrow] Released escrow #${escrowId} → ${releaseTxHash}`);
+
+      // Emit payment forwarded
+      transactionEventEmitter.forwardPayment(
+        transactionId,
+        dataset.id,
+        sellerAmount.toString(),
+        (dataset.pricePerQuery * 0.05).toFixed(4)
+      );
     } catch (releaseErr) {
       console.error("[Escrow] Release failed:", releaseErr);
     }
@@ -247,7 +310,7 @@ paymentsRouter.post("/verify/:id", validateBody(verifySchema), async (req: Reque
 
     // Log transaction (escrowKey used as txHash for replay protection)
     addTransaction({
-      id: `tx-${uuidv4()}`,
+      id: transactionId,
       datasetId: dataset.id,
       txHash: escrowKey,
       amount: dataset.pricePerQuery,
@@ -255,6 +318,24 @@ paymentsRouter.post("/verify/:id", validateBody(verifySchema), async (req: Reque
       aiSummary: summary,
       timestamp: new Date().toISOString(),
     });
+
+    // Emit completed status
+    transactionEventEmitter.updateTransactionStatus(
+      transactionId,
+      dataset.id,
+      "completed",
+      {
+        amount: dataset.pricePerQuery.toString(),
+        aiSummary: summary,
+      }
+    );
+
+    // Emit dataset queried event
+    transactionEventEmitter.queryDataset(
+      transactionId,
+      dataset.id,
+      dataset.queriesServed + 1
+    );
 
     // Notify seller via webhooks
     notifySeller(dataset.sellerWallet, "payment.received", {
@@ -288,6 +369,12 @@ paymentsRouter.post("/verify/:id", validateBody(verifySchema), async (req: Reque
     });
   } catch (err) {
     console.error("Verification error:", err);
+    transactionEventEmitter.updateTransactionStatus(
+      transactionId,
+      dataset.id,
+      "failed",
+      { error: "Internal verification error" }
+    );
     return res.status(500).json({ error: "Internal verification error" });
   }
 });
@@ -298,6 +385,22 @@ paymentsRouter.post("/verify/:id/demo", validateBody(verifyDemoSchema), async (r
   const dataset = getDataset(req.params.id);
 
   if (!dataset) return res.status(404).json({ error: "Dataset not found" });
+
+  const transactionId = `tx-demo-${uuidv4()}`;
+
+  // Emit verifying status
+  transactionEventEmitter.updateTransactionStatus(
+    transactionId,
+    dataset.id,
+    "verifying"
+  );
+
+  // Emit payment received
+  transactionEventEmitter.receivePayment(
+    transactionId,
+    dataset.id,
+    dataset.pricePerQuery.toString()
+  );
 
   let summary = "";
   let answer: string | undefined;
@@ -311,15 +414,26 @@ paymentsRouter.post("/verify/:id/demo", validateBody(verifyDemoSchema), async (r
       "Demo mode: AI summary unavailable. Set ANTHROPIC_API_KEY to enable.";
   }
 
+  const sellerAmount = dataset.pricePerQuery * 0.95;
+  const platformFee = dataset.pricePerQuery * 0.05;
+
+  // Emit payment forwarded
+  transactionEventEmitter.forwardPayment(
+    transactionId,
+    dataset.id,
+    sellerAmount.toFixed(7),
+    platformFee.toFixed(4)
+  );
+
   updateDataset(dataset.id, {
     queriesServed: dataset.queriesServed + 1,
     totalEarned: parseFloat(
-      (dataset.totalEarned + dataset.pricePerQuery * 0.95).toFixed(4),
+      (dataset.totalEarned + sellerAmount).toFixed(4),
     ),
   });
 
   addTransaction({
-    id: `tx-demo-${uuidv4()}`,
+    id: transactionId,
     datasetId: dataset.id,
     txHash: `demo-${Date.now()}`,
     amount: dataset.pricePerQuery,
@@ -327,6 +441,24 @@ paymentsRouter.post("/verify/:id/demo", validateBody(verifyDemoSchema), async (r
     aiSummary: summary,
     timestamp: new Date().toISOString(),
   });
+
+  // Emit completed status
+  transactionEventEmitter.updateTransactionStatus(
+    transactionId,
+    dataset.id,
+    "completed",
+    {
+      amount: dataset.pricePerQuery.toString(),
+      aiSummary: summary,
+    }
+  );
+
+  // Emit dataset queried event
+  transactionEventEmitter.queryDataset(
+    transactionId,
+    dataset.id,
+    dataset.queriesServed + 1
+  );
 
   return res.json({
     success: true,
@@ -336,8 +468,8 @@ paymentsRouter.post("/verify/:id/demo", validateBody(verifyDemoSchema), async (r
     transaction: {
       hash: `demo-${Date.now()}`,
       amount: dataset.pricePerQuery,
-      sellerReceived: parseFloat((dataset.pricePerQuery * 0.95).toFixed(4)),
-      platformFee: parseFloat((dataset.pricePerQuery * 0.05).toFixed(4)),
+      sellerReceived: parseFloat(sellerAmount.toFixed(4)),
+      platformFee: parseFloat(platformFee.toFixed(4)),
     },
   });
 });
