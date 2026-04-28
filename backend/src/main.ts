@@ -134,7 +134,7 @@ async function withHealthTimeout(fn: () => Promise<CheckResult>): Promise<CheckR
 
 async function checkStorage(): Promise<CheckResult> {
   try {
-    readStore();
+    await readStore();
     return 'ok';
   } catch {
     return 'error';

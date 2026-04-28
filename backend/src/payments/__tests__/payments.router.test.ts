@@ -25,9 +25,9 @@ vi.mock('../../common/storage', async (importOriginal) => {
   return {
     ...actual,
     getDataset: vi.fn(),
-    txHashUsed: vi.fn(() => false),
-    addTransaction: vi.fn(),
-    updateDataset: vi.fn(),
+    txHashUsed: vi.fn(() => Promise.resolve(false)),
+    addTransaction: vi.fn(() => Promise.resolve()),
+    updateDataset: vi.fn(() => Promise.resolve()),
   };
 });
 
@@ -75,8 +75,8 @@ describe('POST /api/verify/:id', () => {
 
   beforeEach(() => {
     app = makeApp();
-    vi.mocked(getDataset).mockReturnValue(DATASET);
-    vi.mocked(txHashUsed).mockReturnValue(false);
+    vi.mocked(getDataset).mockResolvedValue(DATASET);
+    vi.mocked(txHashUsed).mockResolvedValue(false);
     vi.mocked(verifyStellarPayment).mockResolvedValue({
       valid: true,
       actualAmount: 1,
@@ -95,7 +95,7 @@ describe('POST /api/verify/:id', () => {
   });
 
   it('returns 404 when dataset does not exist', async () => {
-    vi.mocked(getDataset).mockReturnValue(undefined);
+    vi.mocked(getDataset).mockResolvedValue(undefined);
 
     const res = await request(app)
       .post('/api/verify/does-not-exist')
@@ -122,7 +122,7 @@ describe('POST /api/verify/:id', () => {
   });
 
   it('returns 400 when txHash was already used (replay attack)', async () => {
-    vi.mocked(txHashUsed).mockReturnValue(true);
+    vi.mocked(txHashUsed).mockResolvedValue(true);
 
     const res = await request(app)
       .post('/api/verify/ds-test-1')
@@ -215,7 +215,7 @@ describe('POST /api/verify/:id/demo', () => {
 
   beforeEach(() => {
     app = makeApp();
-    vi.mocked(getDataset).mockReturnValue(DATASET);
+    vi.mocked(getDataset).mockResolvedValue(DATASET);
     vi.mocked(generateDataSummary).mockResolvedValue({
       summary: 'Demo summary',
       answer: undefined,
@@ -234,7 +234,7 @@ describe('POST /api/verify/:id/demo', () => {
   });
 
   it('returns 404 for an unknown dataset', async () => {
-    vi.mocked(getDataset).mockReturnValue(undefined);
+    vi.mocked(getDataset).mockResolvedValue(undefined);
 
     const res = await request(app)
       .post('/api/verify/does-not-exist/demo')
@@ -285,7 +285,7 @@ describe('POST /api/query/:id', () => {
 
   beforeEach(() => {
     app = makeApp();
-    vi.mocked(getDataset).mockReturnValue(DATASET);
+    vi.mocked(getDataset).mockResolvedValue(DATASET);
   });
 
   it('returns 402 Payment Required for a known dataset', async () => {
@@ -298,7 +298,7 @@ describe('POST /api/query/:id', () => {
   });
 
   it('returns 404 for an unknown dataset', async () => {
-    vi.mocked(getDataset).mockReturnValue(undefined);
+    vi.mocked(getDataset).mockResolvedValue(undefined);
 
     const res = await request(app).post('/api/query/does-not-exist').send({});
 
